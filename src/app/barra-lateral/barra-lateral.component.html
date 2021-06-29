@@ -1,19 +1,22 @@
+<!-- El componente de barra lateral contiene todas las rutas del menu correspondiente al usuario -->
+
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-
+<!-- Titulo -->
     <mat-toolbar class="titulo">
       <mat-icon class="icon-logo" aria-hidden="false" aria-label="Example home icon">folder</mat-icon>
       TUTELAS
     </mat-toolbar>
+  <!-- Rutas -->
     <mat-nav-list>
-      <a mat-list-item routerLink="/gestion-usuarios" routerLinkActive="active">
+      <a mat-list-item [routerLink]="['/gestion-usuarios']" routerLinkActive="active">
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">people alt</mat-icon>
         Gestión de usuarios
       </a>
-      <a mat-list-item routerLink="/gestion-clientes" routerLinkActive="active">
+      <a mat-list-item [routerLink]="['/gestion-clientes']" routerLinkActive="active">
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">work</mat-icon>
         Gestión de Clientes
       </a>
@@ -54,6 +57,7 @@
         {{usuario}}
       </p>
     </mat-toolbar>
-    <!-- Add Content Here -->
+    <!-- Contenido de cada boton según la ruta -->
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

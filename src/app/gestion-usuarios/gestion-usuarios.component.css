@@ -1,0 +1,72 @@
+/* busqueda de usuario */
+
+.titulo-buqueda-usuario {
+  position: absolute;
+  left: 13rem;
+  width: 60rem;
+  background-color: #F5F5F5;
+  margin-top: 4rem;
+}
+
+.buqueda-usuario {
+  position: absolute;
+  left: 13rem;
+  width: 60rem;
+  background-color: #ffff;
+  margin-top: 7.22rem;
+}
+
+.buqueda-usuario .nombre-usuario {
+  position: relative;
+  left: 5rem;
+  margin-top: 2rem;
+}
+
+.buqueda-usuario .correo {
+    margin-left: 5rem;
+}
+
+.buqueda-usuario .fecha-inicio {
+  position: relative;
+  left: 10.5rem;
+}
+
+.buqueda-usuario .fecha-final {
+  position: relative;
+  left: 11.5rem;
+}
+
+/* Botones crear, borrar y filtrar */
+
+.buton-crear {
+  position: fixed;
+  right: 13rem;
+  margin-top: 1.3rem;
+  background-color: #007DED;
+  color: #ffff;
+}
+.buton-borrar {
+  position: absolute;
+  right: 11rem;
+  margin-top: 1.3rem;
+}
+
+.buton-filtrar {
+  position: absolute;
+  right: 6.2rem;
+  margin-top: 1.3rem;
+  background-color: #007DED;
+  color: #ffff;
+}
+
+
+table {
+  position: absolute;
+  left: 13rem;
+  width: 62rem;
+  background-color: #ffff;
+  margin-top: 25rem;
+}
+
+
+

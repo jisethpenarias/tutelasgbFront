@@ -11,23 +11,23 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
+import { DemoMaterialModule } from './material-module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    BarraLateralComponent
+    BarraLateralComponent,
+    GestionUsuariosComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
     MatListModule,
-    MatIconModule
+    DemoMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

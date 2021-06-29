@@ -11,7 +11,7 @@ import { map, shareReplay } from 'rxjs/operators';
 export class BarraLateralComponent {
 
   @Input() usuario;
-  animal: string = 'conchita';
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
