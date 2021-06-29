@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogCrearUsuarioComponent } from '../dialog-crear-usuario/dialog-crear-usuario.component';
 
 export interface TablaUsuarios {
   correo: string;
@@ -22,7 +24,11 @@ export class GestionUsuariosComponent implements OnInit {
   displayedColumns: string[] = ['usuario', 'correo', 'fechaCreacion'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
   data: TablaUsuarios[] = ELEMENT_DATA;
-  constructor() { }
+
+  constructor(public dialog: MatDialog) { }
+  openDialog() {
+    this.dialog.open(DialogCrearUsuarioComponent);
+  }
 
   ngOnInit(): void {
   }

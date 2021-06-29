@@ -1,77 +1,56 @@
 <!-- En esta vista el super usuario podrá ver y filtral usuarios -->
-<button mat-raised-button class="buton-crear">Crear</button>
-<mat-card class="titulo-buqueda-usuario">Búsqueda de usuario</mat-card>
-<mat-card class="buqueda-usuario">
-  <!-- formulario para hacer un filtrado según un usuario existente -->
-  <form>
-    <mat-form-field class="nombre-usuario" appearance="fill">
-      <mat-label>Nombre de usuario</mat-label>
-      <input matInput placeholder="escribir nombre usuario">
-    </mat-form-field>
-
-    <mat-form-field class="fecha-inicio" appearance="fill">
-      <mat-label>Desde</mat-label>
-      <input matInput [matDatepicker]="picker" placeholder="mes/dia/año">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-    <mat-form-field class="fecha-final" appearance="fill">
-      <mat-label>Hasta</mat-label>
-      <input matInput [matDatepicker]="picker" placeholder="mes/dia/año">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-    <br>
-    <br>
-    <mat-form-field class="correo" appearance="fill">
-      <mat-label>Correo electrónico</mat-label>
-      <input matInput placeholder="jpa@segurosbolivar.com">
-    </mat-form-field>
-    <button mat-raised-button class="buton-borrar">Borrar</button>
-    <button mat-raised-button class="buton-filtrar">Filtrar</button>
-  </form>
-</mat-card>
-
-<!-- Tabla con datos de todos los usuarios registrados y donde se visualizará el resultado de la búsqueda de usuario -->
-<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-  <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Weight </th>
-    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef> Symbol </th>
-    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table> -->
-
-
 <div>
-  <table mat-table [dataSource]="data" class="mat-elevation-z8">
-    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-    </ng-container>
+  <div>
+    <button mat-button class="buton-crear" (click)="openDialog()">Crear</button>
+  </div>
+  <!-- formulario para hacer un filtrado según un usuario existente -->
+  <div>
+    <mat-card class="titulo-buqueda-usuario">Búsqueda de usuario</mat-card>
+    <mat-card class="buqueda-usuario">
+      <form>
+        <mat-form-field class="nombre-usuario" appearance="fill">
+          <mat-label>Nombre de usuario</mat-label>
+          <input matInput placeholder="escribir nombre usuario">
+        </mat-form-field>
 
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-  </table>
+        <mat-form-field class="fecha-inicio" appearance="fill">
+          <mat-label>Desde</mat-label>
+          <input matInput [matDatepicker]="pickerInicio" placeholder="mes/dia/año">
+          <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+          <mat-datepicker #pickerInicio></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="fecha-final" appearance="fill">
+          <mat-label>Hasta</mat-label>
+          <input matInput [matDatepicker]="pickerFinal" placeholder="mes/dia/año">
+          <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFinal></mat-datepicker>
+        </mat-form-field>
+
+        <br>
+        <br>
+        <mat-form-field class="correo" appearance="fill">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput placeholder="jpa@segurosbolivar.com">
+        </mat-form-field>
+        <button mat-raised-button class="buton-borrar">Borrar</button>
+        <button mat-raised-button class="buton-filtrar">Filtrar</button>
+      </form>
+    </mat-card>
+  </div>
+      <!-- Tabla descrición usuarios existentes -->
+      <div>
+      <table mat-table [dataSource]="data" class="mat-elevation-z8">
+        <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+          <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+          <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+      </table>
+    </div>
 </div>
+
 
 

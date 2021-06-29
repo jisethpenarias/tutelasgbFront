@@ -13,13 +13,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
 import { DemoMaterialModule } from './material-module';
+import { DialogCrearUsuarioComponent } from './dialog-crear-usuario/dialog-crear-usuario.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     BarraLateralComponent,
-    GestionUsuariosComponent
+    GestionUsuariosComponent,
+    DialogCrearUsuarioComponent
   ],
   imports: [
     BrowserModule,

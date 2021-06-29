@@ -1,0 +1,22 @@
+.crear-usuario {
+  color: #090258;
+}
+
+.correo {
+  position: inherit;
+  margin-left: 2rem;
+}
+
+.rol {
+  position: inherit;
+  margin-left: 2rem;
+}
+
+.buton-cancelar {
+  left: 17.2rem;
+}
+.buton-crear {
+  left: 17.3rem;
+  background-color: #007DED;
+  color: #ffff;
+}
