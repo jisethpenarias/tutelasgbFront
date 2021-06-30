@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface RolUsuario {
-  value: string,
-  viewValue: string
-}
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { RolOpcion } from '../models/rolOpcion';
+import { Usuario } from '../models/usuario';
+import { UsuarioCreacion } from '../models/usuarioCreacion';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-dialog-crear-usuario',
@@ -12,14 +13,33 @@ export interface RolUsuario {
 })
 export class DialogCrearUsuarioComponent {
 
-  rolesUsuario: RolUsuario[] = [
+  usuario: UsuarioCreacion = {username:"", email:"", password:"", rol:null};
+  paswordConfirma: string = "";
+
+  rolesUsuario: RolOpcion[] = [
+    {value: null, viewValue: "Seleccion un rol"},
     {value: "RADICADOR", viewValue: "Radicador"},
     {value: "INVESTIGADOR", viewValue: "Investigador"},
   ]
 
-  constructor() { }
+  constructor(private usuarioService :UsuarioService,
+              public dialogRef: MatDialogRef<DialogCrearUsuarioComponent>) { }
 
   ngOnInit(): void {
+
   }
+
+  crear() {
+    this.usuarioService.crear(this.usuario)
+    .subscribe(
+      (usuarioCreado: Usuario) => {
+        this.dialogRef.close('Usuario Creado Satisfactoriamente!');
+      },
+      (error: any) => {
+        this.dialogRef.close(error.error.message);
+      }
+    )
+  }
+
 
 }

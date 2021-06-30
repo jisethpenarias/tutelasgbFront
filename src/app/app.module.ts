@@ -14,6 +14,8 @@ import { MatListModule } from '@angular/material/list';
 import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
 import { DemoMaterialModule } from './material-module';
 import { DialogCrearUsuarioComponent } from './dialog-crear-usuario/dialog-crear-usuario.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -29,7 +31,10 @@ import { DialogCrearUsuarioComponent } from './dialog-crear-usuario/dialog-crear
     BrowserAnimationsModule,
     LayoutModule,
     MatListModule,
-    DemoMaterialModule
+    DemoMaterialModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,21 +3,25 @@
     <form class="crear-usuario">
       <mat-form-field class="nombre-usuario" appearance="fill">
         <mat-label>Nombre de usuario</mat-label>
-        <input matInput placeholder="escribir nombre usuario">
+        <input name="username" matInput placeholder="escribir nombre usuario" [(ngModel)]="usuario.username">
       </mat-form-field>
       <mat-form-field class="correo" appearance="fill">
         <mat-label>Correo electrónico</mat-label>
-        <input matInput placeholder="jpa@segurosbolivar.com">
+        <input name="email" matInput placeholder="jpa@segurosbolivar.com" [(ngModel)]="usuario.email">
       </mat-form-field>
       <br>
       <br>
-      <mat-form-field class="contraseña" appearance="fill">
+      <mat-form-field class="contrasena" appearance="fill">
         <mat-label>Contraseña</mat-label>
-        <input matInput>
+        <input name="password" matInput type="password" [(ngModel)]="usuario.password">
+      </mat-form-field>
+      <mat-form-field class="contrasena" appearance="fill">
+        <mat-label>Confirmar Contraseña</mat-label>
+        <input name="passwordConfirma" matInput type="password" [(ngModel)]="paswordConfirma">
       </mat-form-field>
       <mat-form-field class="rol" appearance="fill">
         <mat-label>Escoger Rol</mat-label>
-        <mat-select>
+        <mat-select name="rol" [(ngModel)]="usuario.rol">
           <mat-option *ngFor="let rolUsuario of rolesUsuario" [value]="rolUsuario.value">
             {{rolUsuario.viewValue}}
           </mat-option>
@@ -27,5 +31,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close class="buton-cancelar">Cancelar</button>
-  <button mat-raised-button class="buton-crear">Crear</button>
+  <button mat-raised-button class="buton-crear" (click)="crear()">Crear</button>
 </div>
