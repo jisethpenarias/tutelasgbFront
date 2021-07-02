@@ -1,37 +1,45 @@
-<h1 mat-dialog-title class="mensaje">Crear nuevo usuario</h1>
+<h1 mat-dialog-title class="mensaje">{{data.titulo}} usuario</h1>
 <div>
-    <form class="crear-usuario">
+    <form class="crear-usuario" [formGroup]="usuarioFormGroup">
       <mat-form-field class="nombre-usuario" appearance="fill">
         <mat-label>Nombre de usuario</mat-label>
-        <input name="username" matInput placeholder="escribir nombre usuario" [(ngModel)]="usuario.username">
+        <input name="username" matInput placeholder="escribir nombre usuario"
+        [(ngModel)]="usuario.username" formControlName="usernameValidacion">
+        <mat-error *ngIf="usuarioFormGroup.controls['usernameValidacion'].hasError('required')">{{getErrorMessage('username', 'required')}}</mat-error>
+        <mat-error *ngIf="usuarioFormGroup.controls['usernameValidacion'].hasError('minlength') || usuarioFormGroup.controls['usernameValidacion'].hasError('maxlength')">{{getErrorMessage('username', 'minmax')}}</mat-error>  
       </mat-form-field>
       <mat-form-field class="correo" appearance="fill">
         <mat-label>Correo electrónico</mat-label>
-        <input name="email" matInput placeholder="jpa@segurosbolivar.com" [(ngModel)]="usuario.email">
+        <input name="email" matInput placeholder="jpa@segurosbolivar.com" [(ngModel)]="usuario.email" formControlName="emailValidacion">
+        <mat-error *ngIf="usuarioFormGroup.controls['emailValidacion'].hasError('required')">{{getErrorMessage('email', 'required')}}</mat-error>
+        <mat-error *ngIf="usuarioFormGroup.controls['emailValidacion'].hasError('email')">{{getErrorMessage('email', 'email')}}</mat-error>
       </mat-form-field>
       <br>
       <br>
       <mat-form-field class="contrasena" appearance="fill">
         <mat-label>Contraseña</mat-label>
-        <input name="password" matInput type="password" [(ngModel)]="usuario.password">
+        <input name="password" matInput type="password" [(ngModel)]="usuario.password" formControlName="passwordValidacion">
+        <mat-error *ngIf="usuarioFormGroup.controls['passwordValidacion'].hasError('required')">{{getErrorMessage('password', 'required')}}</mat-error>
       </mat-form-field>
       <mat-form-field class="contrasenaConfirmar" appearance="fill">
         <mat-label>Confirmar Contraseña</mat-label>
-        <input name="passwordConfirma" matInput type="password" [(ngModel)]="paswordConfirma">
+        <input name="passwordConfirma" matInput type="password" [(ngModel)]="paswordConfirma" formControlName="passwordConfirmacionValidacion">
+        <mat-error *ngIf="usuarioFormGroup.controls['passwordValidacion'].hasError('required')">{{getErrorMessage('password', 'required')}}</mat-error>
       </mat-form-field>
       <br>
       <br>
       <mat-form-field class="rol" appearance="fill">
         <mat-label>Escoger Rol</mat-label>
-        <mat-select name="rol" [(ngModel)]="usuario.rol">
-          <mat-option *ngFor="let rolUsuario of rolesUsuario" [value]="rolUsuario.value">
+        <mat-select name="rol" [(ngModel)]="usuario.rol" formControlName="rolValidacion">
+          <mat-option *ngFor="let rolUsuario of rolesUsuario" [value]="rolUsuario.value" >
             {{rolUsuario.viewValue}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="usuarioFormGroup.controls['rolValidacion'].hasError('required')">{{getErrorMessage('rol', 'required')}}</mat-error>
       </mat-form-field>
     </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close class="buton-cancelar">Cancelar</button>
-  <button mat-raised-button class="buton-crear" (click)="crear()">Crear</button>
+  <button mat-raised-button class="buton-crear" (click)="crearEditar()">{{data.boton}}</button>
 </div>

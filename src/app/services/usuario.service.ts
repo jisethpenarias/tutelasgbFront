@@ -17,8 +17,16 @@ export class UsuarioService {
     return this.httpClient.post(this.REST_API_SERVER_USUARIOS + 'obtener', usuarioFiltro);
   }
 
+  public obtenerUsuario(idUsuario: number) {
+    return this.httpClient.get(this.REST_API_SERVER_USUARIOS + idUsuario);
+  }
+
   public crear(usuario: UsuarioCreacion) {
     return this.httpClient.post(this.REST_API_SERVER_USUARIOS, usuario);
+  }
+
+  public editar(usuario: UsuarioCreacion) {
+    return this.httpClient.put(this.REST_API_SERVER_USUARIOS, usuario);
   }
 
   public desactivar(idUsuario: number) {

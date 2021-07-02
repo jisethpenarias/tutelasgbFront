@@ -27,22 +27,13 @@ export class GestionUsuariosComponent implements OnInit {
               private usuarioService:UsuarioService,
               private _snackBar: MatSnackBar) { }
 
-  openDialog() {
-    this.dialogCreacion = this.dialog.open(DialogCrearUsuarioComponent);
-    this.dialogCreacion.afterClosed().subscribe(result => {
-      if (result !== ""){
-        this._snackBar.open(result, 'Ok', {
-          duration: 2000,
-        });
-        this.filtrar();
-      }
-
-    });
+  ngOnInit(): void {
+    this.filtrar();
   }
 
-  openDialogDesactivar(idUsuario: number) {
-    this.dialogDesactivar = this.dialog.open(DialogDesactivarUsuarioComponent, {data: idUsuario});
-    this.dialogDesactivar.afterClosed().subscribe(result => {
+  openDialog() {
+    this.dialogCreacion = this.dialog.open(DialogCrearUsuarioComponent, {data: {usuario: null, titulo: 'Crear', boton: 'Crear'}});
+    this.dialogCreacion.afterClosed().subscribe((result) => {
       if (result !== null && result !== "") {
         this._snackBar.open(result, 'Ok', {
           duration: 2000,
@@ -52,8 +43,16 @@ export class GestionUsuariosComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.filtrar();
+  openDialogDesactivar(idUsuario: number) {
+    this.dialogDesactivar = this.dialog.open(DialogDesactivarUsuarioComponent, {data: idUsuario});
+    this.dialogDesactivar.afterClosed().subscribe((result) => {
+      if (result !== null && result !== "") {
+        this._snackBar.open(result, 'Ok', {
+          duration: 2000,
+        });
+        this.filtrar();
+      }
+    });
   }
 
   borrar() {
@@ -64,8 +63,19 @@ export class GestionUsuariosComponent implements OnInit {
     this.filtrar();
   }
 
-  editar() {
-    console.log('editando');
+  editar(idUsuario: number) {
+    this.usuarioService.obtenerUsuario(idUsuario).subscribe(
+      (usuario: any) => {
+        this.dialogCreacion = this.dialog.open(DialogCrearUsuarioComponent, {data: {usuario: usuario, titulo: 'Editar', boton: 'Editar'}} );
+        this.dialogCreacion.afterClosed().subscribe((result) => {
+          if (result !== null && result !== "") {
+            this._snackBar.open(result, 'Ok', {
+              duration: 2000,
+            });
+            this.filtrar();
+          }
+        });
+      })
   }
 
   filtrar() {
