@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Crear nuevo usuario</h1>
+<h1 mat-dialog-title class="mensaje">Crear nuevo usuario</h1>
 <div>
     <form class="crear-usuario">
       <mat-form-field class="nombre-usuario" appearance="fill">
@@ -15,10 +15,12 @@
         <mat-label>Contraseña</mat-label>
         <input name="password" matInput type="password" [(ngModel)]="usuario.password">
       </mat-form-field>
-      <mat-form-field class="contrasena" appearance="fill">
+      <mat-form-field class="contrasenaConfirmar" appearance="fill">
         <mat-label>Confirmar Contraseña</mat-label>
         <input name="passwordConfirma" matInput type="password" [(ngModel)]="paswordConfirma">
       </mat-form-field>
+      <br>
+      <br>
       <mat-form-field class="rol" appearance="fill">
         <mat-label>Escoger Rol</mat-label>
         <mat-select name="rol" [(ngModel)]="usuario.rol">

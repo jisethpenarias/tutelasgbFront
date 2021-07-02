@@ -16,6 +16,7 @@ import { DemoMaterialModule } from './material-module';
 import { DialogCrearUsuarioComponent } from './dialog-crear-usuario/dialog-crear-usuario.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogDesactivarUsuarioComponent } from './dialog-desactivar-usuario/dialog-desactivar-usuario.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     BarraLateralComponent,
     GestionUsuariosComponent,
-    DialogCrearUsuarioComponent
+    DialogCrearUsuarioComponent,
+    DialogDesactivarUsuarioComponent
   ],
   imports: [
     BrowserModule,

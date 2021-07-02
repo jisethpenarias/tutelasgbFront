@@ -1,4 +1,4 @@
-.crear-usuario {
+.mensaje {
   color: #090258;
 }
 
@@ -7,10 +7,11 @@
   margin-left: 2rem;
 }
 
-.rol {
+.contrasenaConfirmar {
   position: inherit;
   margin-left: 2rem;
 }
+
 
 .buton-cancelar {
   left: 17.2rem;

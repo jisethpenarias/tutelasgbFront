@@ -39,8 +39,8 @@
 /* Botones crear, borrar y filtrar */
 
 .buton-crear {
-  position: fixed;
-  right: 13rem;
+  position: absolute;
+  left: 70rem;
   margin-top: 1.3rem;
   background-color: #007DED;
   color: #ffff;

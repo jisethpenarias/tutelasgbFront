@@ -5,6 +5,7 @@ import { Usuario } from '../models/usuario';
 import { FiltroUsuario } from '../models/filtroUsuario';
 import { UsuarioService } from '../services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogDesactivarUsuarioComponent } from '../dialog-desactivar-usuario/dialog-desactivar-usuario.component';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class GestionUsuariosComponent implements OnInit {
   columnsToDisplay: string[] = this.displayedColumns.slice();
   data: Usuario[];
   filtro: FiltroUsuario = {username: "", email: "", fechaDesde: null, fechaHasta: null};
-  dialogCreation;
+  dialogCreacion;
+  dialogDesactivar;
 
 
   constructor(public dialog: MatDialog,
@@ -26,12 +28,27 @@ export class GestionUsuariosComponent implements OnInit {
               private _snackBar: MatSnackBar) { }
 
   openDialog() {
-    this.dialogCreation = this.dialog.open(DialogCrearUsuarioComponent);
-    this.dialogCreation.afterClosed().subscribe(result => {
-      this._snackBar.open(result, 'Ok', {
-        duration: 2000,
-      });
-      this.filtrar();
+    this.dialogCreacion = this.dialog.open(DialogCrearUsuarioComponent);
+    this.dialogCreacion.afterClosed().subscribe(result => {
+      if (result !== ""){
+        this._snackBar.open(result, 'Ok', {
+          duration: 2000,
+        });
+        this.filtrar();
+      }
+
+    });
+  }
+
+  openDialogDesactivar(idUsuario: number) {
+    this.dialogDesactivar = this.dialog.open(DialogDesactivarUsuarioComponent, {data: idUsuario});
+    this.dialogDesactivar.afterClosed().subscribe(result => {
+      if (result !== null && result !== "") {
+        this._snackBar.open(result, 'Ok', {
+          duration: 2000,
+        });
+        this.filtrar();
+      }
     });
   }
 
@@ -49,22 +66,6 @@ export class GestionUsuariosComponent implements OnInit {
 
   editar() {
     console.log('editando');
-  }
-
-  desactivar(idUsuario: number) {
-    this.usuarioService.desactivar(idUsuario).subscribe(
-      (data) => {
-        this._snackBar.open('Usuario Desactivado', 'Ok', {
-          duration: 2000,
-        });
-        this.filtrar();
-      },
-      (error) => {
-        this._snackBar.open('Ocurrio un error', 'Ok', {
-          duration: 2000,
-        });
-      }
-    )
   }
 
   filtrar() {
