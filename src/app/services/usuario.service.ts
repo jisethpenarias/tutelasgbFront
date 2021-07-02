@@ -9,7 +9,9 @@ import { UsuarioCreacion } from '../models/usuarioCreacion';
 })
 export class UsuarioService {
 
-  private REST_API_SERVER_USUARIOS = 'http://localhost:8080/usuarios/'
+  //private REST_API_SERVER_USUARIOS = 'http://localhost:8080/usuarios/'
+  private REST_API_SERVER_USUARIOS = 'http://b6e8248aa4c9.ngrok.io/usuarios/'
+
 
   constructor(private httpClient:HttpClient) { }
 

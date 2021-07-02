@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCrearUsuarioComponent } from '../dialog-crear-usuario/dialog-crear-usuario.component';
-import { Usuario } from '../models/usuario';
-import { FiltroUsuario } from '../models/filtroUsuario';
-import { UsuarioService } from '../services/usuario.service';
+import { Usuario } from '../../models/usuario';
+import { FiltroUsuario } from '../../models/filtroUsuario';
+import { UsuarioService } from '../../services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogDesactivarUsuarioComponent } from '../dialog-desactivar-usuario/dialog-desactivar-usuario.component';
 

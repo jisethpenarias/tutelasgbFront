@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { RolOpcion } from '../models/rolOpcion';
-import { Usuario } from '../models/usuario';
-import { UsuarioCreacion } from '../models/usuarioCreacion';
-import { UsuarioService } from '../services/usuario.service';
+import { RolOpcion } from '../../models/rolOpcion';
+import { Usuario } from '../../models/usuario';
+import { UsuarioCreacion } from '../../models/usuarioCreacion';
+import { UsuarioService } from '../../services/usuario.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -78,11 +78,11 @@ export class DialogCrearUsuarioComponent {
     if (error === 'required') {
       return 'Debe introducir la infomación requerida';
     }
-    
+
     if (propiedad === 'username' && error === 'minmax') {
       return 'El nombre de usuario debe tener entre 5 y 20 caracteres';
     }
-  
+
     if (propiedad === 'email' && error === 'email') {
       return 'Debe digitar un Email valido';
     }
