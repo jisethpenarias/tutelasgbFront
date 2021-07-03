@@ -8,7 +8,7 @@ import { FiltroCliente } from '../models/filtroCliente';
 })
 export class ClienteService {
   //private REST_API_SERVER_CLIENTES = 'http://localhost:8080/clientes/'
-  private REST_API_SERVER_CLIENTES = 'http://b6e8248aa4c9.ngrok.io/clientes/'
+  private REST_API_SERVER_CLIENTES = 'http://fef0939a0eb4.ngrok.io/clientes/'
 
   constructor(private httpClient: HttpClient) {}
 
@@ -16,9 +16,9 @@ export class ClienteService {
     return this.httpClient.post(this.REST_API_SERVER_CLIENTES + 'obtener', clienteFiltro)
   }
 
-  // public obtenerCliente(idUsuario: number) {
-  //   return this.httpClient.get(this.REST_API_SERVER_USUARIOS + idUsuario);
-  // }
+  public obtenerCliente(idCliente: number) {
+    return this.httpClient.get(this.REST_API_SERVER_CLIENTES + idCliente);
+  }
 
   public crear(cliente: ClienteCreacionEdicion) {
     return this.httpClient.post(this.REST_API_SERVER_CLIENTES, cliente);
@@ -26,5 +26,9 @@ export class ClienteService {
 
   public editar(cliente: ClienteCreacionEdicion) {
     return this.httpClient.put(this.REST_API_SERVER_CLIENTES, cliente);
+  }
+
+  public desactivar(idCliente: number) {
+    return this.httpClient.put(this.REST_API_SERVER_CLIENTES + idCliente, null);
   }
 }

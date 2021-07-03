@@ -4,10 +4,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { tiposDocumentos } from 'src/app/data/tiposDocumentos';
 import { Cliente } from 'src/app/models/cliente';
 import { FiltroCliente } from 'src/app/models/filtroCliente';
-import { TipoDocumentoOpciones } from 'src/app/models/tipoDocumentoOpciones';
 import { ClienteService } from 'src/app/services/cliente.service';
-
 import { DialogCrearClienteComponent } from '../dialog-crear-cliente/dialog-crear-cliente.component';
+import { DialogDesactivarClienteComponent } from '../dialog-desactivar-cliente/dialog-desactivar-cliente.component';
 
 
 @Component({
@@ -23,6 +22,7 @@ export class GestionClientesComponent implements OnInit {
   data: Cliente[];
   filtro: FiltroCliente = {nombre: "", email: "", tipoDocumento: "",  documento:"", direccion: "", fechaDesde: null, fechaHasta: null};
   dialogCreacion;
+  dialogDesactivarCliente;
 
 
   constructor(private clienteService:ClienteService,
@@ -43,6 +43,33 @@ export class GestionClientesComponent implements OnInit {
         this.filtrar();
       }
     });
+  }
+
+  openDialogDesactivar(idCliente: number) {
+    this.dialogDesactivarCliente = this.dialog.open(DialogDesactivarClienteComponent, {data: idCliente});
+    this.dialogDesactivarCliente.afterClosed().subscribe((result) => {
+      if (result !== null && result !== "") {
+        this._snackBar.open(result, 'Ok', {
+          duration: 2000,
+        });
+        this.filtrar();
+      }
+    });
+  }
+
+  editar(idCliente: number) {
+    this.clienteService.obtenerCliente(idCliente).subscribe(
+      (cliente: any) => {
+        this.dialogCreacion = this.dialog.open(DialogCrearClienteComponent, {data: {cliente: cliente, titulo: 'Editar', boton: 'Editar'}} );
+        this.dialogCreacion.afterClosed().subscribe((result) => {
+          if (result !== null && result !== "") {
+            this._snackBar.open(result, 'Ok', {
+              duration: 2000,
+            });
+            this.filtrar();
+          }
+        });
+      })
   }
 
   borrar() {

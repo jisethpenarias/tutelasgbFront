@@ -15,6 +15,7 @@ import { DialogDesactivarUsuarioComponent } from './usuario/dialog-desactivar-us
 import { DemoMaterialModule } from './material-module';
 import { DialogCrearClienteComponent } from './cliente/dialog-crear-cliente/dialog-crear-cliente.component';
 import { GestionClientesComponent } from './cliente/gestion-clientes/gestion-clientes.component';
+import { DialogDesactivarClienteComponent } from './cliente/dialog-desactivar-cliente/dialog-desactivar-cliente.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { GestionClientesComponent } from './cliente/gestion-clientes/gestion-cli
     DialogCrearUsuarioComponent,
     DialogDesactivarUsuarioComponent,
     DialogCrearClienteComponent,
-    GestionClientesComponent
+    GestionClientesComponent,
+    DialogDesactivarClienteComponent
   ],
   imports: [
     BrowserModule,
