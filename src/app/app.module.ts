@@ -6,17 +6,15 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BarraLateralComponent } from './barra-lateral/barra-lateral.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
-import { DemoMaterialModule } from './material-module';
-import { DialogCrearUsuarioComponent } from './dialog-crear-usuario/dialog-crear-usuario.component';
+import { GestionUsuariosComponent } from './usuario/gestion-usuarios/gestion-usuarios.component';
+import { DialogCrearUsuarioComponent } from './usuario/dialog-crear-usuario/dialog-crear-usuario.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DialogDesactivarUsuarioComponent } from './dialog-desactivar-usuario/dialog-desactivar-usuario.component';
+import { DialogDesactivarUsuarioComponent } from './usuario/dialog-desactivar-usuario/dialog-desactivar-usuario.component';
+import { DemoMaterialModule } from './material-module';
+import { DialogCrearClienteComponent } from './cliente/dialog-crear-cliente/dialog-crear-cliente.component';
+import { GestionClientesComponent } from './cliente/gestion-clientes/gestion-clientes.component';
 
 
 @NgModule({
@@ -25,15 +23,17 @@ import { DialogDesactivarUsuarioComponent } from './dialog-desactivar-usuario/di
     BarraLateralComponent,
     GestionUsuariosComponent,
     DialogCrearUsuarioComponent,
-    DialogDesactivarUsuarioComponent
+    DialogDesactivarUsuarioComponent,
+    DialogCrearClienteComponent,
+    GestionClientesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
-    MatListModule,
     DemoMaterialModule,
+    MatListModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule

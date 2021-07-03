@@ -1,0 +1,73 @@
+/* busqueda de cliente */
+
+.titulo-buqueda-cliente {
+  position: absolute;
+  left: 13rem;
+  width: 60rem;
+  background-color: #F5F5F5;
+  margin-top: 2rem;
+}
+
+.buqueda-cliente {
+  position: absolute;
+  left: 13rem;
+  width: 60rem;
+  background-color: #ffff;
+  margin-top: 5.5rem;
+}
+
+.buqueda-cliente .nombre-cliente {
+  left: 1rem;
+  margin-top: 1.3rem;
+}
+
+.correo {
+    margin-left: 3rem;
+}
+
+.tipo-documento {
+  margin-left: 2rem;
+}
+
+.documento {
+  margin-left: 2rem;
+}
+
+.direccion {
+  padding-left: 12px;
+}
+
+.fecha-inicio {
+  margin-left: 2rem;
+}
+
+.fecha-final {
+  margin-left: 2rem;
+}
+
+/* Botones crear, borrar y filtrar */
+
+.buton-crear {
+  left: 70rem;
+  margin-top: 1.3rem;
+  background-color: #007DED;
+  color: #ffff;
+}
+
+.buton-borrar {
+  left: 48rem;
+}
+
+.buton-filtrar {
+  left: 49rem;
+  background-color: #007DED;
+  color: #ffff;
+}
+
+table {
+  position: absolute;
+  left: 13rem;
+  width: 62rem;
+  background-color: #ffff;
+  margin-top: 25rem;
+}

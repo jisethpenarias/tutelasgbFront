@@ -1,0 +1,44 @@
+<h1 mat-dialog-title class="mensaje">{{data.titulo}} cliente</h1>
+<div>
+  <form>
+    <mat-form-field class="nombre-cliente" appearance="fill">
+      <mat-label>Nombre de cliente</mat-label>
+      <input name="nombre" matInput placeholder="escribir nombre cliente" [(ngModel)]="cliente.nombre" >
+    </mat-form-field>
+    <mat-form-field class="correo" appearance="fill">
+      <mat-label>Correo electrónico</mat-label>
+      <input name="email" matInput placeholder="jpa@segurosbolivar.com" [(ngModel)]="cliente.email" >
+    </mat-form-field>
+    <br>
+    <br>
+    <mat-form-field class="tipo-documento" appearance="fill">
+      <mat-label>Tipo de documento</mat-label>
+      <mat-select name="tipoDocumento" [(ngModel)]="cliente.tipoDocumento">
+        <mat-option *ngFor="let tipoDocumento of tiposDocumentos" [value]="tipoDocumento.value" >
+          {{tipoDocumento.viewValue}}
+        </mat-option>
+      </mat-select>
+      <!-- <mat-error *ngIf="usuarioFormGroup.controls['rolValidacion'].hasError('required')">{{getErrorMessage('rol', 'required')}}</mat-error> -->
+    </mat-form-field>
+
+    <mat-form-field class="documento" appearance="fill">
+      <mat-label>Número de documento</mat-label>
+      <input name="documento" matInput placeholder="número documento" [(ngModel)]="cliente.documento" >
+    </mat-form-field>
+    <br>
+    <br>
+    <mat-form-field class="direccion" appearance="fill">
+      <mat-label>Dirección</mat-label>
+      <input name="direccion" matInput placeholder="Calle 18 #59 - 60 - Cali" [(ngModel)]="cliente.direccion" >
+    </mat-form-field>
+
+    <mat-form-field class="url-poder" appearance="fill">
+      <mat-label>Poder</mat-label>
+      <input name="urlPoder" matInput placeholder="poder.pdf" [(ngModel)]="cliente.urlPoder">
+    </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close class="buton-cancelar">Cancelar</button>
+  <button mat-raised-button class="buton-crear" (click)="crearEditar()">{{data.boton}}</button>
+</div>

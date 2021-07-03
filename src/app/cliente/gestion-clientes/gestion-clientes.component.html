@@ -1,0 +1,83 @@
+<!-- En esta vista el super clientes podrá ver y filtral clientes -->
+<div>
+  <div>
+    <button mat-button class="buton-crear" (click)="openDialog()">Crear</button>
+  </div>
+  <!-- formulario para hacer un filtrado según un clientes existente -->
+  <div>
+    <mat-card class="titulo-buqueda-cliente">Búsqueda de cliente</mat-card>
+    <mat-card class="buqueda-cliente">
+      <form>
+        <mat-form-field class="nombre-cliente" appearance="fill">
+          <mat-label>Nombre de cliente</mat-label>
+          <input name="nombre" matInput placeholder="escribir nombre cliente" [(ngModel)]="filtro.nombre">
+        </mat-form-field>
+        <mat-form-field class="correo" appearance="fill">
+          <mat-label>Correo electrónico</mat-label>
+          <input name="email" matInput placeholder="jpa@segurosbolivar.com" [(ngModel)]="filtro.email">
+        </mat-form-field>
+
+        <mat-form-field class="tipo-documento" appearance="fill">
+          <mat-label>Tipo de documento</mat-label>
+          <mat-select name="tipoDocumento" [(ngModel)]="filtro.tipoDocumento" formControlName="rolValidacion">
+            <mat-option *ngFor="let tipoDocumento of tiposDocumentos" [value]="tipoDocumento.value" >
+              {{tipoDocumento.viewValue}}
+            </mat-option>
+          </mat-select>
+          <!-- <mat-error *ngIf="usuarioFormGroup.controls['rolValidacion'].hasError('required')">{{getErrorMessage('rol', 'required')}}</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="documento" appearance="fill">
+          <mat-label>Número de documento</mat-label>
+          <input name="documento" matInput placeholder="número documento" [(ngModel)]="filtro.documento">
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-form-field class="direccion" appearance="fill">
+          <mat-label>Dirección</mat-label>
+          <input name="direccion" matInput placeholder="Calle 18 #59 - 60 - Cali" [(ngModel)]="filtro.direccion">
+        </mat-form-field>
+
+        <mat-form-field class="fecha-inicio" appearance="fill">
+          <mat-label>Desde</mat-label>
+          <input name="pickerDesde" matInput [matDatepicker]="pickerDesde" placeholder="mes/dia/año" [(ngModel)]="filtro.fechaDesde">
+          <mat-datepicker-toggle matSuffix [for]="pickerDesde"></mat-datepicker-toggle>
+          <mat-datepicker #pickerDesde></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="fecha-final" appearance="fill">
+          <mat-label>Hasta</mat-label>
+          <input name="pickerHasta" matInput [matDatepicker]="pickerHasta" placeholder="mes/dia/año" [(ngModel)]="filtro.fechaHasta">
+          <mat-datepicker-toggle matSuffix [for]="pickerHasta"></mat-datepicker-toggle>
+          <mat-datepicker #pickerHasta></mat-datepicker>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button class="buton-borrar" (click)="borrar()">Borrar</button>
+        <button mat-raised-button class="buton-filtrar" (click)="filtrar()">Filtrar</button>
+      </form>
+    </mat-card>
+  </div>
+      <!-- Tabla descrición clientes existentes -->
+      <div>
+      <table mat-table [dataSource]="data" class="mat-elevation-z8">
+        <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+          <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+          <div *ngIf="column !== 'acciones'">
+            <td  mat-cell *matCellDef=" let cliente"> {{cliente[column]}} </td>
+          </div>
+          <div *ngIf="column === 'acciones'">
+            <td  mat-cell *matCellDef="let cliente">
+                <mat-icon (click)="editar(cliente.id)" class="icon-logo" aria-label="Editar cliente">edit</mat-icon>
+                <mat-icon (click)="openDialogDesactivar(cliente.id)" class="icon-logo" aria-label="Desactivar cliente">unpublished</mat-icon>
+            </td>
+          </div>
+
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+      </table>
+    </div>
+</div>
+
+
+

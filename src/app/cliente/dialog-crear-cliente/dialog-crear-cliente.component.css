@@ -1,0 +1,28 @@
+.mensaje {
+  color: #090258;
+}
+
+.correo {
+  position: inherit;
+  margin-left: 2rem;
+}
+
+.documento {
+  position: inherit;
+  margin-left: 2rem;
+}
+
+.url-poder {
+    position: inherit;
+    margin-left: 2rem;
+}
+
+
+.buton-cancelar {
+  left: 17.2rem;
+}
+.buton-crear {
+  left: 17.3rem;
+  background-color: #007DED;
+  color: #ffff;
+}

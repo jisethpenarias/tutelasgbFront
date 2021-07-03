@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
+import { GestionClientesComponent } from './cliente/gestion-clientes/gestion-clientes.component';
+import { GestionUsuariosComponent } from './usuario/gestion-usuarios/gestion-usuarios.component';
 
 const routes: Routes = [
   {path: 'gestion-usuarios',  component: GestionUsuariosComponent},
+  {path: 'gestion-clientes',  component: GestionClientesComponent},
 ];
 
 @NgModule({
