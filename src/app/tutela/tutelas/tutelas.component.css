@@ -1,0 +1,76 @@
+/* busqueda de usuario */
+
+.titulo-buqueda-tutela {
+  position: absolute;
+  left: 13rem;
+  width: 60rem;
+  background-color: #F5F5F5;
+  margin-top: 4rem;
+}
+
+.buqueda-tutela {
+  position: absolute;
+  left: 13rem;
+  width: 60rem;
+  background-color: #ffff;
+  margin-top: 7.22rem;
+}
+
+.nombre-cliente {
+  position: relative;
+  left: 5rem;
+  margin-top: 2rem;
+}
+
+.etapa {
+    margin-left: 5rem;
+}
+
+.fecha-inicio {
+  position: relative;
+  left: 10.5rem;
+}
+
+.fecha-final {
+  position: relative;
+  left: 11.5rem;
+}
+
+.IdTutela {
+  margin-left: 5rem;
+}
+
+/* Botones crear, borrar y filtrar */
+
+.buton-radicar-tutela {
+  position: absolute;
+  left: 67.6rem;
+  margin-top: 1.3rem;
+  background-color: #007DED;
+  color: #ffff;
+}
+.buton-borrar {
+  position: absolute;
+  right: 11rem;
+  margin-top: 1.3rem;
+}
+
+.buton-filtrar {
+  position: absolute;
+  right: 6.2rem;
+  margin-top: 1.3rem;
+  background-color: #007DED;
+  color: #ffff;
+}
+
+
+table {
+  position: absolute;
+  left: 13rem;
+  width: 62rem;
+  background-color: #ffff;
+  margin-top: 25rem;
+}
+
+
+

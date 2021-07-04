@@ -20,13 +20,9 @@
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">work</mat-icon>
         Gestión de Clientes
       </a>
-      <a mat-list-item routerLink="/radicar-tutela" routerLinkActive="active">
-        <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">article</mat-icon>
-        Radicar Tutela
-      </a>
-      <a mat-list-item routerLink="/lista-tutelas-radicadas" routerLinkActive="active">
+      <a mat-list-item [routerLink]="['/lista-tutelas']" routerLinkActive="active">
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">list</mat-icon>
-        Lista de Tutelas Radicadas
+        Tutelas
       </a>
       <a mat-list-item routerLink="/solicitudes-informacion" routerLinkActive="active">
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">add</mat-icon>
@@ -56,6 +52,7 @@
       <p class="username">
         {{usuario}}
       </p>
+      <mat-icon class="icon-solicitudes" aria-hidden="false" aria-label="Example home icon">email</mat-icon>
     </mat-toolbar>
     <!-- Contenido de cada boton según la ruta -->
     <router-outlet></router-outlet>

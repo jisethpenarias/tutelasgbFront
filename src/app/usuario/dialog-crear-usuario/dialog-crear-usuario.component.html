@@ -6,7 +6,7 @@
         <input name="username" matInput placeholder="escribir nombre usuario"
         [(ngModel)]="usuario.username" formControlName="usernameValidacion">
         <mat-error *ngIf="usuarioFormGroup.controls['usernameValidacion'].hasError('required')">{{getErrorMessage('username', 'required')}}</mat-error>
-        <mat-error *ngIf="usuarioFormGroup.controls['usernameValidacion'].hasError('minlength') || usuarioFormGroup.controls['usernameValidacion'].hasError('maxlength')">{{getErrorMessage('username', 'minmax')}}</mat-error>  
+        <mat-error *ngIf="usuarioFormGroup.controls['usernameValidacion'].hasError('minlength') || usuarioFormGroup.controls['usernameValidacion'].hasError('maxlength')">{{getErrorMessage('username', 'minmax')}}</mat-error>
       </mat-form-field>
       <mat-form-field class="correo" appearance="fill">
         <mat-label>Correo electrónico</mat-label>

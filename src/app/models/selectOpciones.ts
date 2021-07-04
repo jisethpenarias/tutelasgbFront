@@ -1,4 +1,4 @@
-export interface RolOpcion {
+export interface SelectOpciones {
   value: string,
   viewValue: string
 }

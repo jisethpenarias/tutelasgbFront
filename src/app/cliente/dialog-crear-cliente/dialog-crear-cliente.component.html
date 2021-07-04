@@ -1,40 +1,47 @@
 <h1 mat-dialog-title class="mensaje">{{data.titulo}} cliente</h1>
 <div>
-  <form>
+  <form [formGroup]="clienteFormGroup">
     <mat-form-field class="nombre-cliente" appearance="fill">
       <mat-label>Nombre de cliente</mat-label>
-      <input name="nombre" matInput placeholder="escribir nombre cliente" [(ngModel)]="cliente.nombre" >
+      <input name="nombre" matInput placeholder="escribir nombre cliente" [(ngModel)]="cliente.nombre" formControlName="nombreValidacion">
+      <mat-error *ngIf="clienteFormGroup.controls['nombreValidacion'].hasError('required')">{{getErrorMessage('nombre', 'required')}}</mat-error>
+      <mat-error *ngIf="clienteFormGroup.controls['nombreValidacion'].hasError('minlength') || clienteFormGroup.controls['nombreValidacion'].hasError('maxlength')">{{getErrorMessage('nombre', 'minmax')}}</mat-error>
     </mat-form-field>
     <mat-form-field class="correo" appearance="fill">
       <mat-label>Correo electrónico</mat-label>
-      <input name="email" matInput placeholder="jpa@segurosbolivar.com" [(ngModel)]="cliente.email" >
+      <input name="email" matInput placeholder="jpa@segurosbolivar.com" [(ngModel)]="cliente.email" formControlName="emailValidacion">
+      <mat-error *ngIf="clienteFormGroup.controls['emailValidacion'].hasError('required')">{{getErrorMessage('email', 'required')}}</mat-error>
+      <mat-error *ngIf="clienteFormGroup.controls['emailValidacion'].hasError('email')">{{getErrorMessage('email', 'email')}}</mat-error>
     </mat-form-field>
     <br>
     <br>
     <mat-form-field class="tipo-documento" appearance="fill">
       <mat-label>Tipo de documento</mat-label>
-      <mat-select name="tipoDocumento" [(ngModel)]="cliente.tipoDocumento">
+      <mat-select name="tipoDocumento" [(ngModel)]="cliente.tipoDocumento" formControlName="tipoDocumentoValidacion">
         <mat-option *ngFor="let tipoDocumento of tiposDocumentos" [value]="tipoDocumento.value" >
           {{tipoDocumento.viewValue}}
         </mat-option>
       </mat-select>
-      <!-- <mat-error *ngIf="usuarioFormGroup.controls['rolValidacion'].hasError('required')">{{getErrorMessage('rol', 'required')}}</mat-error> -->
+      <mat-error *ngIf="clienteFormGroup.controls['tipoDocumentoValidacion'].hasError('required')">{{getErrorMessage('tipoDocumento', 'required')}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="documento" appearance="fill">
       <mat-label>Número de documento</mat-label>
-      <input name="documento" matInput placeholder="número documento" [(ngModel)]="cliente.documento" >
+      <input name="documento" matInput placeholder="número documento" [(ngModel)]="cliente.documento" formControlName="documentoValidacion">
+      <mat-error *ngIf="clienteFormGroup.controls['documentoValidacion'].hasError('required')">{{getErrorMessage('documento', 'required')}}</mat-error>
     </mat-form-field>
     <br>
     <br>
     <mat-form-field class="direccion" appearance="fill">
       <mat-label>Dirección</mat-label>
-      <input name="direccion" matInput placeholder="Calle 18 #59 - 60 - Cali" [(ngModel)]="cliente.direccion" >
+      <input name="direccion" matInput placeholder="Calle 18 #59 - 60 - Cali" [(ngModel)]="cliente.direccion" formControlName="direccionValidacion">
+      <mat-error *ngIf="clienteFormGroup.controls['direccionValidacion'].hasError('required')">{{getErrorMessage('direccion', 'required')}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="url-poder" appearance="fill">
       <mat-label>Poder</mat-label>
-      <input name="urlPoder" matInput placeholder="poder.pdf" [(ngModel)]="cliente.urlPoder">
+      <input name="urlPoder" matInput placeholder="poder.pdf" [(ngModel)]="cliente.urlPoder" formControlName="urlPoderValidacion">
+      <mat-error *ngIf="clienteFormGroup.controls['urlPoderValidacion'].hasError('required')">{{getErrorMessage('urlPoder', 'required')}}</mat-error>
     </mat-form-field>
     </form>
 </div>

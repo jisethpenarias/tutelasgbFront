@@ -51,6 +51,12 @@
   right: 4rem;
 }
 
+.icon-solicitudes {
+  color: #090258;
+  position: absolute;
+  right: 10rem;
+}
+
 .mat-sidenav-content .icon-user {
   color: #090258;
   position: absolute;

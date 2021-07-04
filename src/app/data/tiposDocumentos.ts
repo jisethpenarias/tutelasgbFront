@@ -1,6 +1,6 @@
-import { TipoDocumentoOpciones } from "../models/tipoDocumentoOpciones";
+import { SelectOpciones } from "../models/selectOpciones";
 
-export const tiposDocumentos : TipoDocumentoOpciones[] = [
+export const tiposDocumentos : SelectOpciones[] = [
   {value: null, viewValue: "Seleccion tipo documento"},
   {value: "CC", viewValue: "Cédula"},
   {value: "CE", viewValue: "Cédula Extranjería"},
