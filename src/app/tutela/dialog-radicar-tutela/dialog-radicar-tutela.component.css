@@ -1,24 +1,22 @@
 .mensaje {
   color: #090258;
+  width: 100%;
 }
 
-.colum-1 {
-  position: inherit;
-  margin-left: 0.6rem;
+.p-20{
+  padding-top: 20px;
 }
 
-.colum-2-3 {
-  position: inherit;
-  margin-left: 2rem;
+.align-left {
+  position: absolute;
+  left: 5px;
 }
 
 .mat-card-anexo {
   margin-top: 1rem;
 }
 .derechos-violados {
-  margin-left: 1rem;
-  margin-top: 1rem;
-  width: 54%;
+  width: 100%;
 }
 
 .fecha-termino {
@@ -28,14 +26,13 @@
 
 .empresa-notificar {
   margin-left: 1rem;
-  margin-top: 1rem;
-  width: 72%;
+  width: 60%;
 }
 
 .despacho {
   margin-left: 1rem;
   margin-top: 1rem;
-  width: 85%;
+  width: 89%;
 }
 
 .fecha-envío {
@@ -44,13 +41,13 @@
 }
 .text-area {
   width: 100%;
-  height: 150px;
   margin-top: 1rem;
 }
 
-.buton-cancelar {
-  left: 37rem;
+.buton-cerrar {
+  float: right;
 }
+
 .buton-guardar {
   left: 37rem;
   background-color: #007DED;

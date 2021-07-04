@@ -10,7 +10,7 @@ import { UsuarioCreacion } from '../models/usuarioCreacion';
 export class UsuarioService {
 
   //private REST_API_SERVER_USUARIOS = 'http://localhost:8080/usuarios/'
-  private REST_API_SERVER_USUARIOS = 'http://b6e8248aa4c9.ngrok.io/usuarios/'
+  private REST_API_SERVER_USUARIOS = 'http://5be74392e275.ngrok.io/usuarios/'
 
 
   constructor(private httpClient:HttpClient) { }
@@ -34,5 +34,4 @@ export class UsuarioService {
   public desactivar(idUsuario: number) {
     return this.httpClient.put(this.REST_API_SERVER_USUARIOS + idUsuario, null);
   }
-
 }

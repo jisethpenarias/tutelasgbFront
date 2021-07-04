@@ -8,7 +8,7 @@ import { FiltroTutela } from '../models/filtroTutela';
 export class TutelaService {
 
   //private REST_API_SERVER_CLIENTES = 'http://localhost:8080/clientes/'
-  private REST_API_SERVER_CLIENTES = 'http://6ef070d747e2.ngrok.io/tutelas/'
+  private REST_API_SERVER_CLIENTES = 'http://5be74392e275.ngrok.io/tutelas/'
 
   constructor(private httpClient: HttpClient) { }
 

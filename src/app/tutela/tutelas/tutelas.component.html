@@ -61,7 +61,7 @@
           <div *ngIf="column === 'acciones'">
             <td  mat-cell *matCellDef="let tutela">
                 <mat-icon (click)="editar(tutela.id)" class="icon-logo" aria-label="Editar tutela">edit</mat-icon>
-                <mat-icon (click)="traza(tutela.id)" class="icon-logo" aria-label="traza tutela">moving</mat-icon>
+                <mat-icon (click)="openDialogTraza(tutela.id)" class="icon-logo" aria-label="traza tutela">moving</mat-icon>
             </td>
           </div>
         </ng-container>
