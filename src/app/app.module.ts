@@ -17,6 +17,7 @@ import { DialogCrearClienteComponent } from './cliente/dialog-crear-cliente/dial
 import { GestionClientesComponent } from './cliente/gestion-clientes/gestion-clientes.component';
 import { DialogDesactivarClienteComponent } from './cliente/dialog-desactivar-cliente/dialog-desactivar-cliente.component';
 import { TutelasComponent } from './tutela/tutelas/tutelas.component';
+import { DialogRadicarTutelaComponent } from './tutela/dialog-radicar-tutela/dialog-radicar-tutela.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { TutelasComponent } from './tutela/tutelas/tutelas.component';
     DialogCrearClienteComponent,
     GestionClientesComponent,
     DialogDesactivarClienteComponent,
-    TutelasComponent
+    TutelasComponent,
+    DialogRadicarTutelaComponent
   ],
   imports: [
     BrowserModule,
