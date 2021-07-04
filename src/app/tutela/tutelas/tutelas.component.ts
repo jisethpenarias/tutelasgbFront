@@ -52,7 +52,14 @@ export class TutelasComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialogRadicacion = this.dialog.open(DialogRadicarTutelaComponent, {data: {tutela: null, titulo: 'Radicar', boton: 'Radicar tutela'}});
+    this.dialogRadicacion = this.dialog.open(
+      DialogRadicarTutelaComponent,
+      {
+        data: {tutela: null, titulo: 'Radicar', boton: 'Radicar tutela'},
+        minHeight: 600,
+        maxHeight: 600,
+        disableClose: true
+      });
     this.dialogRadicacion.afterClosed().subscribe((result) => {
       if (result !== null && result !== "") {
         this._snackBar.open(result, 'Ok', {

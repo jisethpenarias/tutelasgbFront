@@ -1,3 +1,195 @@
-<p>dialog-radicar-tutela works!</p>
-<h1 mat-dialog-title class="mensaje">{{data.titulo}} tutela</h1>
+<h1 mat-dialog-title class="mensaje">{{data.titulo}} tutela
+  <button mat-button mat-dialog-close class="buton-cancelar">
+    <mat-icon class="icon-logo" aria-hidden="false" aria-label="Example home icon">close</mat-icon>
+  </button>
+</h1>
+<div>
+  <!-- formulario inicial con información del accionante -->
+  <form>
+    <mat-form-field class="colum-1" appearance="fill">
+      <mat-label>Nombre del accionante</mat-label>
+      <input name="nombreAccionante" matInput placeholder="escribir nombre accionante" [(ngModel)]="tutela.nombreAccionante">
+    </mat-form-field>
 
+    <mat-form-field class="colum-2-3" appearance="fill">
+      <mat-label>Tipo de documento</mat-label>
+      <mat-select name="tipoDocumento" [(ngModel)]="tutela.tipoDocumentoAccionante">
+        <mat-option *ngFor="let tipoDocumento of tiposDocumentos" [value]="tipoDocumento.value">
+          {{tipoDocumento.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="colum-2-3" appearance="fill">
+      <mat-label>Número de documento</mat-label>
+      <input name="documentoAccionante" matInput placeholder="número documento accionante" [(ngModel)]="tutela.documentoAccionante">
+      <!-- <mat-error *ngIf="clienteFormGroup.controls['documentoValidacion'].hasError('required')">{{getErrorMessage('documento', 'required')}}</mat-error> -->
+    </mat-form-field>
+    <br>
+    <br>
+    <mat-form-field class="colum-1" appearance="fill">
+      <mat-label>Dirección del accionante</mat-label>
+      <input name="direccionAccionante" matInput placeholder="calle 18 #125-59 - Cali" [(ngModel)]="tutela.direccionAccionante">
+      <!-- <mat-error *ngIf="clienteFormGroup.controls['documentoValidacion'].hasError('required')">{{getErrorMessage('documento', 'required')}}</mat-error> -->
+    </mat-form-field>
+
+    <mat-form-field class="colum-2-3" appearance="fill">
+      <mat-label>Teléfono del accionante</mat-label>
+      <input name="telefonoAccionante" matInput placeholder="4444544" [(ngModel)]="tutela.telefonoAccionante">
+      <!-- <mat-error *ngIf="clienteFormGroup.controls['documentoValidacion'].hasError('required')">{{getErrorMessage('documento', 'required')}}</mat-error> -->
+    </mat-form-field>
+
+    <mat-form-field class="colum-2-3" appearance="fill">
+      <mat-label>Celular del accionante</mat-label>
+      <input name="celularAccionante" matInput placeholder="4444544" [(ngModel)]="tutela.celularAccionante">
+      <!-- <mat-error *ngIf="clienteFormGroup.controls['documentoValidacion'].hasError('required')">{{getErrorMessage('documento', 'required')}}</mat-error> -->
+    </mat-form-field>
+    <br>
+    <br>
+    <mat-form-field class="colum-1" appearance="fill">
+      <mat-label>Nº radicado del juzgado</mat-label>
+      <input name="numRadicadoJuzgado" matInput placeholder="4444544" [(ngModel)]="tutela.numRadicadoJuzgado">
+      <!-- <mat-error *ngIf="clienteFormGroup.controls['documentoValidacion'].hasError('required')">{{getErrorMessage('documento', 'required')}}</mat-error> -->
+    </mat-form-field>
+
+    <mat-form-field class="colum-2-3" appearance="fill">
+      <mat-label>Fecha radicación juzgado</mat-label>
+      <input name="pickerRadicacion" matInput [matDatepicker]="pickerJuzgado" placeholder="mes/dia/año" [(ngModel)]="tutela.fechaRadicacionJuzgado">
+      <mat-datepicker-toggle matSuffix [for]="pickerJuzgado"></mat-datepicker-toggle>
+      <mat-datepicker #pickerJuzgado></mat-datepicker>
+    </mat-form-field>
+  </form>
+  <div>
+    <br>
+    <br>
+    <a class="mensaje">DOCUMENTOS ANEXOS</a>
+    <mat-card class="mat-card-anexo">
+      <form>
+        <mat-form-field class="tipo-anexo" appearance="fill">
+          <mat-label>Tipo de anexo</mat-label>
+          <mat-select name="tipoAnexo">
+            <mat-option *ngFor="let tipoAnexo of tiposAnexos" [value]="tipoAnexo.value">
+              {{tipoAnexo.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </mat-card>
+    <br>
+    <br>
+    <a class="mensaje">HECHOS</a>
+    <mat-form-field class="text-area" appearance="fill">
+      <mat-label></mat-label>
+      <textarea class="text-area" matInput></textarea>
+    </mat-form-field>
+    <br>
+    <br>
+    <a class="mensaje">DERECHOS PRESUNTAMENTE VIOLADOS</a>
+    <mat-form-field class="derechos-violados" appearance="fill">
+      <mat-label>Tipo de anexo</mat-label>
+      <mat-select name="derechosViolados">
+        <mat-option *ngFor="let tipoAnexo of tiposAnexos" [value]="tipoAnexo.value">
+          {{tipoAnexo.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <br>
+    <a class="mensaje">PETICIÓN</a>
+    <mat-form-field class="text-area" appearance="fill">
+      <mat-label></mat-label>
+      <textarea class="text-area" matInput></textarea>
+    </mat-form-field>
+    <br>
+    <br>
+    <a class="mensaje">FUNDAMENTOS DEL MINISTERIOS</a>
+    <mat-form-field class="text-area" appearance="fill">
+      <mat-label></mat-label>
+      <textarea class="text-area" matInput></textarea>
+    </mat-form-field>
+    <br>
+    <br>
+    <a class="mensaje">PETICIONES DEL MINISTERIOS</a>
+    <mat-form-field class="text-area" appearance="fill">
+      <mat-label></mat-label>
+      <textarea class="text-area" matInput></textarea>
+    </mat-form-field>
+    <br>
+    <br>
+    <a class="mensaje">TERMINO</a>
+    <mat-form-field class="fecha-termino" appearance="fill">
+      <mat-label>Término de la tutela</mat-label>
+      <input name="pickerTermino" matInput [matDatepicker]="pickerTermino" placeholder="mes/dia/año" [(ngModel)]="tutela.fechaRadicacionJuzgado">
+      <mat-datepicker-toggle matSuffix [for]="pickerTermino"></mat-datepicker-toggle>
+      <mat-datepicker #pickerTermino></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <br>
+    <a class="mensaje">EMPRESA A NOTIFICAR</a>
+    <mat-form-field class="empresa-notificar" appearance="fill">
+      <mat-label>Empresa a la que se le notificará</mat-label>
+      <mat-select name="empresaNotificar">
+        <mat-option *ngFor="let tipoAnexo of tiposAnexos" [value]="tipoAnexo.value">
+          {{tipoAnexo.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <br>
+    <a class="mensaje">DESPACHO</a>
+    <mat-form-field class="despacho" appearance="fill">
+      <mat-label>Despacho al que será enviado</mat-label>
+      <input name="despacho" matInput placeholder="Ejemplo: Despacho 18 de Cali - Calle 18 #59-20" [(ngModel)]="tutela.telefonoAccionante">
+      <!-- <mat-error *ngIf="clienteFormGroup.controls['documentoValidacion'].hasError('required')">{{getErrorMessage('documento', 'required')}}</mat-error> -->
+    </mat-form-field>
+    <br>
+    <br>
+    <a class="mensaje">CONFIRMACIÓN DEL CLIENTE A LA RESPUESTA</a>
+    <section class="confirmacion-cliente">
+      <mat-checkbox class="check-confirmacion">Check si el cliente ha dado su consentimiento para el envío de la respuesta al Despacho judicial.</mat-checkbox>
+    </section>
+    <br>
+    <br>
+    <a class="mensaje">COMENTARIOS DEL CLIENTE</a>
+    <mat-form-field class="text-area" appearance="fill">
+      <mat-label></mat-label>
+      <textarea class="text-area" matInput></textarea>
+    </mat-form-field>
+    <br>
+    <br>
+    <a class="mensaje">FECHA DE ENVÍO AL DESPACHO</a>
+    <mat-form-field class="fecha-envío" appearance="fill">
+      <mat-label>Fecha envío Respuesta</mat-label>
+      <input name="pickerEnvio" matInput [matDatepicker]="pickerEnvio" placeholder="mes/dia/año" [(ngModel)]="tutela.fechaRadicacionJuzgado">
+      <mat-datepicker-toggle matSuffix [for]="pickerTermino"></mat-datepicker-toggle>
+      <mat-datepicker #pickerEnvio></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <br>
+    <a class="mensaje">CONFIRMACIÓN DEL CLIENTE AL OFICIO DE IMPUGNACIÓN</a>
+    <section class="confirmacion-cliente">
+      <mat-checkbox class="check-confirmacion">Check si el cliente ha dado su consentimiento para el envío del oficio de impugnación al Despacho judicial.</mat-checkbox>
+    </section>
+    <br>
+    <br>
+    <a class="mensaje">COMENTARIOS DEL CLIENTE</a>
+    <mat-form-field class="text-area" appearance="fill">
+      <mat-label></mat-label>
+      <textarea class="text-area" matInput></textarea>
+    </mat-form-field>
+    <br>
+    <br>
+    <a class="mensaje">FECHA DE ENVÍO AL DESPACHO</a>
+    <mat-form-field class="fecha-envío" appearance="fill">
+      <mat-label>Fecha envío Impugnación</mat-label>
+      <input name="pickerEnvio" matInput [matDatepicker]="pickerEnvio" placeholder="mes/dia/año" [(ngModel)]="tutela.fechaRadicacionJuzgado">
+      <mat-datepicker-toggle matSuffix [for]="pickerTermino"></mat-datepicker-toggle>
+      <mat-datepicker #pickerEnvio></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close class="buton-cancelar">Cancelar</button>
+    <button mat-raised-button class="buton-guardar">Guardar</button>
+    <!-- <button mat-raised-button class="buton-crear" (click)="crearEditar()">{{data.boton}}</button> -->
+  </div>
+</div>
