@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogTrazaEtapasComponent } from '../dialog-traza-etapas/dialog-traza-etapas.component';
 import {ActivatedRoute} from '@angular/router';
 import {take} from 'rxjs/operators';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-tutelas',

@@ -7,6 +7,9 @@ import { Tutela } from 'src/app/models/radicarTutela';
 import { SelectOpciones } from 'src/app/models/selectOpciones';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { FiltroCliente } from 'src/app/models/filtroCliente';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Derecho} from '../../models/derecho';
+import {tutela} from '../../data/tutela';
 
 @Component({
   selector: 'app-dialog-radicar-tutela',
@@ -15,12 +18,20 @@ import { FiltroCliente } from 'src/app/models/filtroCliente';
 })
 export class DialogRadicarTutelaComponent implements OnInit {
 
-  tutela: Tutela = {nombreAccionante:"", tipoDocumentoAccionante:"", documentoAccionante: "", direccionAccionante:"", telefonoAccionante:null,
-                           celularAccionante:null, numRadicadoJuzgado:"", fechaRadicacionJuzgado:null};
+  tutela: Tutela = {...tutela};
+
+  tutelaFormGroup = new FormGroup({
+    fechaRadicacionJuzgadoValidacion: new FormControl('', [Validators.required]),
+    numRadicadoJuzgadoValidacion: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+    documentoAccionanteValidacion: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
+    tipoDocumentoAccionanteValidacion: new FormControl('',[Validators.required]),
+    nombreAccionanteValidacion: new FormControl('',[Validators.required, Validators.minLength(4), Validators.maxLength(100)])
+  });
+
   tiposDocumentos = tiposDocumentos;
   tiposAnexos = tiposAnexos;
   clienteOpciones: SelectOpciones[];
-  clienteFiltro: FiltroCliente = {nombre: null,direccion: null,email: null,tipoDocumento: null,documento: null,fechaDesde: null,fechaHasta: null};
+  clienteFiltro: FiltroCliente = {nombre: null, direccion: null, email: null, tipoDocumento: null, documento: null, fechaDesde: null, fechaHasta: null};
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -39,6 +50,25 @@ export class DialogRadicarTutelaComponent implements OnInit {
         });
        }
     );
+  }
+
+  getErrorMessage(propiedad: string, error: string) {
+    if (error === 'required') {
+      return 'Debe introducir la infomación requerida';
+    }
+
+    if (propiedad === 'nombreAccionante' && error === 'minmax') {
+     return 'El nombre del accionante debe tener entre 4 y 100 caracteres';
+    }
+
+    if (propiedad === 'documentoAccionante' && error === 'minmax') {
+      return 'El documento del accionante debe tener entre 4 y 20 caracteres';
+    }
+
+    if (propiedad === 'numRadicadoJuzgado' && error === 'minmax') {
+      return 'El numero de radicado del juzgado debe tener entre 1 y 50 caracteres';
+    }
+
   }
 
 }

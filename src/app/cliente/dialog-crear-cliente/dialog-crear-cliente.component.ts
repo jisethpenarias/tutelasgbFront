@@ -16,7 +16,7 @@ import { AcceptValidator, MaxSizeValidator } from '@angular-material-components/
 export class DialogCrearClienteComponent implements OnInit {
 
   tiposDocumentos = tiposDocumentos;
-  cliente: ClienteCreacionEdicion = {id: null, nombre:"", email:"", direccion:"", tipoDocumento:"", documento:"", urlPoder:""};
+  cliente: ClienteCreacionEdicion = {id: null, nombre: '', email: '', direccion: '', tipoDocumento: '', documento: '', urlPoder: ''};
 
   clienteFormGroup = new FormGroup({
     nombreValidacion: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
