@@ -9,6 +9,7 @@ import { TutelaService } from 'src/app/services/tutela.service';
 import { DialogRadicarTutelaComponent } from '../dialog-radicar-tutela/dialog-radicar-tutela.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogTrazaEtapasComponent } from '../dialog-traza-etapas/dialog-traza-etapas.component';
 
 @Component({
   selector: 'app-tutelas',
@@ -52,7 +53,14 @@ export class TutelasComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialogRadicacion = this.dialog.open(DialogRadicarTutelaComponent, {data: {tutela: null, titulo: 'Radicar', boton: 'Radicar tutela'}});
+    this.dialogRadicacion = this.dialog.open(
+      DialogRadicarTutelaComponent,
+      {
+        data: {tutela: null, titulo: 'Radicar', boton: 'Radicar tutela'},
+        minWidth: 800,
+        maxWidth: 1000,
+        disableClose: true
+      });
     this.dialogRadicacion.afterClosed().subscribe((result) => {
       if (result !== null && result !== "") {
         this._snackBar.open(result, 'Ok', {
@@ -61,6 +69,11 @@ export class TutelasComponent implements OnInit {
         this.filtrar();
       }
     });
+  }
+
+  openDialogTraza(idTutela: number) {
+    this.dialogRadicacion = this.dialog.open(DialogTrazaEtapasComponent, {data: idTutela})
+
   }
 
   borrar() {

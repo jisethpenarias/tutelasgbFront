@@ -32,5 +32,4 @@ export class UsuarioService {
   public desactivar(idUsuario: number) {
     return this.httpClient.put(this.REST_API_SERVER_USUARIOS + idUsuario, null);
   }
-
 }

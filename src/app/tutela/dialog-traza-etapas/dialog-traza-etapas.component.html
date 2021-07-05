@@ -1,0 +1,37 @@
+<div mat-dialog-title>
+
+  <span>Traza de las Etapas de la tutela</span>
+
+  <button mat-button class="buton-cerrar" mat-dialog-close>
+    <mat-icon class="icon-logo" aria-hidden="false" aria-label="Example home icon">close</mat-icon>
+  </button>
+
+</div>
+<div mat-dialog-content class="mensaje">
+  <div class="tabla-trazas" *ngIf="trazaEtapas.length === 0">
+    <p> No se tienen trazas de etapa para esta tutela.</p>
+  </div>
+  <div class="tabla-trazas" *ngIf="trazaEtapas.length > 0">
+    <table mat-table [dataSource]="trazaEtapas" class="mat-elevation-z8">
+      <ng-container matColumnDef="etapaAnterior">
+        <th mat-header-cell *matHeaderCellDef>Etapa anterior</th>
+        <td mat-cell *matCellDef="let traza"> {{traza.etapaAnterior}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="etapaActual">
+        <th mat-header-cell *matHeaderCellDef> Etapa Actual </th>
+        <td mat-cell *matCellDef="let traza"> {{traza.etapaActual}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fechaDeCambio">
+        <th mat-header-cell *matHeaderCellDef> Fecha de cambio </th>
+        <td mat-cell *matCellDef="let traza"> {{traza.fechaCambio}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
+<div mat-dialog-actions>
+</div>

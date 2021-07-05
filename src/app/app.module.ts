@@ -19,6 +19,7 @@ import { DialogDesactivarClienteComponent } from './cliente/dialog-desactivar-cl
 import { TutelasComponent } from './tutela/tutelas/tutelas.component';
 import { DialogRadicarTutelaComponent } from './tutela/dialog-radicar-tutela/dialog-radicar-tutela.component';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { DialogTrazaEtapasComponent } from './tutela/dialog-traza-etapas/dialog-traza-etapas.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
     GestionClientesComponent,
     DialogDesactivarClienteComponent,
     TutelasComponent,
-    DialogRadicarTutelaComponent
+    DialogRadicarTutelaComponent,
+    DialogTrazaEtapasComponent
   ],
   imports: [
     BrowserModule,

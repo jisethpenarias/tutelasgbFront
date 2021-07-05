@@ -1,0 +1,55 @@
+.mensaje {
+  color: #090258;
+  width: 100%;
+}
+
+.p-20{
+  padding-top: 20px;
+}
+
+.align-left {
+  position: absolute;
+  left: 5px;
+}
+
+.mat-card-anexo {
+  margin-top: 1rem;
+}
+.derechos-violados {
+  width: 100%;
+}
+
+.fecha-termino {
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+.empresa-notificar {
+  margin-left: 1rem;
+  width: 60%;
+}
+
+.despacho {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  width: 89%;
+}
+
+.fecha-envío {
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+.text-area {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.buton-cerrar {
+  float: right;
+}
+
+.buton-guardar {
+  left: 37rem;
+  background-color: #007DED;
+  color: #ffff;
+}
