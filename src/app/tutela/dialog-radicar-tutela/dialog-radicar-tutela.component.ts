@@ -45,7 +45,6 @@ export class DialogRadicarTutelaComponent implements OnInit {
   public files;
   tipoAnexo: string = null;
 
-
   tutelaFormGroup = new FormGroup({
     fechaRadicacionJuzgadoValidacion: new FormControl('', [Validators.required]),
     numRadicadoJuzgadoValidacion: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
@@ -54,9 +53,7 @@ export class DialogRadicarTutelaComponent implements OnInit {
     nombreAccionanteValidacion: new FormControl('',[Validators.required, Validators.minLength(4), Validators.maxLength(100)])
   });
 
-
   derechosOpciones: Derecho[];
-
   clienteOpciones: Cliente[];
   clienteFiltro: FiltroCliente = {nombre: null, direccion: null, email: null, tipoDocumento: null, documento: null, fechaDesde: null, fechaHasta: null};
 
@@ -79,20 +76,8 @@ export class DialogRadicarTutelaComponent implements OnInit {
       this.derechosSeleccionados = this.tutela.derechos.map(derecho => derecho.id);
     }
 
-    this.clienteOpciones = [];
-    this.clienteService.obtener(this.clienteFiltro).subscribe(
-      (clientes: Cliente[]) => {
-        clientes.forEach(cliente => {
-          // this.clienteOpciones.push({viewValue: cliente.nombre, value: cliente.id});
-          this.clienteOpciones.push(cliente);
-        });
-       }
-    );
-
-    this.derechosOpciones = [];
-    this.derechoService.obtener().subscribe((derechos: Derecho[]) => {
-      this.derechosOpciones = derechos;
-    });
+    this.generarOpcionesClientes();
+    this.generarOpcionesDerechos();
 
     this.fileControl.valueChanges.subscribe((files: any) => {
         this.files = files;
@@ -124,24 +109,6 @@ export class DialogRadicarTutelaComponent implements OnInit {
     });
   }
 
-  getErrorMessage(propiedad: string, error: string) {
-    if (error === 'required') {
-      return 'Debe introducir la infomación requerida';
-    }
-
-    if (propiedad === 'nombreAccionante' && error === 'minmax') {
-     return 'El nombre del accionante debe tener entre 4 y 100 caracteres';
-    }
-
-    if (propiedad === 'documentoAccionante' && error === 'minmax') {
-      return 'El documento del accionante debe tener entre 4 y 20 caracteres';
-    }
-
-    if (propiedad === 'numRadicadoJuzgado' && error === 'minmax') {
-      return 'El numero de radicado del juzgado debe tener entre 1 y 50 caracteres';
-    }
-  }
-
   eliminarAnexo(anexoAEliminar: Anexo) {
     if (this.data.tutela !== null) {
       this.anexoService.eliminarAnexo(anexoAEliminar.nombre, anexoAEliminar.id).subscribe((response) => {});
@@ -149,13 +116,6 @@ export class DialogRadicarTutelaComponent implements OnInit {
     this.tutela.anexos = this.tutela.anexos.filter(anexo => anexo.nombre !== anexoAEliminar.nombre);
     this.tablaAnexos.renderRows();
   }
-
-  descargarAnexo(anexoADescargar: Anexo) {
-    if (anexoADescargar.url !== '') {
-      window.open(anexoADescargar.url,'_blank');
-    }
-  }
-
 
   crearEditar() {
     if (this.tutela.derechos.length > 0 ) {
@@ -199,6 +159,49 @@ export class DialogRadicarTutelaComponent implements OnInit {
       );
     }
 
+  }
+
+
+  getErrorMessage(propiedad: string, error: string) {
+    if (error === 'required') {
+      return 'Debe introducir la infomación requerida';
+    }
+
+    if (propiedad === 'nombreAccionante' && error === 'minmax') {
+      return 'El nombre del accionante debe tener entre 4 y 100 caracteres';
+    }
+
+    if (propiedad === 'documentoAccionante' && error === 'minmax') {
+      return 'El documento del accionante debe tener entre 4 y 20 caracteres';
+    }
+
+    if (propiedad === 'numRadicadoJuzgado' && error === 'minmax') {
+      return 'El numero de radicado del juzgado debe tener entre 1 y 50 caracteres';
+    }
+  }
+
+  descargarAnexo(anexoADescargar: Anexo) {
+    if (anexoADescargar.url !== '') {
+      window.open(anexoADescargar.url,'_blank');
+    }
+  }
+
+  private generarOpcionesDerechos() {
+    this.derechosOpciones = [];
+    this.derechoService.obtener().subscribe((derechos: Derecho[]) => {
+      this.derechosOpciones = derechos;
+    });
+  }
+
+  private generarOpcionesClientes() {
+    this.clienteOpciones = [];
+    this.clienteService.obtener(this.clienteFiltro).subscribe(
+      (clientes: Cliente[]) => {
+        clientes.forEach(cliente => {
+          this.clienteOpciones.push(cliente);
+        });
+      }
+    );
   }
 
 }
