@@ -1,6 +1,6 @@
 <!-- En esta vista el Radicador podrá ver, listar y filtral las tutelas -->
 <div>
-  <div>
+  <div *ngIf="parametrosComponente.view === 'RADICADOR'">
     <button mat-button class="buton-radicar-tutela" (click)="openDialog()">Radicar tutela</button>
   </div>
   <!-- formulario para filtrar tutelas radicadas -->
@@ -34,7 +34,7 @@
         <br>
         <mat-form-field class="etapa" appearance="fill">
           <mat-label>Etapa</mat-label>
-          <mat-select name="etapa" [(ngModel)]="filtroTutela.etapa">
+          <mat-select name="etapa" [(ngModel)]="etapaFiltro">
             <mat-option *ngFor="let etapa of etapaOpciones" [value]="etapa.value" >
               {{etapa.viewValue}}
             </mat-option>

@@ -1,7 +1,7 @@
 export interface FiltroTutela {
   idCliente: number;
   idTutela: number;
-  etapa: string;
+  etapas: string[];
   fechaDesde: Date;
   fechaHasta: Date;
 }

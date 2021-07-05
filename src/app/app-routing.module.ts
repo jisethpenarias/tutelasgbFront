@@ -7,7 +7,9 @@ import { GestionUsuariosComponent } from './usuario/gestion-usuarios/gestion-usu
 const routes: Routes = [
   {path: 'gestion-usuarios',  component: GestionUsuariosComponent},
   {path: 'gestion-clientes',  component: GestionClientesComponent},
-  {path: 'lista-tutelas',  component: TutelasComponent},
+  {path: 'lista-tutelas',  component: TutelasComponent, data: {view: 'RADICADOR'}}, // redireccion para el radicador
+  {path: 'tutelas-asignadas',  component: TutelasComponent, data: {view: 'ASIGNADAS'}}, // redireccion para asignadas
+  {path: 'tutelas-archivadas',  component: TutelasComponent, data: {view: 'ARCHIVADAS'}}, // redireccion para archivadas
 ];
 
 @NgModule({
