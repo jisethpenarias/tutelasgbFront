@@ -37,13 +37,16 @@
       <input name="direccion" matInput placeholder="Calle 18 #59 - 60 - Cali" [(ngModel)]="cliente.direccion" formControlName="direccionValidacion">
       <mat-error *ngIf="clienteFormGroup.controls['direccionValidacion'].hasError('required')">{{getErrorMessage('direccion', 'required')}}</mat-error>
     </mat-form-field>
-
     <mat-form-field class="url-poder" appearance="fill">
-      <mat-label>Poder</mat-label>
-      <input name="urlPoder" matInput placeholder="poder.pdf" [(ngModel)]="cliente.urlPoder" formControlName="urlPoderValidacion">
-      <mat-error *ngIf="clienteFormGroup.controls['urlPoderValidacion'].hasError('required')">{{getErrorMessage('urlPoder', 'required')}}</mat-error>
+      <ngx-mat-file-input [formControl]="fileControl" [multiple]="multiple" [accept]="accept" [color]="color">
+      </ngx-mat-file-input>
     </mat-form-field>
     </form>
+
+    <span *ngIf="data.titulo === 'Editar'">
+      <a [href]="cliente.urlPoder" target="_blank">Descargar poder anexo.</a>
+    </span>
+
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close class="buton-cancelar">Cancelar</button>

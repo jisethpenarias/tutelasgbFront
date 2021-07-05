@@ -18,6 +18,7 @@ import { GestionClientesComponent } from './cliente/gestion-clientes/gestion-cli
 import { DialogDesactivarClienteComponent } from './cliente/dialog-desactivar-cliente/dialog-desactivar-cliente.component';
 import { TutelasComponent } from './tutela/tutelas/tutelas.component';
 import { DialogRadicarTutelaComponent } from './tutela/dialog-radicar-tutela/dialog-radicar-tutela.component';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { DialogRadicarTutelaComponent } from './tutela/dialog-radicar-tutela/dia
     MatListModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMatFileInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpRequest} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ClienteCreacionEdicion } from '../models/clienteCreacion';
 import { FiltroCliente } from '../models/filtroCliente';
@@ -7,13 +7,19 @@ import { FiltroCliente } from '../models/filtroCliente';
   providedIn: 'root'
 })
 export class ClienteService {
-  //private REST_API_SERVER_CLIENTES = 'http://localhost:8080/clientes/'
-  private REST_API_SERVER_CLIENTES = 'http://6ef070d747e2.ngrok.io/clientes/'
+  private REST_API_SERVER_CLIENTES = 'http://localhost:8080/clientes/';
 
   constructor(private httpClient: HttpClient) {}
 
   public obtener(clienteFiltro: FiltroCliente) {
-    return this.httpClient.post(this.REST_API_SERVER_CLIENTES + 'obtener', clienteFiltro)
+    return this.httpClient.post(this.REST_API_SERVER_CLIENTES + 'obtener', clienteFiltro);
+  }
+
+  public subirPoder(files: any, nombreArchivo: string, idCliente: number) {
+    const data: FormData = new FormData();
+    data.set('poder', files[0], nombreArchivo);
+    const newRequest = new HttpRequest('POST', this.REST_API_SERVER_CLIENTES + 'subirPoder/' + idCliente, data);
+    return this.httpClient.request(newRequest);
   }
 
   public obtenerCliente(idCliente: number) {
