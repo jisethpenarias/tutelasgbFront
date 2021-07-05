@@ -16,7 +16,6 @@ import { DialogDesactivarUsuarioComponent } from '../dialog-desactivar-usuario/d
 export class GestionUsuariosComponent implements OnInit {
 
   displayedColumns: string[] = ['username', 'email', 'fechaCreacion', 'acciones'];
-  columnsToDisplay: string[] = this.displayedColumns.slice();
   data: Usuario[];
   filtro: FiltroUsuario = {username: "", email: "", fechaDesde: null, fechaHasta: null};
   dialogCreacion;

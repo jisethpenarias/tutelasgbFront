@@ -1,7 +1,7 @@
 export interface Tutela {
-  idTutela: number;
-  hecho: string;
-  peticiones: string;
+  id: number;
+  hechos: string;
+  peticion: string;
   termino: Date;
   etapa: string;
   cliente: any;

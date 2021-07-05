@@ -14,7 +14,6 @@ import { TutelasComponent } from '../tutelas/tutelas.component';
 export class DialogTrazaEtapasComponent implements OnInit {
 
   displayedColumns: string[] = ['etapaAnterior', 'etapaActual', 'fechaDeCambio'];
-  columnsToDisplay: string[] = this.displayedColumns.slice();
 
   trazaEtapas: TrazaEtapa[] = [];
   clienteOpciones: SelectOpciones[];

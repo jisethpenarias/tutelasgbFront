@@ -18,7 +18,6 @@ export class GestionClientesComponent implements OnInit {
 
   tiposDocumentos = tiposDocumentos;
   displayedColumns: string[] = ['nombre', 'email', 'tipoDocumento', 'documento', 'fechaCreacion', 'direccion', 'acciones'];
-  columnsToDisplay: string[] = this.displayedColumns.slice();
   data: Cliente[];
   filtro: FiltroCliente = {nombre: "", email: "", tipoDocumento: "",  documento:"", direccion: "", fechaDesde: null, fechaHasta: null};
   dialogCreacion;

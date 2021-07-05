@@ -1,7 +1,10 @@
 export interface Cliente {
   id: number;
-  email: string;
   nombre: string;
   direccion: string;
+  email: string;
+  documento: string;
+  tipoDocumento: string;
   fechaCreacion: Date;
+  activo: boolean;
 }

@@ -39,7 +39,6 @@ export class DialogCrearClienteComponent implements OnInit {
               public dialogRef: MatDialogRef<DialogCrearClienteComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.fileControl = new FormControl(this.files, [
-      Validators.required,
       MaxSizeValidator(this.maxSize * 1024)
     ]);
   }

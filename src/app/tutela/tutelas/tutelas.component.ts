@@ -91,8 +91,7 @@ export class TutelasComponent implements OnInit {
   }
 
   openDialogTraza(idTutela: number) {
-    this.dialogRadicacion = this.dialog.open(DialogTrazaEtapasComponent, {data: idTutela})
-
+    this.dialogRadicacion = this.dialog.open(DialogTrazaEtapasComponent, {data: idTutela});
   }
 
   borrar() {
@@ -111,6 +110,28 @@ export class TutelasComponent implements OnInit {
     this.filtroTutela.fechaDesde = null;
     this.filtroTutela.fechaHasta = null;
     this.filtrar();
+  }
+
+  editar(idTutela: number) {
+    this.tutelaService.obtenerTutela(idTutela).subscribe(
+      (tutela: Tutela) => {
+        this.dialogRadicacion = this.dialog.open(
+          DialogRadicarTutelaComponent,
+          {
+            data: {tutela: {...tutela}, titulo: 'Editar', boton: 'Editar tutela'},
+            minWidth: 800,
+            maxWidth: 1000,
+            disableClose: true
+          });
+        this.dialogRadicacion.afterClosed().subscribe((result) => {
+          if (result !== null && result !== "") {
+            this._snackBar.open(result, 'Ok', {
+              duration: 2000,
+            });
+            this.filtrar();
+          }
+        });
+      });
   }
 
   filtrar() {

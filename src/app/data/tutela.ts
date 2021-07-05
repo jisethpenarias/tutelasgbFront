@@ -1,6 +1,6 @@
-import {Tutela} from '../models/radicarTutela';
+import {RadicarTutela} from '../models/radicarTutela';
 
-export const tutela: Tutela = {
+export const tutela: RadicarTutela = {
   hechos: '',
   peticion: '',
   fundamentosMinisterio: '',
@@ -24,5 +24,15 @@ export const tutela: Tutela = {
   consenClientImpugnaComen: '',
   consenClientImpugnaFecha: null,
   fechaEnvioImpugnacionDespacho: null,
-  derechos: []
+  derechos: [],
+  cliente: {
+    id: null,
+    nombre: '',
+    direccion: '',
+    email: '',
+    documento: '',
+    tipoDocumento: '',
+    fechaCreacion: null,
+    activo: true},
+  anexos: []
 };

@@ -1,6 +1,8 @@
 import {Derecho} from './derecho';
+import {Cliente} from './cliente';
+import {Anexo} from './anexo';
 
-export interface Tutela {
+export interface RadicarTutela {
   hechos: string;
   peticion: string;
   fundamentosMinisterio: string;
@@ -25,4 +27,6 @@ export interface Tutela {
   consenClientImpugnaFecha: Date;
   fechaEnvioImpugnacionDespacho: Date;
   derechos: Derecho[];
+  cliente: Cliente;
+  anexos: Anexo[];
 }

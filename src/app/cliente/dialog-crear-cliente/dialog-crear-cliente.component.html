@@ -43,7 +43,7 @@
     </mat-form-field>
     </form>
 
-    <span *ngIf="data.titulo === 'Editar'">
+    <span *ngIf="data.titulo === 'Editar' && cliente.urlPoder !== null">
       <a [href]="cliente.urlPoder" target="_blank">Descargar poder anexo.</a>
     </span>
 
