@@ -1,0 +1,61 @@
+
+.titulo-buqueda-solicitud {
+  position: absolute;
+  left: 13rem;
+  width: 60rem;
+  background-color: #F5F5F5;
+  margin-top: 0.6rem;
+}
+
+.buqueda-solicitud {
+  position: absolute;
+  left: 13rem;
+  width: 60rem;
+  background-color: #ffff;
+  margin-top: 4rem;
+}
+
+.IdTutela {
+  position: relative;
+  left: 5rem;
+}
+
+.fecha-desde {
+  position: relative;
+  left: 10rem;
+}
+
+.fecha-hasta {
+  position: relative;
+  left: 11.1rem;
+}
+
+table {
+  position: absolute;
+  left: 13rem;
+  width: 62rem;
+  background-color: #ffff;
+  margin-top: 14rem;
+}
+
+/* Botones*/
+
+.buton-solicitud {
+  position: relative;
+  left: 65rem;
+  color: #ffff;
+  background-color: #007DED;
+  margin-top: 4rem;
+}
+
+.buton-borrar {
+  float: right;
+  right: 10.6rem;
+}
+
+.buton-filtrar {
+  float: right;
+  right: 1rem;
+  background-color: #007DED;
+  color: #ffff;
+}

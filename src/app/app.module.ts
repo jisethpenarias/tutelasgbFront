@@ -19,6 +19,9 @@ import { DialogDesactivarClienteComponent } from './cliente/dialog-desactivar-cl
 import { TutelasComponent } from './tutela/tutelas/tutelas.component';
 import { DialogRadicarTutelaComponent } from './tutela/dialog-radicar-tutela/dialog-radicar-tutela.component';
 import { DialogTrazaEtapasComponent } from './tutela/dialog-traza-etapas/dialog-traza-etapas.component';
+import { SolicitudesInformacionComponent } from './solicitud/solicitudes-informacion/solicitudes-informacion.component';
+import { DialogCrearSolicitudInformacionComponent } from './solicitud/dialog-crear-solicitud-informacion/dialog-crear-solicitud-informacion.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -33,7 +36,10 @@ import { DialogTrazaEtapasComponent } from './tutela/dialog-traza-etapas/dialog-
     DialogDesactivarClienteComponent,
     TutelasComponent,
     DialogRadicarTutelaComponent,
-    DialogTrazaEtapasComponent
+    DialogTrazaEtapasComponent,
+    SolicitudesInformacionComponent,
+    DialogCrearSolicitudInformacionComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

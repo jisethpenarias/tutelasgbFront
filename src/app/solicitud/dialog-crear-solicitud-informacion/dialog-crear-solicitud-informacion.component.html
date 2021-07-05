@@ -1,0 +1,23 @@
+<div mat-dialog-title>
+  <span class="mensaje">Solicitud de información</span>
+</div>
+<mat-dialog-content>
+  <div class="p-20">
+    <mat-form-field class="text-area" appearance="fill">
+      <mat-label>Título</mat-label>
+      <textarea class="text-area" matInput></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="descripcion">
+    <mat-form-field class="text-area" appearance="fill">
+      <mat-label>Descripción</mat-label>
+      <textarea class="text-area-2" matInput></textarea>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close class="buton-cancelar">Cancelar</button>
+  <button mat-raised-button class="buton-guardar">Guardar</button>
+</mat-dialog-actions>

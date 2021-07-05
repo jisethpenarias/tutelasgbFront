@@ -1,0 +1,61 @@
+<div>
+  <div>
+    <button mat-button class="buton-solicitud" (click)="openDialogSolicitud()">Solicitar información</button>
+  </div>
+  <!-- formulario para hacer un filtrado según solicitudes existente -->
+  <div>
+    <mat-card class="titulo-buqueda-solicitud">Búsqueda solicitudes de información</mat-card>
+  </div>
+  <div>
+    <mat-card class="buqueda-solicitud">
+      <form>
+        <mat-grid-list cols="2" rowHeight="70px">
+        <mat-form-field class="IdTutela" appearance="fill">
+          <mat-label>Nº Id de tutela</mat-label>
+          <input name="idTutela" matInput placeholder="1" [(ngModel)]="filtroDolicitudes.idTutela">
+        </mat-form-field>
+
+        <mat-form-field class="fecha-desde" appearance="fill">
+          <mat-label>Desde</mat-label>
+          <input name="pickerDesde" matInput [matDatepicker]="pickerDesde" placeholder="mes/dia/año" [(ngModel)]="filtroDolicitudes.fechaDesde">
+          <mat-datepicker-toggle matSuffix [for]="pickerDesde"></mat-datepicker-toggle>
+          <mat-datepicker #pickerDesde></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="fecha-hasta" appearance="fill">
+          <mat-label>Hasta</mat-label>
+          <input name="pickerHasta" matInput [matDatepicker]="pickerHasta" placeholder="mes/dia/año" [(ngModel)]="filtroDolicitudes.fechaHasta">
+          <mat-datepicker-toggle matSuffix [for]="pickerHasta"></mat-datepicker-toggle>
+          <mat-datepicker #pickerHasta></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-list>
+        <button mat-raised-button class="buton-borrar" (click)="borrar()">Borrar</button>
+        <button mat-raised-button class="buton-filtrar" (click)="filtrar()">Filtrar</button>
+      </form>
+    </mat-card>
+  </div>
+
+  <!-- Tabla descrición solicitudes existentes -->
+  <div>
+    <table mat-table [dataSource]="data" class="mat-elevation-z8">
+      <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+        <div *ngIf="column !== 'acciones'">
+          <td  mat-cell *matCellDef=" let solicitud"> {{solicitud[column]}} </td>
+        </div>
+        <div *ngIf="column === 'acciones'">
+          <td  mat-cell *matCellDef="let solicitud">
+              <mat-icon (click)="openDialogSolicitud(solicitud.id)" class="icon-logo">visibility</mat-icon>
+              <mat-icon (click)="solicitudAceptada(solicitud.id)" class="icon-logo">verified</mat-icon>
+              <mat-icon (click)="solicitudNegada(solicitud.id)" class="icon-logo">remove</mat-icon>
+          </td>
+        </div>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+    </table>
+  </div>
+</div>
+
+
+

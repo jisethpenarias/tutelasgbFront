@@ -24,7 +24,7 @@
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">list</mat-icon>
         Tutelas
       </a>
-      <a mat-list-item routerLink="/solicitudes-informacion" routerLinkActive="active">
+      <a mat-list-item [routerLink]="['/solicitudes-informacion']" routerLinkActive="active">
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">add</mat-icon>
         Solicitudes de Información
       </a>
@@ -54,6 +54,7 @@
       </p>
       <mat-icon class="icon-solicitudes" aria-hidden="false" aria-label="Example home icon">email</mat-icon>
     </mat-toolbar>
+    <app-dashboard></app-dashboard>
     <!-- Contenido de cada boton según la ruta -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
