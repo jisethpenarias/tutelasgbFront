@@ -75,7 +75,7 @@ export class TutelasComponent implements OnInit {
     this.dialogRadicacion = this.dialog.open(
       DialogRadicarTutelaComponent,
       {
-        data: {tutela: null, titulo: 'Radicar', boton: 'Radicar tutela'},
+        data: {tutela: null, titulo: 'Radicar', boton: 'Radicar tutela', llamadoDesde: this.parametrosComponente.view},
         minWidth: 800,
         maxWidth: 1000,
         disableClose: true
@@ -118,7 +118,7 @@ export class TutelasComponent implements OnInit {
         this.dialogRadicacion = this.dialog.open(
           DialogRadicarTutelaComponent,
           {
-            data: {tutela: {...tutela}, titulo: 'Editar', boton: 'Editar tutela'},
+            data: {tutela: {...tutela}, titulo: 'Editar', boton: 'Editar tutela', llamadoDesde: this.parametrosComponente.view},
             minWidth: 800,
             maxWidth: 1000,
             disableClose: true
