@@ -12,4 +12,8 @@ export class DialogFalloComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  noFallo() {
+
+  }
+
 }
