@@ -8,6 +8,7 @@
     <mat-card class="titulo-buqueda-usuario">Búsqueda de usuario</mat-card>
     <mat-card class="buqueda-usuario">
       <form>
+        <mat-grid-list cols="3">
         <mat-form-field class="nombre-usuario" appearance="fill">
           <mat-label>Nombre de usuario</mat-label>
           <input name="username" matInput placeholder="escribir nombre usuario" [(ngModel)]="filtro.username">
@@ -27,14 +28,13 @@
           <mat-datepicker #pickerHasta></mat-datepicker>
         </mat-form-field>
 
-        <br>
-        <br>
         <mat-form-field class="correo" appearance="fill">
           <mat-label>Correo electrónico</mat-label>
           <input name="email" matInput placeholder="jpa@segurosbolivar.com" [(ngModel)]="filtro.email">
         </mat-form-field>
         <button mat-raised-button class="buton-borrar" (click)="borrar()">Borrar</button>
         <button mat-raised-button class="buton-filtrar" (click)="filtrar()">Filtrar</button>
+      </mat-grid-list>
       </form>
     </mat-card>
   </div>

@@ -1,0 +1,15 @@
+.mensaje
+ {
+  font-weight: bold;
+  color: #090258;
+ }
+
+ .buton-desactivar {
+  left: 8rem;
+  background-color: #007DED;
+  color: #ffff;
+ }
+
+ .buton-archivar {
+  left: 8rem;
+ }

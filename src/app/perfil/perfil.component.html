@@ -1,0 +1,41 @@
+<div>
+  <mat-card >
+    <mat-card-title class="mensaje">
+      <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon>
+      Usuario
+      <button mat-button class="boton-cerrar" mat-dialog-close>
+        <mat-icon class="icon-logo" aria-hidden="false" aria-label="Example home icon">close</mat-icon>
+      </button>
+    </mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="submit()">
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Nombre de Usuario" formControlName="username">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <input type="password" matInput placeholder="Contraseña" formControlName="password">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <input type="passwordConfirma" matInput placeholder="Confirmar Contraseña" formControlName="password">
+          </mat-form-field>
+        </p>
+
+        <div>
+
+        </div>
+
+        <div class="boton-guardar">
+          <button type="submit" mat-button>Guardar</button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

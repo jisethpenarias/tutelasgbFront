@@ -1,0 +1,94 @@
+<div>
+  <mat-card class="titulo-filtrar">Filtrar tutelas por rango de fechas</mat-card>
+  <mat-card class="buqueda-tutela">
+    <form>
+      <mat-form-field class="fecha" appearance="fill">
+        <mat-label>Desde</mat-label>
+        <input name="pickerDesde" matInput [matDatepicker]="pickerDesde" placeholder="mes/dia/año">
+        <mat-datepicker-toggle matSuffix [for]="pickerDesde"></mat-datepicker-toggle>
+        <mat-datepicker #pickerDesde></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="fecha" appearance="fill">
+        <mat-label>Hasta</mat-label>
+        <input name="pickerHasta" matInput [matDatepicker]="pickerHasta" placeholder="mes/dia/año">
+        <mat-datepicker-toggle matSuffix [for]="pickerHasta"></mat-datepicker-toggle>
+        <mat-datepicker #pickerHasta></mat-datepicker>
+      </mat-form-field>
+    </form>
+</mat-card>
+</div>
+<div>
+  <mat-grid-list cols="1" rowHeight="20px">
+    <div class="datos-tutelas">
+      <mat-card class="mat-numero-tutelas">
+          <mat-icon class="icon-logo" aria-hidden="false">folder</mat-icon>
+          Nº total de tutelas {{data.numeroTutelas}}
+      </mat-card>
+    </div>
+    <div class="datos-tutelas">
+      <mat-card class="mat-tutelas-sin-impugnar">
+        <mat-icon class="icon-logo" aria-hidden="false">inventory</mat-icon>
+        <a class="text">
+          Nº tutelas sin impugnación {{data.numeroTutelasSinImpugnacion}}
+        </a>
+      </mat-card>
+    </div>
+    <div class="datos-tutelas">
+      <mat-card class="mat-tutelas-con-impugnar">
+        <mat-icon class="icon-logo" aria-hidden="false">inventory</mat-icon>
+        Nº tutelas con impugnación {{data.numeroTutelasConImpugnacion}}
+      </mat-card>
+    </div>
+  </mat-grid-list>
+</div>
+<div>
+  <table mat-table [dataSource]="data.tutelasArchivadas" class="mat-tabla">
+    <ng-container matColumnDef="cliente">
+      <th mat-header-cell *matHeaderCellDef>Cliente</th>
+      <td mat-cell *matCellDef="let colum"> {{colum.cliente.nombre}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="idTutela">
+      <th mat-header-cell *matHeaderCellDef> Id tutela </th>
+      <td mat-cell *matCellDef="let colum"> {{colum.tutela.idTutela}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaDeRegistro">
+      <th mat-header-cell *matHeaderCellDef> Fecha de registro </th>
+      <td mat-cell *matCellDef="let colum"> {{colum.fechaRegistro}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="investigador">
+      <th mat-header-cell *matHeaderCellDef>Investigador</th>
+      <td mat-cell *matCellDef="let colum"> {{colum.investigador}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="radicador">
+      <th mat-header-cell *matHeaderCellDef> Radicador </th>
+      <td mat-cell *matCellDef="let colum"> {{colum.radicador}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>
+<div>
+  <table mat-table [dataSource]="data.promedios" class="mat-tabla2">
+    <ng-container matColumnDef="etapa">
+      <th mat-header-cell *matHeaderCellDef> Etapas </th>
+      <td mat-cell *matCellDef="let colum"> {{colum.etapa}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numeroDias">
+      <th mat-header-cell *matHeaderCellDef> Promedio de tiempo por días </th>
+      <td mat-cell *matCellDef="let colum"> {{colum.numeroDias}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+  </table>
+</div>
+
