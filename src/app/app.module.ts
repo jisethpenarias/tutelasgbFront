@@ -24,6 +24,7 @@ import { DialogCrearSolicitudInformacionComponent } from './solicitud/dialog-cre
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { DialogFalloComponent } from './tutela/dialog-fallo/dialog-fallo.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { PerfilComponent } from './perfil/perfil.component';
     DialogCrearSolicitudInformacionComponent,
     DashboardComponent,
     LoginComponent,
-    PerfilComponent
+    PerfilComponent,
+    DialogFalloComponent
   ],
   imports: [
     BrowserModule,
