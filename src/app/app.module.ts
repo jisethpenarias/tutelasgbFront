@@ -25,6 +25,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { DialogFalloComponent } from './tutela/dialog-fallo/dialog-fallo.component';
+import { DialogReasignarTutelaComponent } from './tutela/dialog-reasignar-tutela/dialog-reasignar-tutela.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { DialogFalloComponent } from './tutela/dialog-fallo/dialog-fallo.compone
     DashboardComponent,
     LoginComponent,
     PerfilComponent,
-    DialogFalloComponent
+    DialogFalloComponent,
+    DialogReasignarTutelaComponent
   ],
   imports: [
     BrowserModule,
