@@ -22,6 +22,8 @@ import { DialogTrazaEtapasComponent } from './tutela/dialog-traza-etapas/dialog-
 import { SolicitudesInformacionComponent } from './solicitud/solicitudes-informacion/solicitudes-informacion.component';
 import { DialogCrearSolicitudInformacionComponent } from './solicitud/dialog-crear-solicitud-informacion/dialog-crear-solicitud-informacion.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DialogTrazaEtapasComponent,
     SolicitudesInformacionComponent,
     DialogCrearSolicitudInformacionComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

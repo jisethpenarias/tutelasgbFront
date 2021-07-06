@@ -5,7 +5,7 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
 <!-- Titulo -->
-    <mat-toolbar class="titulo">
+    <mat-toolbar [routerLink]="['']" routerLinkActive="active" class="titulo">
       <mat-icon class="icon-logo" aria-hidden="false" aria-label="Example home icon">folder</mat-icon>
       TUTELAS
     </mat-toolbar>
@@ -53,7 +53,6 @@
       </p>
       <mat-icon class="icon-solicitudes" aria-hidden="false" aria-label="Example home icon">email</mat-icon>
     </mat-toolbar>
-    <app-dashboard></app-dashboard>
     <!-- Contenido de cada boton según la ruta -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
