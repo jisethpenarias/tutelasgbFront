@@ -1,15 +1,12 @@
-.mensaje
- {
+.mensaje {
   font-weight: bold;
   color: #090258;
  }
 
  .buton-reasignar {
-  left: 8rem;
   background-color: #007DED;
   color: #ffff;
  }
 
  .buton-cerrar {
-  left: 8rem;
  }

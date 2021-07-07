@@ -6,8 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class TrazaEtapaService {
 
-  //private REST_API_SERVER_TRAZAS = 'http://localhost:8080/trazas/'
-  private REST_API_SERVER_TRAZAS = 'http://5be74392e275.ngrok.io/trazas/'
+  private REST_API_SERVER_TRAZAS = 'http://localhost:8080/trazas/';
 
   constructor(private httpClient: HttpClient) { }
 

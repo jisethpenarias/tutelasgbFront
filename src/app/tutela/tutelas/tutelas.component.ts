@@ -13,6 +13,8 @@ import { DialogTrazaEtapasComponent } from '../dialog-traza-etapas/dialog-traza-
 import {ActivatedRoute} from '@angular/router';
 import {take} from 'rxjs/operators';
 import {FormGroup} from '@angular/forms';
+import {DialogReasignarTutelaComponent} from '../dialog-reasignar-tutela/dialog-reasignar-tutela.component';
+import {DialogFalloComponent} from '../dialog-fallo/dialog-fallo.component';
 
 @Component({
   selector: 'app-tutelas',
@@ -33,6 +35,9 @@ export class TutelasComponent implements OnInit {
   columnsToDisplay: string[] = this.displayedColumns.slice();
 
   dialogRadicacion;
+  dialogTrazaTutelas;
+  dialogReasignacion;
+  dialogNoImpugnacion;
 
   parametrosComponente:any;
 
@@ -91,7 +96,7 @@ export class TutelasComponent implements OnInit {
   }
 
   openDialogTraza(idTutela: number) {
-    this.dialogRadicacion = this.dialog.open(DialogTrazaEtapasComponent, {data: idTutela});
+    this.dialogTrazaTutelas = this.dialog.open(DialogTrazaEtapasComponent, {data: idTutela});
   }
 
   borrar() {
@@ -132,6 +137,46 @@ export class TutelasComponent implements OnInit {
           }
         });
       });
+  }
+
+  reasignarTutela(idTutela: number) {
+    this.dialogReasignacion = this.dialog.open(DialogReasignarTutelaComponent,
+      { data: idTutela,
+        minWidth: 230,
+        maxWidth: 230,
+        disableClose: true
+      });
+    this.dialogReasignacion.afterClosed().subscribe((result) => {
+      if  (result === '') {
+        return;
+      }
+      if (result === 'Reasignado') {
+        this._snackBar.open('La tutela ha sido reasignada satisfactoriamente.', 'Ok');
+        this.filtrar();
+      } else {
+        this._snackBar.open('Ocurrió un error en la reasignación, por favor intente unos segundos mas tarde.', 'Ok');
+      }
+    });
+  }
+
+  noImpugar(idTutela: number) {
+    this.dialogNoImpugnacion = this.dialog.open(DialogFalloComponent,
+      {
+        data: idTutela,
+        minWidth: 300,
+        maxWidth: 300
+      });
+    this.dialogNoImpugnacion.afterClosed().subscribe((result) => {
+      if  (result === '') {
+        return;
+      }
+      if (result.respuesta === 'Archivado') {
+        this._snackBar.open('La tutela ha sido archivada sin impugnacion.', 'Ok');
+        this.filtrar();
+      } else {
+        this._snackBar.open('Ocurrio un error en la archivacion de la tutela, por favor intente unos segundos mas tarde.', 'Ok');
+      }
+    });
   }
 
   filtrar() {
