@@ -2,26 +2,26 @@
   <mat-card>
     <mat-card-title class="mensaje">BIENVENIDO</mat-card-title>
 <mat-card-content>
-<form (ngSubmit)="submit()">
+<form [formGroup]="loginFormGroup" (ngSubmit)="submit()">
   <p>
     <mat-form-field>
-      <input type="text" matInput placeholder="Username" formControlName="username">
+      <input type="text" [(ngModel)]="login.username" matInput placeholder="Username" formControlName="usernameValidacion">
+      <mat-error *ngIf="loginFormGroup.controls['usernameValidacion'].hasError('required')">{{getErrorMessage('username', 'required')}}</mat-error>
+      <mat-error *ngIf="loginFormGroup.controls['usernameValidacion'].hasError('maxlength')">{{getErrorMessage('username', 'max')}}</mat-error>
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field>
-      <input type="password" matInput placeholder="Password" formControlName="password">
+      <input type="password" [(ngModel)]="login.password" matInput placeholder="Password" formControlName="passwordValidacion">
+      <mat-error *ngIf="loginFormGroup.controls['passwordValidacion'].hasError('required')">{{getErrorMessage('password', 'required')}}</mat-error>
+      <mat-error *ngIf="loginFormGroup.controls['passwordValidacion'].hasError('maxlength')">{{getErrorMessage('password', 'max')}}</mat-error>
     </mat-form-field>
-    <a class="contrasena">
-      ¿olvidaste tu contraseña?
-    </a>
   </p>
 
   <div class="button">
-    <button type="submit" mat-button>Ingresar</button>
+    <button type="submit" mat-button [disabled]="loginFormGroup.invalid">Ingresar</button>
   </div>
-
 </form>
 </mat-card-content>
 </mat-card>

@@ -1,48 +1,47 @@
 <!-- El componente de barra lateral contiene todas las rutas del menu correspondiente al usuario -->
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
+  <mat-sidenav #drawer class="sidenav" fixedInViewport *ngIf="mostrarBarraLateral"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-<!-- Titulo -->
-    <mat-toolbar [routerLink]="['']" routerLinkActive="active" class="titulo">
+    <mat-toolbar [routerLink]="['']" routerLinkActive="active" class="titulo" >
       <mat-icon class="icon-logo" aria-hidden="false" aria-label="Example home icon">folder</mat-icon>
       TUTELAS
     </mat-toolbar>
-  <!-- Rutas -->
+
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/gestion-usuarios']" routerLinkActive="active">
+      <a mat-list-item *ngIf="localstorageService.usuarioLogueado.rol === 'SUPERUSUARIO'" [routerLink]="['/gestion-usuarios']" routerLinkActive="active">
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">people alt</mat-icon>
         Gestión de usuarios
       </a>
-      <a mat-list-item [routerLink]="['/gestion-clientes']" routerLinkActive="active">
+      <a mat-list-item *ngIf="localstorageService.usuarioLogueado.rol === 'SUPERUSUARIO'" [routerLink]="['/gestion-clientes']" routerLinkActive="active">
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">work</mat-icon>
         Gestión de Clientes
       </a>
-      <a mat-list-item [routerLink]="['/lista-tutelas']" routerLinkActive="active">
+      <a mat-list-item *ngIf="localstorageService.usuarioLogueado.rol === 'RADICADOR'" [routerLink]="['/lista-tutelas']" routerLinkActive="active">
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">list</mat-icon>
         Tutelas
       </a>
-      <a mat-list-item [routerLink]="['tutelas-asignadas']" routerLinkActive="active">
+      <a mat-list-item *ngIf="localstorageService.usuarioLogueado.rol === 'INVESTIGADOR'" [routerLink]="['tutelas-asignadas']" routerLinkActive="active">
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">list</mat-icon>
         Tutelas Asignadas
       </a>
-      <a mat-list-item [routerLink]="['tutelas-archivadas']" routerLinkActive="active">
+      <a mat-list-item *ngIf="localstorageService.usuarioLogueado.rol === 'INVESTIGADOR'" [routerLink]="['tutelas-archivadas']" routerLinkActive="active">
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">list</mat-icon>
         Tutelas Archivadas
       </a>
-      <a mat-list-item [routerLink]="['/solicitudes-informacion']" routerLinkActive="active">
+      <a mat-list-item *ngIf="localstorageService.usuarioLogueado.rol === 'RADICADOR'" [routerLink]="['/solicitudes-informacion']" routerLinkActive="active">
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">add</mat-icon>
         Solicitudes de Información
       </a>
-      <a mat-list-item routerLink="/solicitudes-infomacion-realizadas" routerLinkActive="active">
+      <a mat-list-item *ngIf="localstorageService.usuarioLogueado.rol === 'INVESTIGADOR'" routerLink="/solicitudes-infomacion-realizadas" routerLinkActive="active">
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">add</mat-icon>
         Solicitudes de Información Realizadas
       </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="content">
-    <mat-toolbar class="mat-toolbar" color="primary">
+    <mat-toolbar class="mat-toolbar" color="primary" *ngIf="mostrarBarraLateral">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -51,13 +50,22 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <mat-icon class="icon-user" aria-hidden="false" aria-label="Example home icon">person</mat-icon>
-      <p class="username">
-        {{usuario}}
-      </p>
-      <mat-icon class="icon-solicitudes" aria-hidden="false" aria-label="Example home icon">email</mat-icon>
+      <div class="top-bar-content">
+        <p class="username">
+          <button mat-raised-button matTooltip="Notificaciones">
+            <mat-icon aria-hidden="false" >email</mat-icon>
+          </button>
+          {{localstorageService.usuarioLogueado.username}}
+          <mat-icon aria-hidden="false" >person</mat-icon>
+          <button (click)="cerrarSesion()" mat-raised-button matTooltip="Cerrar sesion">
+            <mat-icon aria-hidden="false">logout</mat-icon>
+          </button>
+
+        </p>
+      </div>
     </mat-toolbar>
     <!-- Contenido de cada boton según la ruta -->
     <router-outlet></router-outlet>
+
   </mat-sidenav-content>
 </mat-sidenav-container>

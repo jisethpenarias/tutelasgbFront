@@ -33,8 +33,6 @@
   color: #ffff;
 }
 
-
-
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
@@ -45,20 +43,10 @@
   background-color: #ffff;
 }
 
-.mat-sidenav-content .username {
+.top-bar-content {
   color: #090258;
-  position: absolute;
-  right: 4rem;
+  right: 0px;
+  position: fixed;
+  margin-right: 17px;
 }
 
-.icon-solicitudes {
-  color: #090258;
-  position: absolute;
-  right: 10rem;
-}
-
-.mat-sidenav-content .icon-user {
-  color: #090258;
-  position: absolute;
-  right: 2rem;
-}
