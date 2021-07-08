@@ -15,6 +15,7 @@ import {take} from 'rxjs/operators';
 import {FormGroup} from '@angular/forms';
 import {DialogReasignarTutelaComponent} from '../dialog-reasignar-tutela/dialog-reasignar-tutela.component';
 import {DialogFalloComponent} from '../dialog-fallo/dialog-fallo.component';
+import {LocalstorageService} from '../../services/localstorage.service';
 
 @Component({
   selector: 'app-tutelas',
@@ -23,7 +24,7 @@ import {DialogFalloComponent} from '../dialog-fallo/dialog-fallo.component';
 })
 export class TutelasComponent implements OnInit {
 
-  filtroTutela: FiltroTutela = {idCliente: null, idTutela: null, etapas: [], fechaDesde: null, fechaHasta: null};
+  filtroTutela: FiltroTutela = {idCliente: null, idTutela: null, etapas: [], fechaDesde: null, fechaHasta: null, idUsuario: null};
   etapaFiltro: string = '';
 
   clienteFiltro: FiltroCliente = {nombre: null, direccion: null, email: null, tipoDocumento: null, documento: null, fechaDesde: null, fechaHasta: null};
@@ -45,7 +46,8 @@ export class TutelasComponent implements OnInit {
               private tutelaService: TutelaService,
               public dialog: MatDialog,
               private _snackBar: MatSnackBar,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private localStorageService: LocalstorageService) { }
 
   ngOnInit(): void {
     this.activatedRoute.data.pipe(take(1)).subscribe((data) => {
@@ -184,6 +186,8 @@ export class TutelasComponent implements OnInit {
       this.filtroTutela.etapas = [];
       this.filtroTutela.etapas.push(this.etapaFiltro);
     }
+
+    this.filtroTutela.idUsuario = this.localStorageService.usuarioLogueado.id;
     this.tutelaService.obtener(this.filtroTutela)
     .subscribe((tutelas: Tutela[]) => {
       this.data = tutelas;

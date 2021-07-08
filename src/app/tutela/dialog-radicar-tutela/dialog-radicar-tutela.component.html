@@ -115,7 +115,7 @@
             <ng-container matColumnDef="acciones">
               <th mat-header-cell *matHeaderCellDef> Acciones </th>
               <td mat-cell *matCellDef="let anexo">
-                  <mat-icon *ngIf="data.llamadoDesde === 'RADICADOR'" (click)="eliminarAnexo(anexo)" class="icon-logo">delete</mat-icon>
+                  <mat-icon *ngIf="data.llamadoDesde === 'RADICADOR' || (data.llamadoDesde === 'ASIGNADAS' && (anexo.tipo === 'RESPUESTA' || anexo.tipo === 'IMPUGNACION'))" (click)="eliminarAnexo(anexo)" class="icon-logo">delete</mat-icon>
                   <mat-icon *ngIf="data.tutela !== null && anexo.url !== ''" (click)="descargarAnexo(anexo)" class="icon-logo">file_download</mat-icon>
               </td>
             </ng-container>
@@ -215,20 +215,20 @@
               </mat-expansion-panel-header>
               <a class="mensaje">CONFIRMACIÓN DEL CLIENTE A LA RESPUESTA</a>
               <div class="confirmacion-cliente">
-                <mat-checkbox class="check-confirmacion" [(ngModel)]="tutela.consenClientRespuesta" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde === 'ARCHIVADAS'">Check si el cliente ha dado su consentimiento para el envío de la respuesta al Despacho judicial.</mat-checkbox>
+                <mat-checkbox class="check-confirmacion" [(ngModel)]="tutela.consenClientRespuesta" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde === 'ARCHIVADAS' || this.respuestaInactiva">Check si el cliente ha dado su consentimiento para el envío de la respuesta al Despacho judicial.</mat-checkbox>
               </div>
 
               <div class="p-20">
                 <a class="mensaje">COMENTARIOS DEL CLIENTE</a>
                 <mat-form-field class="text-area" appearance="fill">
-                  <textarea class="text-area" matInput [(ngModel)]="tutela.consenClientRespuestaComen" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde === 'ARCHIVADAS'"></textarea>
+                  <textarea class="text-area" matInput [(ngModel)]="tutela.consenClientRespuestaComen" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde === 'ARCHIVADAS' || this.respuestaInactiva"></textarea>
                 </mat-form-field>
               </div>
 
               <a class="mensaje">FECHA DE ENVÍO AL DESPACHO</a>
               <mat-form-field class="fecha-envío" appearance="fill">
                 <mat-label>Fecha envío Respuesta</mat-label>
-                <input name="pickerEnvioRespuesta" matInput [matDatepicker]="pickerEnvioRespuesta" placeholder="mes/dia/año" [(ngModel)]="tutela.fechaEnvioRespuestaDespacho" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde === 'ARCHIVADAS'">
+                <input name="pickerEnvioRespuesta" matInput [matDatepicker]="pickerEnvioRespuesta" placeholder="mes/dia/año" [(ngModel)]="tutela.fechaEnvioRespuestaDespacho" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde === 'ARCHIVADAS' || this.respuestaInactiva">
                 <mat-datepicker-toggle matSuffix [for]="pickerEnvioRespuesta"></mat-datepicker-toggle>
                 <mat-datepicker #pickerEnvioRespuesta></mat-datepicker>
               </mat-form-field>
@@ -247,21 +247,21 @@
             <div style="width: 100%;">
               <a class="mensaje">CONFIRMACIÓN DEL CLIENTE AL OFICIO DE IMPUGNACIÓN</a>
               <div class="confirmacion-cliente">
-                <mat-checkbox class="check-confirmacion" [(ngModel)]="tutela.consenClientImpugna" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde === 'ARCHIVADAS'">Check si el cliente ha dado su consentimiento para el envío del oficio de impugnación al Despacho judicial.</mat-checkbox>
+                <mat-checkbox class="check-confirmacion" [(ngModel)]="tutela.consenClientImpugna" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde === 'ARCHIVADAS' || this.impugnacionInactiva ">Check si el cliente ha dado su consentimiento para el envío del oficio de impugnación al Despacho judicial.</mat-checkbox>
               </div>
             </div>
 
             <div class="p-20">
               <a class="mensaje">COMENTARIOS DEL CLIENTE</a>
               <mat-form-field class="text-area" appearance="fill">
-                <textarea class="text-area" matInput [(ngModel)]="tutela.consenClientImpugnaComen" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde === 'ARCHIVADAS'"></textarea>
+                <textarea class="text-area" matInput [(ngModel)]="tutela.consenClientImpugnaComen" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde === 'ARCHIVADAS' || this.impugnacionInactiva"></textarea>
               </mat-form-field>
             </div>
 
             <a class="mensaje">FECHA DE ENVÍO AL DESPACHO</a>
             <mat-form-field class="fecha-envío" appearance="fill">
               <mat-label>Fecha envío Impugnación</mat-label>
-              <input name="pickerEnvioDespacho" matInput [matDatepicker]="pickerEnvioDespacho" placeholder="mes/dia/año" [(ngModel)]="tutela.fechaEnvioImpugnacionDespacho" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde === 'ARCHIVADAS'">
+              <input name="pickerEnvioDespacho" matInput [matDatepicker]="pickerEnvioDespacho" placeholder="mes/dia/año" [(ngModel)]="tutela.fechaEnvioImpugnacionDespacho" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde === 'ARCHIVADAS' || this.impugnacionInactiva">
               <mat-datepicker-toggle matSuffix [for]="pickerEnvioDespacho"></mat-datepicker-toggle>
               <mat-datepicker #pickerEnvioDespacho></mat-datepicker>
             </mat-form-field>

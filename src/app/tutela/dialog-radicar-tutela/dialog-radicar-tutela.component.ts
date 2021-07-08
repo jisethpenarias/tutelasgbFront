@@ -19,6 +19,7 @@ import {TutelaService} from '../../services/tutela.service';
 import {AnexoService} from '../../services/anexo.service';
 import {Tutela} from '../../models/tutela';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {LocalstorageService} from '../../services/localstorage.service';
 
 @Component({
   selector: 'app-dialog-radicar-tutela',
@@ -57,6 +58,8 @@ export class DialogRadicarTutelaComponent implements OnInit {
   clienteOpciones: Cliente[];
   clienteFiltro: FiltroCliente = {nombre: null, direccion: null, email: null, tipoDocumento: null, documento: null, fechaDesde: null, fechaHasta: null};
 
+  respuestaInactiva: boolean;
+  impugnacionInactiva: boolean;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private clienteService: ClienteService,
@@ -64,7 +67,8 @@ export class DialogRadicarTutelaComponent implements OnInit {
               private tutelaService: TutelaService,
               private anexoService: AnexoService,
               public dialogRef: MatDialogRef<DialogRadicarTutelaComponent>,
-              private _snackBar: MatSnackBar) {
+              private _snackBar: MatSnackBar,
+              public localStorageService: LocalstorageService) {
     this.fileControl = new FormControl(this.files, [
       MaxSizeValidator(this.maxSize * 1024)
     ]);
@@ -73,6 +77,10 @@ export class DialogRadicarTutelaComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.tutela != null) {
       this.tutela = this.data.tutela;
+
+      this.respuestaInactiva = this.tutela.consenClientRespuesta;
+      this.impugnacionInactiva = this.tutela.consenClientImpugna;
+
       this.derechosSeleccionados = this.tutela.derechos.map(derecho => derecho.id);
     }
 
@@ -118,26 +126,30 @@ export class DialogRadicarTutelaComponent implements OnInit {
   }
 
   crearEditar() {
-    if (this.tutela.derechos.length > 0 ) {
-      this.tutela.derechos = this.derechosSeleccionados.map(tutelaId => { return {id: tutelaId, nombre: '', descripcion: ''} });
+    if (this.derechosSeleccionados.length > 0 ) {
+      this.tutela.derechos = this.derechosSeleccionados.map(derechoId => { return {id: derechoId, nombre: '', descripcion: ''} });
     }
 
     if ( this.data.titulo === 'Radicar' ) {
       this.tutelaService.crear(this.tutela).subscribe(
         (tutelaResponse: Tutela) => {
           if (this.data.tutela === null) {
-            this.tutela.anexos.forEach(anexo => {
-              this.anexoService.anexarArchivoATutela(anexo.file, tutelaResponse.id, anexo.tipo).subscribe((response) => {
-                  this.dialogRef.close('Tutela Creada Satisfactoriamente!');
-                },
-                (error) => {
-                  console.log(error);
-                  this._snackBar.open('Ocurrio un error en la radicacion de la tutela', 'Ok', {
-                    duration: 2000,
-                  });
-                }
-              );
-            });
+            if (this.tutela.anexos.length > 0 ) {
+              this.tutela.anexos.forEach(anexo => {
+                this.anexoService.anexarArchivoATutela(anexo.file, tutelaResponse.id, anexo.tipo).subscribe((response) => {
+                    this.dialogRef.close('Tutela Creada Satisfactoriamente!');
+                  },
+                  (error) => {
+                    console.log(error);
+                    this._snackBar.open('Ocurrio un error en la radicacion de la tutela', 'Ok', {
+                      duration: 2000,
+                    });
+                  }
+                );
+              });
+            } else {
+              this.dialogRef.close('Tutela Creada Satisfactoriamente!');
+            }
           }
         },
         (error) => {

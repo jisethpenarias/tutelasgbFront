@@ -4,4 +4,5 @@ export interface FiltroTutela {
   etapas: string[];
   fechaDesde: Date;
   fechaHasta: Date;
+  idUsuario: number;
 }
