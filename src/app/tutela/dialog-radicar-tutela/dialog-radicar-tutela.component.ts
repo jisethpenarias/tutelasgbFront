@@ -20,6 +20,7 @@ import {AnexoService} from '../../services/anexo.service';
 import {Tutela} from '../../models/tutela';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {LocalstorageService} from '../../services/localstorage.service';
+import {SelectOpciones} from '../../models/selectOpciones';
 
 @Component({
   selector: 'app-dialog-radicar-tutela',
@@ -35,7 +36,7 @@ export class DialogRadicarTutelaComponent implements OnInit {
   @ViewChild('tablaAnexos') tablaAnexos: MatTable<Anexo>;
   @ViewChild('uploader') uploader: NgxMatFileInputComponent;
 
-  tiposAnexos = tiposAnexos;
+  tiposAnexosOpciones: SelectOpciones[] = [];
   displayedColumnsAnexos: string[] = ['nombre', 'tipo', 'acciones'];
   // Variables para el uploader
   fileControl: FormControl;
@@ -61,6 +62,10 @@ export class DialogRadicarTutelaComponent implements OnInit {
   respuestaInactiva: boolean;
   impugnacionInactiva: boolean;
 
+  existeFallo: boolean;
+  existeRespuesta: boolean;
+  existeImpugnacion: boolean;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private clienteService: ClienteService,
               private derechoService: DerechoService,
@@ -81,8 +86,22 @@ export class DialogRadicarTutelaComponent implements OnInit {
       this.respuestaInactiva = this.tutela.consenClientRespuesta;
       this.impugnacionInactiva = this.tutela.consenClientImpugna;
 
+      this.existeFallo = this.tutela.anexos.some(anexo => anexo.tipo === 'FALLO');
+      this.existeRespuesta = this.tutela.anexos.some(anexo => anexo.tipo === 'RESPUESTA');
+      this.existeImpugnacion = this.tutela.anexos.some(anexo => anexo.tipo === 'IMPUGNACION');
+
       this.derechosSeleccionados = this.tutela.derechos.map(derecho => derecho.id);
     }
+
+    this.tiposAnexosOpciones = tiposAnexos.filter(tutelaAnexo => {
+      if (this.data.llamadoDesde === 'RADICADOR'){
+        return tutelaAnexo.value === 'TUTELA' || tutelaAnexo.value === 'SOPORTE' || tutelaAnexo.value === 'FALLO';
+      }
+      if(this.data.llamadoDesde === 'ASIGNADAS') {
+        return tutelaAnexo.value === 'RESPUESTA' || tutelaAnexo.value === 'IMPUGNACION';
+      }
+      return tutelaAnexo;
+    });
 
     this.generarOpcionesClientes();
     this.generarOpcionesDerechos();

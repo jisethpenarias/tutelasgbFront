@@ -56,14 +56,18 @@
         <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
           <th mat-header-cell *matHeaderCellDef> {{column}} </th>
           <div *ngIf="column !== 'acciones'">
-            <td  mat-cell *matCellDef=" let tutela"> {{column === 'cliente' ? tutela[column].nombre : tutela[column]}} </td>
+            <td  mat-cell *matCellDef=" let tutela">
+              {{column === 'cliente' ? tutela[column].nombre :
+                column === 'hechos' ? tutela[column].substring(0,10) + '...' :
+                column === 'peticion' ? tutela[column].substring(0,10) + '...' :
+                  tutela[column]}} </td>
           </div>
           <div *ngIf="column === 'acciones'">
             <td  mat-cell *matCellDef="let tutela">
-                <mat-icon  *ngIf="parametrosComponente.view !== 'ARCHIVADAS'" (click)="editar(tutela.id)" class="icon-logo" aria-label="Editar tutela">edit</mat-icon>
+                <mat-icon  *ngIf="parametrosComponente.view !== 'ARCHIVADAS' && tutela.etapa !== 'Archivada con impugnacion' && tutela.etapa !== 'Archivada sin impugnacion'" (click)="editar(tutela.id)" class="icon-logo" aria-label="Editar tutela">edit</mat-icon>
                 <mat-icon  *ngIf="parametrosComponente.view === 'ASIGNADAS'" (click)="reasignarTutela(tutela.id)" class="icon-logo" aria-label="Editar tutela">accessibility</mat-icon>
               <mat-icon  *ngIf="parametrosComponente.view === 'ASIGNADAS'" (click)="noImpugar(tutela.id)" class="icon-logo" aria-label="Editar tutela">error</mat-icon>
-                <mat-icon  *ngIf="parametrosComponente.view === 'ARCHIVADAS'" (click)="editar(tutela.id)" class="icon-logo" aria-label="Editar tutela">visibility</mat-icon>
+                <mat-icon  *ngIf="parametrosComponente.view === 'ARCHIVADAS' || (tutela.etapa === 'Archivada con impugnacion' && parametrosComponente.view !== 'ASIGNADAS') || (tutela.etapa === 'Archivada sin impugnacion' && parametrosComponente.view !== 'ASIGNADAS')" (click)="editar(tutela.id)" class="icon-logo" aria-label="Editar tutela">visibility</mat-icon>
                 <mat-icon (click)="openDialogTraza(tutela.id)" class="icon-logo" aria-label="traza tutela">moving</mat-icon>
             </td>
           </div>
