@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import {LocalstorageService} from '../services/localstorage.service';
 import {Router} from '@angular/router';
+import {Solicitud} from '../models/solicitud';
+import {SolicitudService} from '../services/solicitud.service';
 
 @Component({
   selector: 'app-barra-lateral',
@@ -19,8 +21,11 @@ export class BarraLateralComponent implements OnInit {
       shareReplay()
     );
 
+  solicitudes: Solicitud[] = [];
+
   constructor(private breakpointObserver: BreakpointObserver,
               private localstorageService: LocalstorageService,
+              private solicitudService: SolicitudService,
               private router: Router) {
 
     localstorageService.observable.subscribe((nextValue) => {
@@ -34,7 +39,10 @@ export class BarraLateralComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.solicitudService.obtener({idTutela: null, fechaDesde: null, fechaHasta: null, estado: 'CREADA'}).subscribe(
+      (solicitudesResponse: Solicitud[]) => {
+        this.solicitudes = solicitudesResponse.sort((a, b) => new Date(b.fechaCreacion).getTime() - new Date(a.fechaCreacion).getTime()).slice(0, 5);
+      });
   }
 
   cerrarSesion() {

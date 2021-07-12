@@ -1,23 +1,31 @@
 <div mat-dialog-title>
-  <span class="mensaje">Solicitud de información</span>
+  <span class="mensaje">{{data.titulo}}</span>
+  <button mat-button mat-dialog-close class="buton-cerrar">
+    <mat-icon class="icon-logo" aria-hidden="false" aria-label="Example home icon">close</mat-icon>
+  </button>
 </div>
+<form [formGroup]="solicitudFormGroup" (ngSubmit)="submit()">
 <mat-dialog-content>
-  <div class="p-20">
-    <mat-form-field class="text-area" appearance="fill">
-      <mat-label>Título</mat-label>
-      <textarea class="text-area" matInput></textarea>
-    </mat-form-field>
-  </div>
+    <div class="p-20">
+      <mat-form-field class="text-area" appearance="fill">
+        <mat-label>Título</mat-label>
+        <input class="text-area" [(ngModel)]="solicitud.titulo"  matInput formControlName="tituloValidacion" [readonly]="data.accion === 'VER'"/>
+        <mat-error *ngIf="solicitudFormGroup.controls['tituloValidacion'].hasError('required')">{{getErrorMessage('titulo', 'required')}}</mat-error>
+        <mat-error *ngIf="solicitudFormGroup.controls['tituloValidacion'].hasError('minlength') || solicitudFormGroup.controls['tituloValidacion'].hasError('maxlength')">{{getErrorMessage('titulo', 'minmax')}}</mat-error>
+      </mat-form-field>
+    </div>
 
-  <div class="descripcion">
-    <mat-form-field class="text-area" appearance="fill">
-      <mat-label>Descripción</mat-label>
-      <textarea class="text-area-2" matInput></textarea>
-    </mat-form-field>
-  </div>
+    <div class="descripcion">
+      <mat-form-field class="text-area" appearance="fill">
+        <mat-label>Descripción</mat-label>
+        <textarea class="text-area-2" [(ngModel)]="solicitud.descripcion"  matInput formControlName="descripcionValidacion" [readonly]="data.accion === 'VER'"></textarea>
+        <mat-error *ngIf="solicitudFormGroup.controls['descripcionValidacion'].hasError('minlength') || solicitudFormGroup.controls['tituloValidacion'].hasError('maxlength')">{{getErrorMessage('descripcion', 'minmax')}}</mat-error>
+      </mat-form-field>
+    </div>
 </mat-dialog-content>
 
-<mat-dialog-actions>
+<mat-dialog-actions *ngIf="data.accion === 'CREAR'">
   <button mat-button mat-dialog-close class="buton-cancelar">Cancelar</button>
-  <button mat-raised-button class="buton-guardar">Guardar</button>
+  <button type="submit" [disabled]="solicitudFormGroup.invalid" mat-raised-button class="buton-guardar">Guardar</button>
 </mat-dialog-actions>
+</form>

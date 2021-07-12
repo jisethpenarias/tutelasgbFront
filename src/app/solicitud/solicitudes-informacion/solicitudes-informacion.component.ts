@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Solicitud } from 'src/app/models/solicitudes';
+import { Solicitud } from 'src/app/models/solicitud';
 import { DialogCrearSolicitudInformacionComponent } from '../dialog-crear-solicitud-informacion/dialog-crear-solicitud-informacion.component';
+import {SolicitudService} from '../../services/solicitud.service';
 
-
-const ELEMENT_DATA: Solicitud[] = [
-  {titulo: "solicitud", descripción: "descripcion", estado: "aceptada", id: 21, termino: new Date(), }
-];
 
 @Component({
   selector: 'app-solicitudes-informacion',
@@ -16,23 +13,29 @@ const ELEMENT_DATA: Solicitud[] = [
 })
 export class SolicitudesInformacionComponent implements OnInit {
 
-  filtroDolicitudes = {idTutela:null, fechaDesde:null, fechaHasta:null}
-  data: Solicitud[] = ELEMENT_DATA;
+  filtroSolicitudes = {idTutela: null, fechaDesde: null, fechaHasta: null, estado: null};
+  solicitudes: Solicitud[] = [];
   dialogSolicitud;
+  estadosOpciones: string[] = ['CREADA', 'ACEPTADA', 'NEGADA'];
 
-  displayedColumns: string[] = ['titulo', 'descripción', 'estado', 'id', 'acciones'];
-  columnsToDisplay: string[] = this.displayedColumns.slice();
+  displayedColumns: string[] = ['id', 'tutela', 'titulo', 'descripcion', 'estado', 'acciones'];
 
   constructor(public dialog: MatDialog,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar,
+              private solicitudService: SolicitudService) { }
 
   ngOnInit(): void {
+    console.log(this.filtroSolicitudes);
+    this.filtrar();
   }
 
-  openDialogSolicitud() {
-    // este componente se reutiliza: se necesita validar cuando se crea y cuando solo se visualiza
+  verSolicitud(solicitud: Solicitud) {
     this.dialogSolicitud = this.dialog.open(
-      DialogCrearSolicitudInformacionComponent,{data: {tutela: null, titulo: 'Solicitud información'}, disableClose: true});
+      DialogCrearSolicitudInformacionComponent,
+      {
+        data: { solicitud: solicitud, titulo: 'Ver Solicitud información', accion: 'VER', tutela: null },
+        disableClose: true
+      });
     this.dialogSolicitud.afterClosed().subscribe((result) => {
       if (result !== null && result !== "") {
         this._snackBar.open(result, 'Ok', {
@@ -43,27 +46,43 @@ export class SolicitudesInformacionComponent implements OnInit {
     });
   }
 
-  // solicitudAceptada(solicitud.id) {
-  //   consume un endpoint
-  // }
+  aceptarSolicitud(solicitud: Solicitud) {
+    solicitud.estado = 'ACEPTADA';
+    this.solicitudService.actualizarSolicitud(solicitud).subscribe(
+      () => {
+        this._snackBar.open('La solicitud ha sido aceptada.', 'Ok', {
+          duration: 2000,
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
-  // solicitudNegada(solicitud.id) {
-  //   consume un endpoint
-  // }
+  negarSolicitud(solicitud: Solicitud) {
+    solicitud.estado = 'NEGADA';
+    this.solicitudService.actualizarSolicitud(solicitud).subscribe(
+      () => {
+        this._snackBar.open('La solicitud ha sido negada.', 'Ok', {
+          duration: 2000,
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
   borrar() {
-    // this.filtro.email="";
-    // this.filtro.username="";
-    // this.filtro.fechaDesde = null;
-    // this.filtro.fechaHasta = null;
+    this.filtroSolicitudes = {idTutela: null, fechaDesde: null, fechaHasta: null, estado: null};
     this.filtrar();
   }
 
   filtrar() {
-    // this.usuarioService.obtener(this.filtro)
-    // .subscribe((usuarios: Usuario[]) => {
-    //   this.data = usuarios;
-    // })
+    this.solicitudService.obtener(this.filtroSolicitudes).subscribe((solicitudesRespuesta: Solicitud[]) => {
+      this.solicitudes = solicitudesRespuesta;
+    });
   }
 
 }

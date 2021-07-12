@@ -11,7 +11,7 @@
         <div class="align-left">
           <mat-form-field appearance="fill">
             <mat-label>Nombre del accionante</mat-label>
-            <input name="nombreAccionante" matInput placeholder="escribir nombre accionante" [(ngModel)]="tutela.nombreAccionante" formControlName="nombreAccionanteValidacion" [readonly]="data.llamadoDesde !== 'RADICADOR'">
+            <input name="nombreAccionante" matInput placeholder="escribir nombre accionante" [(ngModel)]="tutela.nombreAccionante" formControlName="nombreAccionanteValidacion" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
             <mat-error *ngIf="tutelaFormGroup.controls['nombreAccionanteValidacion'].hasError('required')">{{getErrorMessage('nombreAccionanteValidacion', 'required')}}</mat-error>
             <mat-error *ngIf="tutelaFormGroup.controls['nombreAccionanteValidacion'].hasError('minlength') || tutelaFormGroup.controls['nombreAccionanteValidacion'].hasError('maxlength')">{{getErrorMessage('nombreAccionante', 'minmax')}}</mat-error>
           </mat-form-field>
@@ -21,7 +21,7 @@
         <div class="align-left">
           <mat-form-field  appearance="fill">
             <mat-label>Tipo de documento</mat-label>
-            <mat-select name="tipoDocumento" [(ngModel)]="tutela.tipoDocumentoAccionante" formControlName="tipoDocumentoAccionanteValidacion" [disabled]="data.llamadoDesde !== 'RADICADOR'">
+            <mat-select name="tipoDocumento" [(ngModel)]="tutela.tipoDocumentoAccionante" formControlName="tipoDocumentoAccionanteValidacion" [disabled]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
               <mat-option *ngFor="let tipoDocumento of tiposDocumentos" [value]="tipoDocumento.value">
                 {{tipoDocumento.viewValue}}
               </mat-option>
@@ -34,7 +34,7 @@
         <div class="align-left">
           <mat-form-field appearance="fill">
             <mat-label>Número de documento</mat-label>
-            <input name="documentoAccionante" matInput placeholder="número documento accionante" [(ngModel)]="tutela.documentoAccionante" formControlName="documentoAccionanteValidacion" [readonly]="data.llamadoDesde !== 'RADICADOR'">
+            <input name="documentoAccionante" matInput placeholder="número documento accionante" [(ngModel)]="tutela.documentoAccionante" formControlName="documentoAccionanteValidacion" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
             <mat-error *ngIf="tutelaFormGroup.controls['documentoAccionanteValidacion'].hasError('required')">{{getErrorMessage('documentoAccionanteValidacion', 'required')}}</mat-error>
             <mat-error *ngIf="tutelaFormGroup.controls['documentoAccionanteValidacion'].hasError('minlength') || tutelaFormGroup.controls['documentoAccionanteValidacion'].hasError('maxlength')">{{getErrorMessage('documentoAccionante', 'minmax')}}</mat-error>
           </mat-form-field>
@@ -44,7 +44,7 @@
         <div class="align-left">
           <mat-form-field appearance="fill">
             <mat-label>Dirección del accionante</mat-label>
-            <input name="direccionAccionante" matInput placeholder="calle 18 #125-59 - Cali" [(ngModel)]="tutela.direccionAccionante" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR'">
+            <input name="direccionAccionante" matInput placeholder="calle 18 #125-59 - Cali" [(ngModel)]="tutela.direccionAccionante" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
           </mat-form-field>
         </div>
       </mat-grid-tile>
@@ -52,7 +52,7 @@
         <div class="align-left">
           <mat-form-field  appearance="fill">
             <mat-label>Teléfono del accionante</mat-label>
-            <input name="telefonoAccionante" matInput placeholder="4444544" [(ngModel)]="tutela.telefonoAccionante" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR'">
+            <input name="telefonoAccionante" matInput placeholder="4444544" [(ngModel)]="tutela.telefonoAccionante" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
           </mat-form-field>
         </div>
       </mat-grid-tile>
@@ -60,7 +60,7 @@
         <div class="align-left">
           <mat-form-field  appearance="fill">
             <mat-label>Celular del accionante</mat-label>
-            <input name="celularAccionante" matInput placeholder="4444544" [(ngModel)]="tutela.celularAccionante" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR'">
+            <input name="celularAccionante" matInput placeholder="4444544" [(ngModel)]="tutela.celularAccionante" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
           </mat-form-field>
         </div>
       </mat-grid-tile>
@@ -68,7 +68,7 @@
         <div class="align-left">
             <mat-form-field appearance="fill">
               <mat-label>Nº radicado del juzgado</mat-label>
-              <input name="numRadicadoJuzgado" matInput placeholder="4444544" [(ngModel)]="tutela.numRadicadoJuzgado" formControlName="numRadicadoJuzgadoValidacion" [readonly]="data.llamadoDesde !== 'RADICADOR'">
+              <input name="numRadicadoJuzgado" matInput placeholder="4444544" [(ngModel)]="tutela.numRadicadoJuzgado" formControlName="numRadicadoJuzgadoValidacion" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
               <mat-error *ngIf="tutelaFormGroup.controls['numRadicadoJuzgadoValidacion'].hasError('required')">{{getErrorMessage('numRadicadoJuzgado', 'required')}}</mat-error>
               <mat-error *ngIf="tutelaFormGroup.controls['numRadicadoJuzgadoValidacion'].hasError('minlength') || tutelaFormGroup.controls['numRadicadoJuzgadoValidacion'].hasError('maxlength')">{{getErrorMessage('numRadicadoJuzgado', 'minmax')}}</mat-error>
             </mat-form-field>
@@ -78,7 +78,7 @@
         <div class="align-left">
             <mat-form-field  appearance="fill">
               <mat-label>Fecha radicación juzgado</mat-label>
-              <input name="pickerJuzgado" matInput [matDatepicker]="pickerJuzgado" placeholder="mes/dia/año" [(ngModel)]="tutela.fechaRadicacionJuzgado" formControlName="fechaRadicacionJuzgadoValidacion" [disabled]="data.llamadoDesde !== 'RADICADOR'">
+              <input name="pickerJuzgado" matInput [matDatepicker]="pickerJuzgado" placeholder="mes/dia/año" [(ngModel)]="tutela.fechaRadicacionJuzgado" formControlName="fechaRadicacionJuzgadoValidacion" [disabled]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
               <mat-datepicker-toggle matSuffix [for]="pickerJuzgado"></mat-datepicker-toggle>
               <mat-datepicker #pickerJuzgado></mat-datepicker>
               <mat-error *ngIf="tutelaFormGroup.controls['fechaRadicacionJuzgadoValidacion'].hasError('required')">{{getErrorMessage('fechaRadicacionJuzgado', 'required')}}</mat-error>
@@ -116,9 +116,9 @@
               <th mat-header-cell *matHeaderCellDef> Acciones </th>
               <td mat-cell *matCellDef="let anexo">
                   <mat-icon *ngIf="
-                  data.llamadoDesde === 'RADICADOR' ||
-                  (data.llamadoDesde === 'ASIGNADAS' && anexo.tipo === 'IMPUGNACION') ||
-                  (data.llamadoDesde === 'ASIGNADAS' && anexo.tipo === 'RESPUESTA' && !existeFallo)
+                  (data.llamadoDesde === 'RADICADOR' && (tutela.etapa !== 'ARCHIVADA_CON_IMPUGNACION' && tutela.etapa !== 'ARCHIVADA_SIN_IMPUGNACION')) ||
+                  (data.llamadoDesde === 'ASIGNADAS' && anexo.tipo === 'IMPUGNACION' && (tutela.etapa !== 'ARCHIVADA_CON_IMPUGNACION' && tutela.etapa !== 'ARCHIVADA_SIN_IMPUGNACION')) ||
+                  (data.llamadoDesde === 'ASIGNADAS' && anexo.tipo === 'RESPUESTA' && !existeFallo && (tutela.etapa !== 'ARCHIVADA_CON_IMPUGNACION' && tutela.etapa !== 'ARCHIVADA_SIN_IMPUGNACION'))
                   " (click)="eliminarAnexo(anexo)" class="icon-logo">delete</mat-icon>
                   <mat-icon *ngIf="data.tutela !== null && anexo.url !== ''" (click)="descargarAnexo(anexo)" class="icon-logo">file_download</mat-icon>
               </td>
@@ -144,13 +144,13 @@
             <div class="p-20">
               <a class="mensaje">HECHOS</a>
               <mat-form-field class="text-area" appearance="fill">
-                <textarea class="text-area" matInput [(ngModel)]="tutela.hechos" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR'"></textarea>
+                <textarea class="text-area" matInput [(ngModel)]="tutela.hechos" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'"></textarea>
               </mat-form-field>
             </div>
             <a class="mensaje">DERECHOS PRESUNTAMENTE VIOLADOS</a>
             <mat-form-field appearance="fill">
               <mat-label>Derechos Violentados</mat-label>
-              <mat-select name="derechosViolentados" [(ngModel)]="derechosSeleccionados" multiple [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde !== 'RADICADOR'">
+              <mat-select name="derechosViolentados" [(ngModel)]="derechosSeleccionados" multiple [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
                 <mat-option *ngFor="let derecho of derechosOpciones" [value]="derecho.id">
                   {{derecho.nombre}}
                 </mat-option>
@@ -160,19 +160,19 @@
             <div>
               <a class="mensaje">PETICIÓN</a>
               <mat-form-field class="text-area" appearance="fill">
-                <textarea class="text-area" matInput [(ngModel)]="tutela.peticion" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR'"></textarea>
+                <textarea class="text-area" matInput [(ngModel)]="tutela.peticion" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'"></textarea>
               </mat-form-field>
             </div>
 
 
             <a class="mensaje">FUNDAMENTOS DEL MINISTERIOS</a>
             <mat-form-field class="text-area" appearance="fill">
-              <textarea class="text-area" matInput [(ngModel)]="tutela.fundamentosMinisterio" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR'"></textarea>
+              <textarea class="text-area" matInput [(ngModel)]="tutela.fundamentosMinisterio" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'"></textarea>
             </mat-form-field>
 
             <a class="mensaje">PETICIONES DEL MINISTERIOS</a>
             <mat-form-field class="text-area" appearance="fill">
-              <textarea class="text-area" matInput [(ngModel)]="tutela.peticionesMinisterio" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR'"></textarea>
+              <textarea class="text-area" matInput [(ngModel)]="tutela.peticionesMinisterio" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'"></textarea>
             </mat-form-field>
 
             <mat-grid-list cols="2" rowHeight="70px">
@@ -181,7 +181,7 @@
                   <a class="mensaje">TERMINO</a>
                   <mat-form-field class="fecha-termino" appearance="fill">
                     <mat-label>Término de la tutela</mat-label>
-                    <input name="pickerTermino" matInput [matDatepicker]="pickerTermino" placeholder="mes/dia/año" [(ngModel)]="tutela.termino" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde !== 'RADICADOR'">
+                    <input name="pickerTermino" matInput [matDatepicker]="pickerTermino" placeholder="mes/dia/año" [(ngModel)]="tutela.termino" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
                     <mat-datepicker-toggle matSuffix [for]="pickerTermino"></mat-datepicker-toggle>
                     <mat-datepicker #pickerTermino></mat-datepicker>
                   </mat-form-field>
@@ -192,7 +192,7 @@
                   <a class="mensaje">EMPRESA</a>
                   <mat-form-field class="empresa-notificar" appearance="fill">
                     <mat-label>Empresa a la que se le notificará</mat-label>
-                    <mat-select name="empresaNotificar" [(ngModel)]="tutela.cliente.id" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde !== 'RADICADOR'">
+                    <mat-select name="empresaNotificar" [(ngModel)]="tutela.cliente.id" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
                       <mat-option *ngFor="let cliente of clienteOpciones" [value]="cliente.id" >
                         {{cliente.nombre}}
                       </mat-option>
@@ -204,7 +204,7 @@
             <a class="mensaje" style="width: 20%;">DESPACHO</a>
             <mat-form-field class="despacho" appearance="fill">
               <mat-label>Despacho al que será enviado</mat-label>
-              <input name="despacho" matInput placeholder="Ejemplo: Despacho 18 de Cali - Calle 18 #59-20"  [(ngModel)]="tutela.despacho" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR'">
+              <input name="despacho" matInput placeholder="Ejemplo: Despacho 18 de Cali - Calle 18 #59-20"  [(ngModel)]="tutela.despacho" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
             </mat-form-field>
           </mat-expansion-panel>
 
@@ -276,7 +276,7 @@
 
 </mat-dialog-content>
 
-<mat-dialog-actions *ngIf="data.llamadoDesde === 'RADICADOR' || data.llamadoDesde === 'ASIGNADAS'">
+<mat-dialog-actions *ngIf="(data.llamadoDesde === 'RADICADOR' || data.llamadoDesde === 'ASIGNADAS') && (tutela.etapa !== 'ARCHIVADA_CON_IMPUGNACION' && tutela.etapa !== 'ARCHIVADA_SIN_IMPUGNACION')">
   <button mat-button mat-dialog-close class="buton-cancelar">Cancelar</button>
   <button mat-raised-button class="buton-guardar" (click)="crearEditar()">Guardar</button>
 </mat-dialog-actions>

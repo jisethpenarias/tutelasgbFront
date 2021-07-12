@@ -52,9 +52,17 @@
       </button>
       <div class="top-bar-content">
         <p class="username">
-          <button mat-raised-button matTooltip="Notificaciones">
+          <button mat-raised-button [matMenuTriggerFor]="menu">
             <mat-icon aria-hidden="false" >email</mat-icon>
           </button>
+          <mat-menu #menu="matMenu">
+            <button [routerLink]="['/solicitudes-informacion']" routerLinkActive="active" *ngFor="let solicitud of solicitudes"  mat-menu-item>
+              Solicitud: #{{solicitud.id}}
+              Tutela: #{{solicitud.tutela.id}}
+              {{solicitud.usuarioCreacion}}
+            </button>
+          </mat-menu>
+
           {{localstorageService.usuarioLogueado.username}}
           <mat-icon aria-hidden="false" >person</mat-icon>
           <button (click)="cerrarSesion()" mat-raised-button matTooltip="Cerrar sesion">

@@ -1,20 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Dashboard } from '../models/dashboard';
+import {DashboardService} from '../services/dashboard.service';
 
-
-
-const ELEMENT_DATA: Dashboard =
-  { numeroTutelas: 6659,
-    numeroTutelasSinImpugnacion: 3224,
-    numeroTutelasConImpugnacion: 3425,
-    promedios: [{numeroDias: 9, etapa: 'radicada'}],
-    tutelasArchivadas: [{
-      cliente: {id: null, nombre: 'Coomeva', direccion: '' ,  email: '', documento: '', tipoDocumento: '', fechaCreacion: null, activo: true},
-      tutela: {id: 12, hechos: '', peticion: '', termino: null, etapa: '', cliente:null},
-      fechaRegistro: new Date(),
-      investigador: 'string',
-      radicador: 'string'}]
-  };
 
 @Component({
   selector: 'app-dashboard',
@@ -27,11 +14,46 @@ export class DashboardComponent implements OnInit {
   displayedColumns2: string[] = ['etapa', 'numeroDias'];
   data: Dashboard;
 
-  constructor() {
-    this.data = ELEMENT_DATA;
+  filtroFechas: any = {
+    fechaInicio: null,
+    fechaFin: null
+  };
+
+  constructor( private dashboardService: DashboardService) {
+    this.data = { numeroTutelas: 0,
+        numeroTutelasSinImpugnacion: 0,
+        numeroTutelasConImpugnacion: 0,
+        promedios: [],
+        tutelasArchivadas: []
+    };
    }
 
   ngOnInit(): void {
+    this.borrar();
   }
 
+  filtrar() {
+    this.dashboardService.obtenerInformacion(this.filtroFechas).subscribe((dashboardResponse: Dashboard) => {
+      this.data = dashboardResponse;
+      this.data.promedios = this.data.promedios.map(promedio => {
+          return {...promedio,
+            etapa: promedio.etapa === 'RADICADA' ? 'Radicada' :
+              promedio.etapa === 'ASIGNADA' ? 'Asignada' :
+                promedio.etapa === 'REVISION_RESPUESTA_CLIENTE' ?  'Revision respuesta' :
+                  promedio.etapa === 'RESPONDIDA' ? 'Respondida' :
+                    promedio.etapa === 'FALLO' ? 'Fallo' :
+                      promedio.etapa === 'REVISION_IMPUGNACION_CLIENTE' ? 'Revision impugnacion' :
+                        promedio.etapa === 'IMPUGNACION' ? 'Impugnacion' :
+                          promedio.etapa === 'ARCHIVADA_SIN_IMPUGNACION' ? 'Archivada sin impugnacion' :
+                            promedio.etapa === 'ARCHIVADA_CON_IMPUGNACION' ? 'Archivada con impugnacion' : promedio.etapa};
+        });
+    });
+  }
+
+  borrar() {
+    const fechaActual = new Date();
+    this.filtroFechas.fechaInicio = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), 1);
+    this.filtroFechas.fechaFin = new Date(fechaActual.getFullYear(), fechaActual.getMonth() + 1, 0);
+    this.filtrar();
+  }
 }

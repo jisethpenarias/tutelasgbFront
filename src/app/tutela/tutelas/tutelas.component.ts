@@ -16,6 +16,7 @@ import {FormGroup} from '@angular/forms';
 import {DialogReasignarTutelaComponent} from '../dialog-reasignar-tutela/dialog-reasignar-tutela.component';
 import {DialogFalloComponent} from '../dialog-fallo/dialog-fallo.component';
 import {LocalstorageService} from '../../services/localstorage.service';
+import {DialogCrearSolicitudInformacionComponent} from '../../solicitud/dialog-crear-solicitud-informacion/dialog-crear-solicitud-informacion.component';
 
 @Component({
   selector: 'app-tutelas',
@@ -39,6 +40,7 @@ export class TutelasComponent implements OnInit {
   dialogTrazaTutelas;
   dialogReasignacion;
   dialogNoImpugnacion;
+  dialogSolicitudes;
 
   parametrosComponente:any;
 
@@ -99,6 +101,25 @@ export class TutelasComponent implements OnInit {
 
   openDialogTraza(idTutela: number) {
     this.dialogTrazaTutelas = this.dialog.open(DialogTrazaEtapasComponent, {data: idTutela});
+  }
+
+  openDialogSolicitudes(idTutela: number) {
+    this.dialogSolicitudes = this.dialog.open(
+      DialogCrearSolicitudInformacionComponent,
+      {
+        data: {solicitud: null, titulo: 'Crear Solicitud Informacion', accion: 'CREAR', tutela: idTutela},
+        disableClose: true
+      });
+    this.dialogSolicitudes.afterClosed().subscribe((result) => {
+      if (result === '') {
+        return;
+      }
+      if (result === 'Creada'){
+        this._snackBar.open('Solicitud creada satisfactoriamente.', 'Ok');
+      }else {
+        this._snackBar.open(result.error.message, 'Ok');
+      }
+    });
   }
 
   borrar() {
@@ -172,7 +193,7 @@ export class TutelasComponent implements OnInit {
       if  (result === '') {
         return;
       }
-      if (result.respuesta === 'Archivado') {
+      if (result === 'Archivado') {
         this._snackBar.open('La tutela ha sido archivada sin impugnacion.', 'Ok');
         this.filtrar();
       } else {
