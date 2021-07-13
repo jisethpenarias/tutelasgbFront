@@ -6,6 +6,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {LocalstorageService} from '../services/localstorage.service';
 import {LoginExitoso} from '../models/loginExitoso';
+import {SpinnerComponent} from '../spinner/spinner.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -26,13 +28,16 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService,
               public _snackbar: MatSnackBar,
               private router: Router,
+              private dialog: MatDialog,
               private localstorageService: LocalstorageService) { }
 
   ngOnInit(): void {
   }
 
   submit(){
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     if (this.loginFormGroup.invalid) {
+      spinnerRef.close();
       return;
     }
 
@@ -42,8 +47,10 @@ export class LoginComponent implements OnInit {
         this.login = {username: '', password: ''};
         this.router.navigate(['']);
         this._snackbar.open('Login exitoso', 'Ok', {duration: 2000});
+        spinnerRef.close();
       },
       (error) => {
+        spinnerRef.close();
         this._snackbar.open(error.errors.message, 'Ok');
       }
     );

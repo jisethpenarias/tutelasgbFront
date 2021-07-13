@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { tiposDocumentos } from 'src/app/data/tiposDocumentos';
 import { tiposAnexos } from 'src/app/data/tiposAnexos';
 
@@ -21,6 +21,8 @@ import {Tutela} from '../../models/tutela';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {LocalstorageService} from '../../services/localstorage.service';
 import {SelectOpciones} from '../../models/selectOpciones';
+import {UtilidadesService} from '../../services/utilidades.service';
+import {SpinnerComponent} from '../../spinner/spinner.component';
 
 @Component({
   selector: 'app-dialog-radicar-tutela',
@@ -38,6 +40,10 @@ export class DialogRadicarTutelaComponent implements OnInit {
 
   tiposAnexosOpciones: SelectOpciones[] = [];
   displayedColumnsAnexos: string[] = ['nombre', 'tipo', 'acciones'];
+
+  fechaMaxRadicacion;
+  fechaMinRaciacion;
+
   // Variables para el uploader
   fileControl: FormControl;
   multiple: boolean = false;
@@ -73,10 +79,14 @@ export class DialogRadicarTutelaComponent implements OnInit {
               private anexoService: AnexoService,
               public dialogRef: MatDialogRef<DialogRadicarTutelaComponent>,
               private _snackBar: MatSnackBar,
-              public localStorageService: LocalstorageService) {
+              public dialog: MatDialog,
+              private utilidadesService: UtilidadesService) {
     this.fileControl = new FormControl(this.files, [
       MaxSizeValidator(this.maxSize * 1024)
     ]);
+    this.fechaMinRaciacion = new Date();
+    this.fechaMaxRadicacion = new Date();
+    this.fechaMaxRadicacion.setDate(this.fechaMinRaciacion.getDate() + 14);
   }
 
   ngOnInit(): void {
@@ -108,23 +118,36 @@ export class DialogRadicarTutelaComponent implements OnInit {
 
     this.fileControl.valueChanges.subscribe((files: any) => {
         this.files = files;
+
+        if (files.size > (5 * 1024 * 1024)) {
+          this._snackBar.open('No se permiten archivos de mas de 5Mb', 'Ok', {
+            duration: 2000,
+          });
+          return;
+        }
+
         this.tutela.anexos.push({id: null, nombre: files.name, descripcion: '', tipo: this.tipoAnexo, url: '', fechaSubida: null,
             usuarioSubida: null, ultimaDescarga: null, file: files});
 
+
         if ( this.data.tutela !== null ) {
-          this.anexoService.anexarArchivoATutela(files, this.data.tutela.id, this.tipoAnexo).subscribe((response: Anexo) => {
-            this.tutela.anexos = this.tutela.anexos.map(anexo => {
+          const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
+          this.anexoService.anexarArchivoATutela(files, this.data.tutela.id, this.tipoAnexo).subscribe(
+            (response: Anexo) => {
+              this.tutela.anexos = this.tutela.anexos.map(anexo => {
                 if (anexo.nombre === response.nombre) {
                   anexo = response;
                 }
                 return anexo;
               });
+              spinnerRef.close();
             },
             (error) => {
-              console.log(error);
+              this.tutela.anexos = this.tutela.anexos.filter(anexo => anexo.nombre !== files.name);
               this._snackBar.open('Ocurrio un error en la subida del archivo', 'Ok', {
                 duration: 2000,
               });
+              spinnerRef.close();
             }
           );
         }
@@ -138,17 +161,30 @@ export class DialogRadicarTutelaComponent implements OnInit {
 
   eliminarAnexo(anexoAEliminar: Anexo) {
     if (this.data.tutela !== null) {
-      this.anexoService.eliminarAnexo(anexoAEliminar.nombre, anexoAEliminar.id).subscribe((response) => {});
+      const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
+      this.anexoService.eliminarAnexo(anexoAEliminar.nombre, anexoAEliminar.id).subscribe((response) => {
+        spinnerRef.close();
+      }, () => {
+        this._snackBar.open('Ocurrio un error eliminando el archivo, por favor intente nuevamente', 'Ok');
+        spinnerRef.close();
+      }
+      );
     }
     this.tutela.anexos = this.tutela.anexos.filter(anexo => anexo.nombre !== anexoAEliminar.nombre);
     this.tablaAnexos.renderRows();
   }
 
   crearEditar() {
+    if (!this.tutela.anexos.some(anexo => anexo.tipo === 'TUTELA')){
+      this._snackBar.open('Debe añadir al menos un anexo de tipo tutela para radicar.');
+      return;
+    }
+
     if (this.derechosSeleccionados.length > 0 ) {
       this.tutela.derechos = this.derechosSeleccionados.map(derechoId => { return {id: derechoId, nombre: '', descripcion: ''} });
     }
 
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     if ( this.data.titulo === 'Radicar' ) {
       this.tutelaService.crear(this.tutela).subscribe(
         (tutelaResponse: Tutela) => {
@@ -157,16 +193,24 @@ export class DialogRadicarTutelaComponent implements OnInit {
               this.tutela.anexos.forEach(anexo => {
                 this.anexoService.anexarArchivoATutela(anexo.file, tutelaResponse.id, anexo.tipo).subscribe((response) => {
                     this.dialogRef.close('Tutela Creada Satisfactoriamente!');
+                    spinnerRef.close();
                   },
                   (error) => {
-                    console.log(error);
-                    this._snackBar.open('Ocurrio un error en la radicacion de la tutela', 'Ok', {
-                      duration: 2000,
-                    });
+                    if (anexo.file.size > (5 * 1024 * 1024)) {
+                      this._snackBar.open('El archivo: ' + anexo.file.name + ' pesa mas de 5Mb, y no sera subido', 'Ok', {
+                        duration: 4000,
+                      });
+                    } else {
+                      this._snackBar.open('Ocurrio un error en la radicacion de la tutela', 'Ok', {
+                        duration: 3000,
+                      });
+                    }
+                    spinnerRef.close();
                   }
                 );
               });
             } else {
+              spinnerRef.close();
               this.dialogRef.close('Tutela Creada Satisfactoriamente!');
             }
           }
@@ -180,9 +224,11 @@ export class DialogRadicarTutelaComponent implements OnInit {
     if ( this.data.titulo === 'Editar') {
       this.tutelaService.editar(this.tutela).subscribe(
         () => {
+          spinnerRef.close();
           this.dialogRef.close('Tutela Editada Satisfactoriamente!');
         },
         (error) => {
+          spinnerRef.close();
           this._snackBar.open('Ocurrio un error en la edicion de la tutela', 'Ok', {
             duration: 2000,
           });

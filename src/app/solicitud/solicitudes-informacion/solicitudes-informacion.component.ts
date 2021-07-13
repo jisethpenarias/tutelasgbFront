@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Solicitud } from 'src/app/models/solicitud';
 import { DialogCrearSolicitudInformacionComponent } from '../dialog-crear-solicitud-informacion/dialog-crear-solicitud-informacion.component';
 import {SolicitudService} from '../../services/solicitud.service';
+import {SpinnerComponent} from '../../spinner/spinner.component';
 
 
 @Component({
@@ -48,28 +49,34 @@ export class SolicitudesInformacionComponent implements OnInit {
 
   aceptarSolicitud(solicitud: Solicitud) {
     solicitud.estado = 'ACEPTADA';
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     this.solicitudService.actualizarSolicitud(solicitud).subscribe(
       () => {
         this._snackBar.open('La solicitud ha sido aceptada.', 'Ok', {
           duration: 2000,
         });
+        spinnerRef.close();
       },
       (error) => {
         console.log(error);
+        spinnerRef.close();
       }
     );
   }
 
   negarSolicitud(solicitud: Solicitud) {
     solicitud.estado = 'NEGADA';
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     this.solicitudService.actualizarSolicitud(solicitud).subscribe(
       () => {
         this._snackBar.open('La solicitud ha sido negada.', 'Ok', {
           duration: 2000,
         });
+        spinnerRef.close();
       },
       (error) => {
         console.log(error);
+        spinnerRef.close();
       }
     );
   }
@@ -80,8 +87,10 @@ export class SolicitudesInformacionComponent implements OnInit {
   }
 
   filtrar() {
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     this.solicitudService.obtener(this.filtroSolicitudes).subscribe((solicitudesRespuesta: Solicitud[]) => {
       this.solicitudes = solicitudesRespuesta;
+      spinnerRef.close();
     });
   }
 

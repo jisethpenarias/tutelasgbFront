@@ -73,4 +73,10 @@ table {
 }
 
 
+.red-fila {
+  color: red;
+}
 
+.normal-fila {
+  color: black;
+}

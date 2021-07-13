@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Dashboard } from '../models/dashboard';
 import {DashboardService} from '../services/dashboard.service';
+import {UtilidadesService} from '../services/utilidades.service';
+import {SpinnerComponent} from '../spinner/spinner.component';
+import {MatDialog} from '@angular/material/dialog';
 
 
 @Component({
@@ -19,7 +22,9 @@ export class DashboardComponent implements OnInit {
     fechaFin: null
   };
 
-  constructor( private dashboardService: DashboardService) {
+  constructor( private dashboardService: DashboardService,
+               private utilidadesService: UtilidadesService,
+               public dialog: MatDialog) {
     this.data = { numeroTutelas: 0,
         numeroTutelasSinImpugnacion: 0,
         numeroTutelasConImpugnacion: 0,
@@ -33,20 +38,14 @@ export class DashboardComponent implements OnInit {
   }
 
   filtrar() {
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     this.dashboardService.obtenerInformacion(this.filtroFechas).subscribe((dashboardResponse: Dashboard) => {
       this.data = dashboardResponse;
       this.data.promedios = this.data.promedios.map(promedio => {
           return {...promedio,
-            etapa: promedio.etapa === 'RADICADA' ? 'Radicada' :
-              promedio.etapa === 'ASIGNADA' ? 'Asignada' :
-                promedio.etapa === 'REVISION_RESPUESTA_CLIENTE' ?  'Revision respuesta' :
-                  promedio.etapa === 'RESPONDIDA' ? 'Respondida' :
-                    promedio.etapa === 'FALLO' ? 'Fallo' :
-                      promedio.etapa === 'REVISION_IMPUGNACION_CLIENTE' ? 'Revision impugnacion' :
-                        promedio.etapa === 'IMPUGNACION' ? 'Impugnacion' :
-                          promedio.etapa === 'ARCHIVADA_SIN_IMPUGNACION' ? 'Archivada sin impugnacion' :
-                            promedio.etapa === 'ARCHIVADA_CON_IMPUGNACION' ? 'Archivada con impugnacion' : promedio.etapa};
+            etapa: this.utilidadesService.convertirEtapa(promedio.etapa)};
         });
+      spinnerRef.close();
     });
   }
 

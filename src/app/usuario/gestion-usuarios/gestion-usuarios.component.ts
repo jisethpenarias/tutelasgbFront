@@ -6,6 +6,7 @@ import { FiltroUsuario } from '../../models/filtroUsuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogDesactivarUsuarioComponent } from '../dialog-desactivar-usuario/dialog-desactivar-usuario.component';
+import {SpinnerComponent} from '../../spinner/spinner.component';
 
 
 @Component({
@@ -63,6 +64,7 @@ export class GestionUsuariosComponent implements OnInit {
   }
 
   editar(idUsuario: number) {
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     this.usuarioService.obtenerUsuario(idUsuario).subscribe(
       (usuario: any) => {
         this.dialogCreacion = this.dialog.open(DialogCrearUsuarioComponent, {data: {usuario: usuario, titulo: 'Editar', boton: 'Editar'}} );
@@ -74,13 +76,16 @@ export class GestionUsuariosComponent implements OnInit {
             this.filtrar();
           }
         });
-      })
+        spinnerRef.close();
+      });
   }
 
   filtrar() {
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     this.usuarioService.obtener(this.filtro)
     .subscribe((usuarios: Usuario[]) => {
       this.data = usuarios;
-    })
+      spinnerRef.close();
+    });
   }
 }

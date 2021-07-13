@@ -7,6 +7,7 @@ import { FiltroCliente } from 'src/app/models/filtroCliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { DialogCrearClienteComponent } from '../dialog-crear-cliente/dialog-crear-cliente.component';
 import { DialogDesactivarClienteComponent } from '../dialog-desactivar-cliente/dialog-desactivar-cliente.component';
+import {SpinnerComponent} from '../../spinner/spinner.component';
 
 
 @Component({
@@ -57,6 +58,7 @@ export class GestionClientesComponent implements OnInit {
   }
 
   editar(idCliente: number) {
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     this.clienteService.obtenerCliente(idCliente).subscribe(
       (cliente: any) => {
         this.dialogCreacion = this.dialog.open(DialogCrearClienteComponent, {data: {cliente: cliente, titulo: 'Editar', boton: 'Editar'}} );
@@ -68,24 +70,33 @@ export class GestionClientesComponent implements OnInit {
             this.filtrar();
           }
         });
-      })
+        spinnerRef.close();
+      },
+      (error) => {
+        this._snackBar.open('La informacion del cliente no ha podido ser consultada, por favor intente mas tarde', 'ok');
+      }
+    );
   }
 
   borrar() {
-    this.filtro.email="";
-    this.filtro.nombre="";
-    this.filtro.documento="";
-    this.filtro.tipoDocumento="";
-    this.filtro.direccion="";
+    this.filtro.email = '';
+    this.filtro.nombre = '';
+    this.filtro.documento = '';
+    this.filtro.tipoDocumento = '';
+    this.filtro.direccion = '';
     this.filtro.fechaDesde = null;
     this.filtro.fechaHasta = null;
     this.filtrar();
   }
 
   filtrar() {
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     this.clienteService.obtener(this.filtro)
     .subscribe((clientes: Cliente[]) => {
       this.data = clientes;
-    })
+      spinnerRef.close();
+    }, (error) => {
+      spinnerRef.close();
+    });
   }
 }

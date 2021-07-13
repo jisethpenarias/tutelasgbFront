@@ -27,6 +27,7 @@ import { LoginComponent } from './login/login.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { DialogFalloComponent } from './tutela/dialog-fallo/dialog-fallo.component';
 import { DialogReasignarTutelaComponent } from './tutela/dialog-reasignar-tutela/dialog-reasignar-tutela.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { DialogReasignarTutelaComponent } from './tutela/dialog-reasignar-tutela
     LoginComponent,
     PerfilComponent,
     DialogFalloComponent,
-    DialogReasignarTutelaComponent
+    DialogReasignarTutelaComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

@@ -181,7 +181,7 @@
                   <a class="mensaje">TERMINO</a>
                   <mat-form-field class="fecha-termino" appearance="fill">
                     <mat-label>Término de la tutela</mat-label>
-                    <input name="pickerTermino" matInput [matDatepicker]="pickerTermino" placeholder="mes/dia/año" [(ngModel)]="tutela.termino" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
+                    <input name="pickerTermino" [min]="fechaMinRaciacion" [max]="fechaMaxRadicacion" matInput [matDatepicker]="pickerTermino" placeholder="mes/dia/año" [(ngModel)]="tutela.termino" [ngModelOptions]="{standalone: true}" [disabled]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
                     <mat-datepicker-toggle matSuffix [for]="pickerTermino"></mat-datepicker-toggle>
                     <mat-datepicker #pickerTermino></mat-datepicker>
                   </mat-form-field>

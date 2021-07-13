@@ -3,6 +3,7 @@ export interface Tutela {
   hechos: string;
   peticion: string;
   termino: Date;
+  pintarRojoFila?: boolean;
   etapa: string;
   cliente: any;
 }

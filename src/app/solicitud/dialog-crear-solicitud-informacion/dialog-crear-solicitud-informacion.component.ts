@@ -2,7 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Solicitud} from '../../models/solicitud';
 import {SolicitudService} from '../../services/solicitud.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {SpinnerComponent} from '../../spinner/spinner.component';
 
 @Component({
   selector: 'app-dialog-crear-solicitud-informacion',
@@ -20,6 +21,7 @@ export class DialogCrearSolicitudInformacionComponent implements OnInit {
 
   constructor(private solicitudService: SolicitudService,
               public dialogRef: MatDialogRef<DialogCrearSolicitudInformacionComponent>,
+              private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
@@ -29,13 +31,16 @@ export class DialogCrearSolicitudInformacionComponent implements OnInit {
   }
 
   submit() {
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     this.solicitud.tutela.id = this.data;
     this.solicitudService.crear(this.solicitud).subscribe(
       (solicitudCreada) => {
         this.dialogRef.close('Creada');
+        spinnerRef.close();
       },
       (error) => {
         this.dialogRef.close(error);
+        spinnerRef.close();
       });
   }
 

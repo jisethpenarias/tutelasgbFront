@@ -7,7 +7,7 @@ import { SelectOpciones } from 'src/app/models/selectOpciones';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { TutelaService } from 'src/app/services/tutela.service';
 import { DialogRadicarTutelaComponent } from '../dialog-radicar-tutela/dialog-radicar-tutela.component';
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogTrazaEtapasComponent } from '../dialog-traza-etapas/dialog-traza-etapas.component';
 import {ActivatedRoute} from '@angular/router';
@@ -17,6 +17,8 @@ import {DialogReasignarTutelaComponent} from '../dialog-reasignar-tutela/dialog-
 import {DialogFalloComponent} from '../dialog-fallo/dialog-fallo.component';
 import {LocalstorageService} from '../../services/localstorage.service';
 import {DialogCrearSolicitudInformacionComponent} from '../../solicitud/dialog-crear-solicitud-informacion/dialog-crear-solicitud-informacion.component';
+import {UtilidadesService} from '../../services/utilidades.service';
+import {SpinnerComponent} from '../../spinner/spinner.component';
 
 @Component({
   selector: 'app-tutelas',
@@ -49,7 +51,8 @@ export class TutelasComponent implements OnInit {
               public dialog: MatDialog,
               private _snackBar: MatSnackBar,
               private activatedRoute: ActivatedRoute,
-              private localStorageService: LocalstorageService) { }
+              private localStorageService: LocalstorageService,
+              private utilidadesService: UtilidadesService) { }
 
   ngOnInit(): void {
     this.activatedRoute.data.pipe(take(1)).subscribe((data) => {
@@ -141,6 +144,7 @@ export class TutelasComponent implements OnInit {
   }
 
   editar(idTutela: number) {
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     this.tutelaService.obtenerTutela(idTutela).subscribe(
       (tutela: Tutela) => {
         this.dialogRadicacion = this.dialog.open(
@@ -159,6 +163,10 @@ export class TutelasComponent implements OnInit {
             this.filtrar();
           }
         });
+        spinnerRef.close();
+      }, (error) => {
+        this._snackBar.open('Ocurrio un error consultando la tutela seleccionada', 'Ok');
+        spinnerRef.close();
       });
   }
 
@@ -209,22 +217,20 @@ export class TutelasComponent implements OnInit {
     }
 
     this.filtroTutela.idUsuario = this.localStorageService.usuarioLogueado.id;
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     this.tutelaService.obtener(this.filtroTutela)
     .subscribe((tutelas: Tutela[]) => {
       this.data = tutelas;
-      this.data = this.data
-        .map(tutela => {
+      this.data = this.data.map(tutela => {
           return {...tutela,
-            etapa: tutela.etapa === 'RADICADA' ? 'Radicada' :
-                   tutela.etapa === 'ASIGNADA' ? 'Asignada' :
-                   tutela.etapa === 'REVISION_RESPUESTA_CLIENTE' ?  'Revision respuesta' :
-                   tutela.etapa === 'RESPONDIDA' ? 'Respondida' :
-                   tutela.etapa === 'FALLO' ? 'Fallo' :
-                   tutela.etapa === 'REVISION_IMPUGNACION_CLIENTE' ? 'Revision impugnacion' :
-                   tutela.etapa === 'IMPUGNACION' ? 'Impugnacion' :
-                   tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION' ? 'Archivada sin impugnacion' :
-                   tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' ? 'Archivada con impugnacion' : tutela.etapa};
+                      etapa: this.utilidadesService.convertirEtapa(tutela.etapa),
+                      pintarRojoFila: this.utilidadesService.verificarTermino(tutela.termino)
+          };
         });
+      spinnerRef.close();
+    }, (error) => {
+      this._snackBar.open('Ocurrio un error por favor intente nuevamente.');
+      spinnerRef.close();
     });
   }
 }

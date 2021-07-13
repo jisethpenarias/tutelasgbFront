@@ -5,6 +5,7 @@ import { SelectOpciones } from 'src/app/models/selectOpciones';
 import { TrazaEtapa } from 'src/app/models/trazaEtapa';
 import { TrazaEtapaService } from 'src/app/services/traza-etapa.service';
 import { TutelasComponent } from '../tutelas/tutelas.component';
+import {UtilidadesService} from '../../services/utilidades.service';
 
 @Component({
   selector: 'app-dialog-traza-etapas',
@@ -20,11 +21,18 @@ export class DialogTrazaEtapasComponent implements OnInit {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: number,
-              private trazaEtapaService: TrazaEtapaService) { }
+              private trazaEtapaService: TrazaEtapaService,
+              private utilidadesService: UtilidadesService) { }
 
   ngOnInit(): void {
     this.trazaEtapaService.consultaTrazaEtapa(this.data).subscribe((trazaEtapasResponse: TrazaEtapa[]) => {
       this.trazaEtapas = trazaEtapasResponse;
+      this.trazaEtapas = this.trazaEtapas.map(trazaEtapa => {
+          return {...trazaEtapa,
+            etapaActual: this.utilidadesService.convertirEtapa(trazaEtapa.etapaActual),
+            etapaAnterior: this.utilidadesService.convertirEtapa(trazaEtapa.etapaAnterior)
+          };
+        });
     });
   }
 

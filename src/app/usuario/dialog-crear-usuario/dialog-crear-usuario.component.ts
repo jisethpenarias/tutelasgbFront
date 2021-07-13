@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Usuario } from '../../models/usuario';
 import { UsuarioCreacion } from '../../models/usuarioCreacion';
@@ -7,6 +7,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SelectOpciones } from 'src/app/models/selectOpciones';
+import {SpinnerComponent} from '../../spinner/spinner.component';
 
 @Component({
   selector: 'app-dialog-crear-usuario',
@@ -34,6 +35,7 @@ export class DialogCrearUsuarioComponent {
 
   constructor(private usuarioService :UsuarioService,
               public dialogRef: MatDialogRef<DialogCrearUsuarioComponent>,
+              private dialog: MatDialog,
               private _snackBar: MatSnackBar,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -44,32 +46,39 @@ export class DialogCrearUsuarioComponent {
   }
 
   crearEditar() {
-
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
     if (this.data.titulo === 'Crear'){
 
       if(this.usuario.password !== this.paswordConfirma){
         this._snackBar.open('La contraseña y confirmacion no coinciden', 'Ok', {
           duration: 2000,
         });
+        spinnerRef.close();
         return;
       }
 
       this.usuarioService.crear(this.usuario)
       .subscribe(
         (usuarioCreado: Usuario) => {
+          spinnerRef.close();
           this.dialogRef.close('Usuario Creado Satisfactoriamente!');
         },
         (error: any) => {
+          spinnerRef.close();
           this.dialogRef.close(error.error.message);
         }
-      )
+      );
     }
 
     if(this.data.titulo === 'Editar') {
       this.usuarioService.editar(this.usuario)
       .subscribe((data) => {
+        spinnerRef.close();
         this.dialogRef.close('Usuario Editado Satisfactoriamente!');
-      })
+      }, (error: any) => {
+        spinnerRef.close();
+        this._snackBar.open('Ocurrio un error editando el usuario, por favor intente nuevamente.', 'Ok');
+      });
     }
   }
 
