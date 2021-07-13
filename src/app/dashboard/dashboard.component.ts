@@ -46,6 +46,8 @@ export class DashboardComponent implements OnInit {
             etapa: this.utilidadesService.convertirEtapa(promedio.etapa)};
         });
       spinnerRef.close();
+    }, (error) => {
+      spinnerRef.close();
     });
   }
 

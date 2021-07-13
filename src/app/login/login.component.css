@@ -1,8 +1,12 @@
 :host {
   display: flex;
   justify-content: center;
-  margin: 100px 0px;
+  padding: 20%;
   background-color: #090258;
+}
+
+mat-card {
+  border-radius: 10px;
 }
 
 .mensaje {
@@ -12,12 +16,7 @@
 .mat-form-field {
   width: 100%;
   min-width: 300px;
-}
-
-.contrasena {
-  font-size: 10px;
-  margin-top: 0rem;
-  color: #007DED;
+  color: #ffff;
 }
 
 mat-card-title,
