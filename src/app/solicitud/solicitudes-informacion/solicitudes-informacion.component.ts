@@ -91,7 +91,11 @@ export class SolicitudesInformacionComponent implements OnInit {
     this.solicitudService.obtener(this.filtroSolicitudes).subscribe((solicitudesRespuesta: Solicitud[]) => {
       this.solicitudes = solicitudesRespuesta;
       spinnerRef.close();
-    });
+    },
+      (error) => {
+        console.log(error);
+        spinnerRef.close();
+      });
   }
 
 }

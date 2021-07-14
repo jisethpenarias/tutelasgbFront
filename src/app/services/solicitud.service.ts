@@ -14,7 +14,7 @@ export class SolicitudService {
               private localStorageService: LocalstorageService) { }
 
   public crear(solicitud: Solicitud) {
-    return this.httpClient.post(this.REST_API_SERVER_SOLICITUDES + this.localStorageService.usuarioLogueado, solicitud);
+    return this.httpClient.post(this.REST_API_SERVER_SOLICITUDES + this.localStorageService.usuarioLogueado.username, solicitud);
   }
 
   public obtener(filtroSolicitudes: any) {
@@ -22,6 +22,6 @@ export class SolicitudService {
   }
 
   public actualizarSolicitud(solicitud: Solicitud) {
-    return this.httpClient.put(this.REST_API_SERVER_SOLICITUDES + this.localStorageService.usuarioLogueado, solicitud);
+    return this.httpClient.put(this.REST_API_SERVER_SOLICITUDES + this.localStorageService.usuarioLogueado.username, solicitud);
   }
 }

@@ -39,6 +39,7 @@ export class DialogCrearSolicitudInformacionComponent implements OnInit {
         spinnerRef.close();
       },
       (error) => {
+        console.log(error);
         this.dialogRef.close(error);
         spinnerRef.close();
       });

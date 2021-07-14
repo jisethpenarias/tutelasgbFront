@@ -120,7 +120,7 @@ export class TutelasComponent implements OnInit {
       if (result === 'Creada'){
         this._snackBar.open('Solicitud creada satisfactoriamente.', 'Ok');
       }else {
-        this._snackBar.open(result.error.message, 'Ok');
+        this._snackBar.open( 'Ocurrio un error en la creacion de la solicitud', 'Ok');
       }
     });
   }

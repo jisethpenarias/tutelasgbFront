@@ -71,10 +71,12 @@
 
 .btn-filtrar {
   position: relative;
-  left: 754px;
+  left: 70%;
+  background-color: #007DED;
+  color: #ffff;
 }
 
 .btn-borrar {
   position: relative;
-  left: 750px;
+  left: 69%;
 }
