@@ -55,6 +55,8 @@ export class TutelasComponent implements OnInit {
               private utilidadesService: UtilidadesService) { }
 
   ngOnInit(): void {
+    this.utilidadesService.controlAcceso();
+
     this.activatedRoute.data.pipe(take(1)).subscribe((data) => {
       this.parametrosComponente = data;
 

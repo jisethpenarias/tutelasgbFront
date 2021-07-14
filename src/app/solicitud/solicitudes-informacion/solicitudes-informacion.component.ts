@@ -6,6 +6,9 @@ import { DialogCrearSolicitudInformacionComponent } from '../dialog-crear-solici
 import {SolicitudService} from '../../services/solicitud.service';
 import {SpinnerComponent} from '../../spinner/spinner.component';
 import {LocalstorageService} from '../../services/localstorage.service';
+import {ActivatedRoute} from '@angular/router';
+import {take} from 'rxjs/operators';
+import {UtilidadesService} from '../../services/utilidades.service';
 
 
 @Component({
@@ -15,19 +18,27 @@ import {LocalstorageService} from '../../services/localstorage.service';
 })
 export class SolicitudesInformacionComponent implements OnInit {
 
-  filtroSolicitudes = {idTutela: null, fechaDesde: null, fechaHasta: null, estado: null, usuarioCreacion: null, usuarioRadicador: null};
+  filtroSolicitudes = {idTutela: null, fechaDesde: null, fechaHasta: null, estado: null, usuario: null};
   solicitudes: Solicitud[] = [];
   dialogSolicitud;
   estadosOpciones: string[] = ['CREADA', 'ACEPTADA', 'NEGADA'];
+  parametrosComponente: any;
 
   displayedColumns: string[] = ['id', 'tutela', 'titulo', 'descripcion', 'estado', 'acciones'];
 
   constructor(public dialog: MatDialog,
               private _snackBar: MatSnackBar,
               private solicitudService: SolicitudService,
+              private utilidadesService: UtilidadesService,
+              private activatedRoute: ActivatedRoute,
               private localStorageService: LocalstorageService) { }
 
   ngOnInit(): void {
+    this.utilidadesService.controlAcceso();
+
+    this.activatedRoute.data.pipe(take(1)).subscribe((data) => {
+      this.parametrosComponente = data;
+    });
     this.filtrar();
   }
 
@@ -83,13 +94,13 @@ export class SolicitudesInformacionComponent implements OnInit {
   }
 
   borrar() {
-    this.filtroSolicitudes = {idTutela: null, fechaDesde: null, fechaHasta: null, estado: null, usuarioCreacion: null, usuarioRadicador: null};
+    this.filtroSolicitudes = {idTutela: null, fechaDesde: null, fechaHasta: null, estado: null, usuario: null};
     this.filtrar();
   }
 
   filtrar() {
     const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
-    this.filtroSolicitudes.usuarioRadicador = this.localStorageService.usuarioLogueado;
+    this.filtroSolicitudes.usuario = this.localStorageService.usuarioLogueado;
     this.solicitudService.obtener(this.filtroSolicitudes).subscribe((solicitudesRespuesta: Solicitud[]) => {
       this.solicitudes = solicitudesRespuesta;
       spinnerRef.close();

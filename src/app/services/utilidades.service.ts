@@ -1,13 +1,17 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as moment from 'moment';
-import {Anexo} from '../models/anexo';
+import {LocalstorageService} from './localstorage.service';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilidadesService {
 
-  constructor() { }
+  constructor(private localstorageService: LocalstorageService,
+              private router: Router,
+              private _snackbar: MatSnackBar) { }
 
   public convertirEtapa(etapa: string) {
     return etapa === 'RADICADA' ? 'Radicada' :
@@ -29,5 +33,10 @@ export class UtilidadesService {
     return false;
   }
 
-
+  public controlAcceso() {
+    if (this.localstorageService.usuarioLogueado === null) {
+      this.router.navigate(['/login']);
+      this._snackbar.open('Debe loguearse para acceder a esta pagina', 'Ok');
+    }
+  }
 }

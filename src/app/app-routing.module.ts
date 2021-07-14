@@ -14,10 +14,11 @@ const routes: Routes = [
   {path: 'perfil',  component: PerfilComponent},
   {path: 'gestion-usuarios',  component: GestionUsuariosComponent},
   {path: 'gestion-clientes',  component: GestionClientesComponent},
-  {path: 'lista-tutelas',  component: TutelasComponent, data: {view: 'RADICADOR'}}, // redireccion para el radicador
-  {path: 'tutelas-asignadas',  component: TutelasComponent, data: {view: 'ASIGNADAS'}}, // redireccion para asignadas
-  {path: 'tutelas-archivadas',  component: TutelasComponent, data: {view: 'ARCHIVADAS'}}, // redireccion para archivadas
-  {path: 'solicitudes-informacion',  component: SolicitudesInformacionComponent},
+  {path: 'lista-tutelas',  component: TutelasComponent, data: {view: 'RADICADOR'}},
+  {path: 'tutelas-asignadas',  component: TutelasComponent, data: {view: 'ASIGNADAS'}},
+  {path: 'tutelas-archivadas',  component: TutelasComponent, data: {view: 'ARCHIVADAS'}},
+  {path: 'solicitudes-informacion',  component: SolicitudesInformacionComponent, data: {view: 'RADICADOR'}},
+  {path: 'solicitudes-infomacion-realizadas',  component: SolicitudesInformacionComponent, data: {view: 'INVESTIGADOR'}},
 ];
 
 @NgModule({

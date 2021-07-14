@@ -7,6 +7,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogDesactivarUsuarioComponent } from '../dialog-desactivar-usuario/dialog-desactivar-usuario.component';
 import {SpinnerComponent} from '../../spinner/spinner.component';
+import {UtilidadesService} from '../../services/utilidades.service';
 
 
 @Component({
@@ -24,10 +25,12 @@ export class GestionUsuariosComponent implements OnInit {
 
 
   constructor(public dialog: MatDialog,
-              private usuarioService:UsuarioService,
+              private usuarioService: UsuarioService,
+              private utilidadesService: UtilidadesService,
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.utilidadesService.controlAcceso();
     this.filtrar();
   }
 

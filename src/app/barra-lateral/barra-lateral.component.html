@@ -34,7 +34,7 @@
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">add</mat-icon>
         Solicitudes de Información
       </a>
-      <a mat-list-item *ngIf="localstorageService.usuarioLogueado.rol === 'INVESTIGADOR'" routerLink="/solicitudes-infomacion-realizadas" routerLinkActive="active">
+      <a mat-list-item *ngIf="localstorageService.usuarioLogueado.rol === 'INVESTIGADOR'" [routerLink]="['/solicitudes-infomacion-realizadas']" routerLinkActive="active">
         <mat-icon class="icons" aria-hidden="false" aria-label="Example home icon">add</mat-icon>
         Solicitudes de Información Realizadas
       </a>
@@ -52,7 +52,10 @@
       </button>
       <div class="top-bar-content">
         <p class="username">
-          <button mat-raised-button [matMenuTriggerFor]="menu">
+          <button mat-raised-button matTooltip="Asignar Masivamente" (click)="ejecutarAsignaciones()" *ngIf="localstorageService.usuarioLogueado.rol === 'RADICADOR'">
+            <mat-icon aria-hidden="false" >published_with_changes</mat-icon>
+          </button>
+          <button mat-raised-button [matMenuTriggerFor]="menu" matTooltip="Mostrar Solicitudes" *ngIf="localstorageService.usuarioLogueado.rol === 'RADICADOR'">
             <mat-icon aria-hidden="false" >email</mat-icon>
           </button>
           <mat-menu #menu="matMenu">

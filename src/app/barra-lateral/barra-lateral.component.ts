@@ -8,6 +8,8 @@ import {Solicitud} from '../models/solicitud';
 import {SolicitudService} from '../services/solicitud.service';
 import {SpinnerComponent} from '../spinner/spinner.component';
 import {MatDialog} from '@angular/material/dialog';
+import {TutelaService} from '../services/tutela.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-barra-lateral',
@@ -28,6 +30,8 @@ export class BarraLateralComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver,
               private localstorageService: LocalstorageService,
               private solicitudService: SolicitudService,
+              private _snackbar: MatSnackBar,
+              private tutelaService: TutelaService,
               private router: Router,
               private dialog: MatDialog) {
 
@@ -53,6 +57,17 @@ export class BarraLateralComponent implements OnInit {
   cerrarSesion() {
     this.localstorageService.usuarioLogueado = null;
     this.router.navigate(['/login']);
+  }
+
+  ejecutarAsignaciones() {
+    const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
+    this.tutelaService.asignarTutelas().subscribe(() => {
+      spinnerRef.close();
+      this._snackbar.open('Se ha ejecutado el proceso de asignacion satisfactoriamente.', 'Ok');
+    }, () => {
+      spinnerRef.close();
+      this._snackbar.open('El proceso no ha podido ser ejecutado, por favor intente mas tarde', 'Ok');
+    });
   }
 
 }

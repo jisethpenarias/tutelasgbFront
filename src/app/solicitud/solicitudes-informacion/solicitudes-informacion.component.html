@@ -59,10 +59,10 @@
         <div *ngIf="column === 'acciones'">
           <td mat-cell *matCellDef="let solicitud">
             <mat-icon (click)="verSolicitud(solicitud)" class="icon-logo">visibility</mat-icon>
-            <mat-icon *ngIf="solicitud.estado === 'CREADA'" (click)="aceptarSolicitud(solicitud)" class="icon-logo">
+            <mat-icon *ngIf="solicitud.estado === 'CREADA' && parametrosComponente.view === 'RADICADOR'" (click)="aceptarSolicitud(solicitud)" class="icon-logo">
               verified
             </mat-icon>
-            <mat-icon *ngIf="solicitud.estado === 'CREADA'" (click)="negarSolicitud(solicitud)" class="icon-logo">
+            <mat-icon *ngIf="solicitud.estado === 'CREADA' && parametrosComponente.view === 'RADICADOR'" (click)="negarSolicitud(solicitud)" class="icon-logo">
               remove
             </mat-icon>
           </td>

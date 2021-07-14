@@ -32,6 +32,10 @@ export class TutelaService {
     return this.httpClient.put(this.REST_API_SERVER_TUTELAS, tutela);
   }
 
+  public asignarTutelas() {
+    return this.httpClient.get(this.REST_API_SERVER_TUTELAS + 'asignarTutelas/');
+  }
+
   public reasignarTutela(idTutela: number) {
     return this.httpClient.get(this.REST_API_SERVER_TUTELAS + 'reasignarTutela/' + idTutela );
   }

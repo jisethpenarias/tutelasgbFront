@@ -8,6 +8,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import { DialogCrearClienteComponent } from '../dialog-crear-cliente/dialog-crear-cliente.component';
 import { DialogDesactivarClienteComponent } from '../dialog-desactivar-cliente/dialog-desactivar-cliente.component';
 import {SpinnerComponent} from '../../spinner/spinner.component';
+import {UtilidadesService} from '../../services/utilidades.service';
 
 
 @Component({
@@ -27,9 +28,11 @@ export class GestionClientesComponent implements OnInit {
 
   constructor(private clienteService:ClienteService,
                       public dialog: MatDialog,
+                      private utilidadesService: UtilidadesService,
                       private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.utilidadesService.controlAcceso();
     this.filtrar();
   }
 
