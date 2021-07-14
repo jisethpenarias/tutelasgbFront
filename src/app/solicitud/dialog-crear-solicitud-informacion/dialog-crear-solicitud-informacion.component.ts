@@ -32,7 +32,7 @@ export class DialogCrearSolicitudInformacionComponent implements OnInit {
 
   submit() {
     const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
-    this.solicitud.tutela.id = this.data;
+    this.solicitud.tutela.id = this.data.tutela;
     this.solicitudService.crear(this.solicitud).subscribe(
       (solicitudCreada) => {
         this.dialogRef.close('Creada');

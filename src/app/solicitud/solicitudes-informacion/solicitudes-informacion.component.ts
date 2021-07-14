@@ -5,6 +5,7 @@ import { Solicitud } from 'src/app/models/solicitud';
 import { DialogCrearSolicitudInformacionComponent } from '../dialog-crear-solicitud-informacion/dialog-crear-solicitud-informacion.component';
 import {SolicitudService} from '../../services/solicitud.service';
 import {SpinnerComponent} from '../../spinner/spinner.component';
+import {LocalstorageService} from '../../services/localstorage.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import {SpinnerComponent} from '../../spinner/spinner.component';
 })
 export class SolicitudesInformacionComponent implements OnInit {
 
-  filtroSolicitudes = {idTutela: null, fechaDesde: null, fechaHasta: null, estado: null};
+  filtroSolicitudes = {idTutela: null, fechaDesde: null, fechaHasta: null, estado: null, usuarioCreacion: null, usuarioRadicador: null};
   solicitudes: Solicitud[] = [];
   dialogSolicitud;
   estadosOpciones: string[] = ['CREADA', 'ACEPTADA', 'NEGADA'];
@@ -23,10 +24,10 @@ export class SolicitudesInformacionComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private _snackBar: MatSnackBar,
-              private solicitudService: SolicitudService) { }
+              private solicitudService: SolicitudService,
+              private localStorageService: LocalstorageService) { }
 
   ngOnInit(): void {
-    console.log(this.filtroSolicitudes);
     this.filtrar();
   }
 
@@ -82,12 +83,13 @@ export class SolicitudesInformacionComponent implements OnInit {
   }
 
   borrar() {
-    this.filtroSolicitudes = {idTutela: null, fechaDesde: null, fechaHasta: null, estado: null};
+    this.filtroSolicitudes = {idTutela: null, fechaDesde: null, fechaHasta: null, estado: null, usuarioCreacion: null, usuarioRadicador: null};
     this.filtrar();
   }
 
   filtrar() {
     const spinnerRef = this.dialog.open(SpinnerComponent, {panelClass: 'transparent', disableClose: true});
+    this.filtroSolicitudes.usuarioRadicador = this.localStorageService.usuarioLogueado;
     this.solicitudService.obtener(this.filtroSolicitudes).subscribe((solicitudesRespuesta: Solicitud[]) => {
       this.solicitudes = solicitudesRespuesta;
       spinnerRef.close();
