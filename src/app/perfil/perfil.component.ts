@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UsuarioService} from '../services/usuario.service';
 import {LocalstorageService} from '../services/localstorage.service';
-import {UsuarioModificacion} from '../models/usuarioModificacion';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {UsuarioCreacion} from '../models/usuarioCreacion';
@@ -33,7 +32,7 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioService.obtenerUsuario(this.localstorageService.usuarioLogueado.id).subscribe(
-      (usuarioRespuesta: UsuarioModificacion) => {
+      (usuarioRespuesta: UsuarioCreacion) => {
         this.usuario = usuarioRespuesta;
       },
       () => {

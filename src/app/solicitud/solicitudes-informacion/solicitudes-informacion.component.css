@@ -26,21 +26,25 @@
 .IdTutela {
   position: relative;
   left: 0rem;
+  margin-top: 1rem;
 }
 
 .fecha-desde {
   position: relative;
   left: 1rem;
+  margin-top: 1rem;
 }
 
 .fecha-hasta {
   position: relative;
   left: 2rem;
+  margin-top: 1rem;
 }
 
 .estados {
   position: relative;
   left: 3rem;
+  margin-top: 1rem;
 }
 
 table {
@@ -64,6 +68,7 @@ table {
 .buton-borrar {
   float: right;
   right: 2.6rem;
+  margin-top: 2rem;
 }
 
 .buton-filtrar {
@@ -71,4 +76,5 @@ table {
   left: 7.2rem;
   background-color: #007DED;
   color: #ffff;
+  margin-top: 2rem;
 }

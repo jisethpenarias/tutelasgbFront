@@ -1,15 +1,16 @@
-.mensaje
- {
+.mensaje {
   font-weight: bold;
   color: #090258;
  }
 
- .buton-desactivar {
-  left: 8rem;
+.buton-cerrar {
+  margin-top: 2rem;
+  left: 4rem;
+}
+ .buton-archivar {
+  left: 4rem;
   background-color: #007DED;
   color: #ffff;
+  margin-top: 2rem;
  }
 
- .buton-archivar {
-  left: 8rem;
- }
