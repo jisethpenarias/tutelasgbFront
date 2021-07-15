@@ -60,7 +60,7 @@
         <div class="align-left">
           <mat-form-field  appearance="fill">
             <mat-label>Celular del accionante</mat-label>
-            <input name="celularAccionante" matInput placeholder="4444544" [(ngModel)]="tutela.celularAccionante" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
+            <input name="celularAccionante" matInput placeholder="3007515544" [(ngModel)]="tutela.celularAccionante" [ngModelOptions]="{standalone: true}" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
           </mat-form-field>
         </div>
       </mat-grid-tile>
@@ -68,7 +68,7 @@
         <div class="align-left">
             <mat-form-field appearance="fill">
               <mat-label>Nº radicado del juzgado</mat-label>
-              <input name="numRadicadoJuzgado" matInput placeholder="4444544" [(ngModel)]="tutela.numRadicadoJuzgado" formControlName="numRadicadoJuzgadoValidacion" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
+              <input name="numRadicadoJuzgado" matInput placeholder="T1234" [(ngModel)]="tutela.numRadicadoJuzgado" formControlName="numRadicadoJuzgadoValidacion" [readonly]="data.llamadoDesde !== 'RADICADOR' || tutela.etapa === 'ARCHIVADA_CON_IMPUGNACION' || tutela.etapa === 'ARCHIVADA_SIN_IMPUGNACION'">
               <mat-error *ngIf="tutelaFormGroup.controls['numRadicadoJuzgadoValidacion'].hasError('required')">{{getErrorMessage('numRadicadoJuzgado', 'required')}}</mat-error>
               <mat-error *ngIf="tutelaFormGroup.controls['numRadicadoJuzgadoValidacion'].hasError('minlength') || tutelaFormGroup.controls['numRadicadoJuzgadoValidacion'].hasError('maxlength')">{{getErrorMessage('numRadicadoJuzgado', 'minmax')}}</mat-error>
             </mat-form-field>
@@ -138,7 +138,7 @@
                 Tutela
               </mat-panel-title>
               <mat-panel-description>
-                Informacion basica de la tutela
+                Información básica de la tutela
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div class="p-20">

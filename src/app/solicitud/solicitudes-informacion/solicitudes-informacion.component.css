@@ -1,41 +1,54 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
 
 .titulo-buqueda-solicitud {
-  position: absolute;
-  left: 13rem;
+  display: flex;
+  align-content: center;
   width: 60rem;
+  min-width: 40rem;
   background-color: #F5F5F5;
-  margin-top: 0.6rem;
+  margin-top: 5rem;
+  align-content: center;
 }
 
 .buqueda-solicitud {
-  position: absolute;
-  left: 13rem;
+  display: flex;
   width: 60rem;
+  min-width: 40rem;
   background-color: #ffff;
-  margin-top: 4rem;
+  margin-top: 0.22rem;
+  align-content: center;
 }
 
 .IdTutela {
   position: relative;
-  left: 5rem;
+  left: 0rem;
 }
 
 .fecha-desde {
   position: relative;
-  left: 10rem;
+  left: 1rem;
 }
 
 .fecha-hasta {
   position: relative;
-  left: 11.1rem;
+  left: 2rem;
+}
+
+.estados {
+  position: relative;
+  left: 3rem;
 }
 
 table {
   position: absolute;
-  left: 13rem;
   width: 62rem;
+  min-width: 40rem;
   background-color: #ffff;
-  margin-top: 14rem;
+  margin-top: 4rem;
 }
 
 /* Botones*/
@@ -50,12 +63,12 @@ table {
 
 .buton-borrar {
   float: right;
-  right: 10.6rem;
+  right: 2.6rem;
 }
 
 .buton-filtrar {
   float: right;
-  right: 1rem;
+  left: 7.2rem;
   background-color: #007DED;
   color: #ffff;
 }

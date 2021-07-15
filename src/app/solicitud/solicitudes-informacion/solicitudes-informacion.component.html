@@ -6,7 +6,7 @@
   <div>
     <mat-card class="buqueda-solicitud">
       <form>
-        <mat-grid-list cols="2" rowHeight="70px">
+        <mat-grid-list cols="3" rowHeight="70px">
           <mat-form-field class="IdTutela" appearance="fill">
             <mat-label>Nº Id de tutela</mat-label>
             <input name="idTutela" matInput placeholder="1" [(ngModel)]="filtroSolicitudes.idTutela">
@@ -28,7 +28,7 @@
             <mat-datepicker #pickerHasta></mat-datepicker>
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field class="estados" appearance="fill">
             <mat-label>Estados</mat-label>
             <mat-select name="estados" [(ngModel)]="filtroSolicitudes.estado">
               <mat-option *ngFor="let estado of estadosOpciones" [value]="estado">

@@ -1,19 +1,27 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
 /* busqueda de usuario */
 
 .titulo-buqueda-tutela {
-  position: absolute;
-  left: 13rem;
+  display: flex;
+  align-content: center;
   width: 60rem;
+  min-width: 40rem;
   background-color: #F5F5F5;
-  margin-top: 4rem;
+  margin-top: 1rem;
+  align-content: center;
 }
 
 .buqueda-tutela {
-  position: absolute;
-  left: 13rem;
+  display: flex;
   width: 60rem;
+  min-width: 40rem;
   background-color: #ffff;
-  margin-top: 7.22rem;
+  margin-top: 0.22rem;
+  align-content: center;
 }
 
 .nombre-cliente {
@@ -43,9 +51,9 @@
 /* Botones crear, borrar y filtrar */
 
 .buton-radicar-tutela {
-  position: absolute;
-  left: 67.6rem;
-  margin-top: 1.3rem;
+  display: flex;
+  left: 54.6rem;
+  margin-top: 3rem;
   background-color: #007DED;
   color: #ffff;
 }
@@ -66,10 +74,9 @@
 
 table {
   position: absolute;
-  left: 13rem;
   width: 62rem;
   background-color: #ffff;
-  margin-top: 25rem;
+  margin-top: 4rem;
 }
 
 
