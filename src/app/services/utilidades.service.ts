@@ -35,7 +35,7 @@ export class UtilidadesService {
 
   public controlAcceso() {
     if (this.localstorageService.usuarioLogueado === null) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['']);
       this._snackbar.open('Debe loguearse para acceder a esta pagina', 'Ok');
     }
   }

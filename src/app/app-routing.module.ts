@@ -9,8 +9,8 @@ import { TutelasComponent } from './tutela/tutelas/tutelas.component';
 import { GestionUsuariosComponent } from './usuario/gestion-usuarios/gestion-usuarios.component';
 
 const routes: Routes = [
-  {path: '',  component: DashboardComponent},
-  {path: 'login',  component: LoginComponent},
+  {path: '',  component: LoginComponent},
+  {path: 'dashboard',  component: DashboardComponent},
   {path: 'perfil',  component: PerfilComponent},
   {path: 'gestion-usuarios',  component: GestionUsuariosComponent},
   {path: 'gestion-clientes',  component: GestionClientesComponent},

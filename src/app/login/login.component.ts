@@ -45,13 +45,13 @@ export class LoginComponent implements OnInit {
       (response: LoginExitoso) => {
         this.localstorageService.usuarioLogueado = response;
         this.login = {username: '', password: ''};
-        this.router.navigate(['']);
+        this.router.navigate(['dashboard']);
         this._snackbar.open('Login exitoso', 'Ok', {duration: 2000});
         spinnerRef.close();
       },
       (error) => {
         spinnerRef.close();
-        this._snackbar.open(error.errors.message, 'Ok');
+        this._snackbar.open('Usuario y contraseña incorrectos', 'Ok');
       }
     );
   }

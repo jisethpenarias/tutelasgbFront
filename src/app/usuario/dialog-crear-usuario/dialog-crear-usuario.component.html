@@ -20,11 +20,13 @@
         <mat-label>Contraseña</mat-label>
         <input name="password" matInput type="password" [(ngModel)]="usuario.password" formControlName="passwordValidacion">
         <mat-error *ngIf="usuarioFormGroup.controls['passwordValidacion'].hasError('required')">{{getErrorMessage('password', 'required')}}</mat-error>
+        <mat-error *ngIf="usuarioFormGroup.controls['usernameValidacion'].hasError('minlength') || usuarioFormGroup.controls['usernameValidacion'].hasError('maxlength')">{{getErrorMessage('password', 'minmax')}}</mat-error>
       </mat-form-field>
       <mat-form-field class="contrasenaConfirmar" appearance="fill">
         <mat-label>Confirmar Contraseña</mat-label>
         <input name="passwordConfirma" matInput type="password" [(ngModel)]="paswordConfirma" formControlName="passwordConfirmacionValidacion">
         <mat-error *ngIf="usuarioFormGroup.controls['passwordValidacion'].hasError('required')">{{getErrorMessage('password', 'required')}}</mat-error>
+        <mat-error *ngIf="usuarioFormGroup.controls['usernameValidacion'].hasError('minlength') || usuarioFormGroup.controls['usernameValidacion'].hasError('maxlength')">{{getErrorMessage('confirmacion', 'minmax')}}</mat-error>
       </mat-form-field>
       <br>
       <br>

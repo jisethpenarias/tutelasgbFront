@@ -8,31 +8,39 @@
       </button>
     </mat-card-title>
     <mat-card-content>
-      <form (ngSubmit)="submit()">
+      <form (ngSubmit)="submit()" [formGroup]="usuarioFormGroup">
         <p>
           <mat-form-field>
-            <input type="text" matInput placeholder="Nombre de Usuario" formControlName="username">
+            <input type="text" [(ngModel)]="usuario.username" [readonly]="true"  matInput placeholder="Nombre de Usuario" formControlName="usernameValidacion">
+            <mat-error *ngIf="usuarioFormGroup.controls['usernameValidacion'].hasError('required')">{{getErrorMessage('username', 'required')}}</mat-error>
           </mat-form-field>
         </p>
 
         <p>
           <mat-form-field>
-            <input type="password" matInput placeholder="Contraseña" formControlName="password">
+            <input  matInput [type]="ocultarPass ? 'password' : 'text'" [(ngModel)]="usuario.password" placeholder="Contraseña" formControlName="passwordValidacion">
+            <mat-error *ngIf="usuarioFormGroup.controls['passwordValidacion'].hasError('required')">{{getErrorMessage('password', 'required')}}</mat-error>
+            <mat-error *ngIf="usuarioFormGroup.controls['passwordValidacion'].hasError('minlength') || usuarioFormGroup.controls['usernameValidacion'].hasError('maxlength')">{{getErrorMessage('password', 'minmax')}}</mat-error>
+            <button mat-icon-button matSuffix (click)="ocultarPass = !ocultarPass">
+              <mat-icon>{{ocultarPass ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
           </mat-form-field>
+
         </p>
 
         <p>
           <mat-form-field>
-            <input type="passwordConfirma" matInput placeholder="Confirmar Contraseña" formControlName="password">
+            <input  matInput [type]="ocultarConfirmacionPass ? 'password' : 'text'" [(ngModel)]="confirmacionPassword" placeholder="Confirmar Contraseña" formControlName="passwordConfirmaValidacion">
+            <mat-error *ngIf="usuarioFormGroup.controls['passwordConfirmaValidacion'].hasError('required')">{{getErrorMessage('confirmacion', 'required')}}</mat-error>
+            <mat-error *ngIf="usuarioFormGroup.controls['passwordConfirmaValidacion'].hasError('minlength') || usuarioFormGroup.controls['usernameValidacion'].hasError('maxlength')">{{getErrorMessage('confirmacion', 'minmax')}}</mat-error>
+            <button mat-icon-button matSuffix (click)="ocultarConfirmacionPass = !ocultarConfirmacionPass">
+              <mat-icon>{{ocultarConfirmacionPass ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
           </mat-form-field>
         </p>
 
-        <div>
-
-        </div>
-
-        <div class="boton-guardar">
-          <button type="submit" mat-button>Guardar</button>
+        <div class="boton-guardar" >
+          <button type="submit" [disabled]="usuarioFormGroup.invalid" mat-button>Guardar</button>
         </div>
 
       </form>

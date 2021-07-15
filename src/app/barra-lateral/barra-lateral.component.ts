@@ -10,6 +10,7 @@ import {SpinnerComponent} from '../spinner/spinner.component';
 import {MatDialog} from '@angular/material/dialog';
 import {TutelaService} from '../services/tutela.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {PerfilComponent} from '../perfil/perfil.component';
 
 @Component({
   selector: 'app-barra-lateral',
@@ -26,6 +27,8 @@ export class BarraLateralComponent implements OnInit {
     );
 
   solicitudes: Solicitud[] = [];
+
+  dialogPerfil;
 
   constructor(private breakpointObserver: BreakpointObserver,
               private localstorageService: LocalstorageService,
@@ -56,7 +59,7 @@ export class BarraLateralComponent implements OnInit {
 
   cerrarSesion() {
     this.localstorageService.usuarioLogueado = null;
-    this.router.navigate(['/login']);
+    this.router.navigate(['']);
   }
 
   ejecutarAsignaciones() {
@@ -70,4 +73,7 @@ export class BarraLateralComponent implements OnInit {
     });
   }
 
+  mostrarPerfil() {
+    this.router.navigate(['perfil']);
+  }
 }

@@ -4,7 +4,7 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar [routerLink]="['']" routerLinkActive="active" class="titulo" >
+    <mat-toolbar [routerLink]="['dashboard']" routerLinkActive="active" class="titulo" >
       <mat-icon class="icon-logo" aria-hidden="false" aria-label="Example home icon">folder</mat-icon>
       TUTELAS
     </mat-toolbar>
@@ -67,10 +67,18 @@
           </mat-menu>
 
           {{localstorageService.usuarioLogueado.username}}
-          <mat-icon aria-hidden="false" >person</mat-icon>
-          <button (click)="cerrarSesion()" mat-raised-button matTooltip="Cerrar sesion">
-            <mat-icon aria-hidden="false">logout</mat-icon>
+
+          <button mat-raised-button [matMenuTriggerFor]="menuPerfil" matTooltip="Opciones de perfil">
+            <mat-icon aria-hidden="false" >person</mat-icon>
           </button>
+          <mat-menu #menuPerfil="matMenu">
+            <button (click)="mostrarPerfil()" matTooltip="Perfil" mat-menu-item>
+              <mat-icon aria-hidden="false" >person</mat-icon> Perfil
+            </button>
+            <button (click)="cerrarSesion()" matTooltip="Cerrar sesion" mat-menu-item>
+              <mat-icon aria-hidden="false">logout</mat-icon> Cerrar Sesión
+            </button>
+          </mat-menu>
 
         </p>
       </div>

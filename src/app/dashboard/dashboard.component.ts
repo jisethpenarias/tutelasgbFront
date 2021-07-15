@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.utilidadesService.controlAcceso();
     this.borrar();
   }
 

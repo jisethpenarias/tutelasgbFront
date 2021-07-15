@@ -1,7 +1,7 @@
 export interface UsuarioCreacion {
   id:number;
-  email: string;
+  email?: string;
   username: string;
   password: string;
-  rol: string;
+  rol?: string;
 }

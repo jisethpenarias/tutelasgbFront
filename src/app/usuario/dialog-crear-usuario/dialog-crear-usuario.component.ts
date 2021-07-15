@@ -22,8 +22,8 @@ export class DialogCrearUsuarioComponent {
   usuarioFormGroup = new FormGroup({
     usernameValidacion: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
     emailValidacion: new FormControl('',[Validators.required, Validators.email]),
-    passwordValidacion: new FormControl('',[Validators.required]),
-    passwordConfirmacionValidacion: new FormControl('',[Validators.required]),
+    passwordValidacion: new FormControl('',[Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
+    passwordConfirmacionValidacion: new FormControl('',[Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
     rolValidacion: new FormControl('',[Validators.required])
   });
 
@@ -89,6 +89,14 @@ export class DialogCrearUsuarioComponent {
 
     if (propiedad === 'username' && error === 'minmax') {
       return 'El nombre de cliente debe tener entre 5 y 100 caracteres';
+    }
+
+    if (propiedad === 'password' && error === 'minmax') {
+      return 'El password debe tener entre 5 y 20 caracteres';
+    }
+
+    if (propiedad === 'confirmacion' && error === 'minmax') {
+      return 'La confirmacion del password debe tener entre 5 y 20 caracteres';
     }
 
     if (propiedad === 'email' && error === 'email') {
