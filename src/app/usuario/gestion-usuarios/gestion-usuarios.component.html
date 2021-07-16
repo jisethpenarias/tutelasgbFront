@@ -49,8 +49,8 @@
           </div>
           <div *ngIf="column === 'acciones'">
             <td  mat-cell *matCellDef="let usuario">
-                <mat-icon (click)="editar(usuario.id)" class="icon-logo" aria-label="Editar usuario">edit</mat-icon>
-                <mat-icon (click)="openDialogDesactivar(usuario.id)" class="icon-logo" aria-label="Desactivar usuario">unpublished</mat-icon>
+                <mat-icon (click)="editar(usuario.id)" class="icon-logo" matTooltip="Editar usuario" aria-label="Editar usuario">edit</mat-icon>
+                <mat-icon (click)="openDialogDesactivar(usuario.id)" matTooltip="Editar usuario"class="icon-logo" aria-label="Desactivar usuario">unpublished</mat-icon>
             </td>
           </div>
 

@@ -87,11 +87,15 @@ export class DialogRadicarTutelaComponent implements OnInit {
     this.fechaMinRaciacion = new Date();
     this.fechaMaxRadicacion = new Date();
     this.fechaMaxRadicacion.setDate(this.fechaMinRaciacion.getDate() + 14);
+    this.files = null;
+    this.tutela = {...tutela};
   }
 
   ngOnInit(): void {
+    this.tutela.anexos = [];
     if (this.data.tutela != null) {
       this.tutela = this.data.tutela;
+      console.log(this.tutela);
 
       this.respuestaInactiva = this.tutela.consenClientRespuesta;
       this.impugnacionInactiva = this.tutela.consenClientImpugna;
@@ -102,6 +106,7 @@ export class DialogRadicarTutelaComponent implements OnInit {
 
       this.derechosSeleccionados = this.tutela.derechos.map(derecho => derecho.id);
     }
+
 
     this.tiposAnexosOpciones = tiposAnexos.filter(tutelaAnexo => {
       if (this.data.llamadoDesde === 'RADICADOR'){
@@ -117,6 +122,8 @@ export class DialogRadicarTutelaComponent implements OnInit {
     this.generarOpcionesDerechos();
 
     this.fileControl.valueChanges.subscribe((files: any) => {
+        console.log('valueChanges files');
+
         this.files = files;
 
         if (files.size > (5 * 1024 * 1024)) {
