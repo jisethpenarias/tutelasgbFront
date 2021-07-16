@@ -52,7 +52,7 @@
       </button>
       <div class="top-bar-content">
         <p class="username">
-          <button mat-raised-button matTooltip="Asignar Masivamente" (click)="ejecutarAsignaciones()" *ngIf="localstorageService.usuarioLogueado.rol === 'RADICADOR'">
+          <button mat-raised-button matTooltip="Asignar tutelas masivamente" (click)="ejecutarAsignaciones()" *ngIf="localstorageService.usuarioLogueado.rol === 'RADICADOR'">
             <mat-icon aria-hidden="false" >published_with_changes</mat-icon>
           </button>
           <button mat-raised-button [matMenuTriggerFor]="menu" matTooltip="Mostrar Solicitudes" *ngIf="localstorageService.usuarioLogueado.rol === 'RADICADOR'">
